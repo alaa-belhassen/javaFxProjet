@@ -46,19 +46,18 @@ public class EvenementServiceImpl implements ICrud<Evenement> {
             selectStatement.setString(1, evenement.getLibelle());
             ResultSet resultSet = selectStatement.executeQuery();
             if (!resultSet.next()) {
-                String insertQuery = "INSERT INTO Evenement(idevenement,libelle, duration, date_event, time_event, max_places, prix, lieu,status) " +
-                        "VALUES (?,?, ?, ?, ?, ?, ?, ?,?)";
+                String insertQuery = "INSERT INTO Evenement(libelle, duration, date_event, time_event, max_places, prix, lieu,status) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 
                 try (PreparedStatement insertStatement = DbConnection.getCnx().prepareStatement(insertQuery)) {
-                    insertStatement.setInt(1, evenement.getIdEvenement());
-                    insertStatement.setString(2, evenement.getLibelle());
-                    insertStatement.setInt(3, evenement.getDuration());
-                    insertStatement.setDate(4, Date.valueOf(evenement.getDate_event()));
-                    insertStatement.setTime(5, Time.valueOf(evenement.getTime_event())); // Assuming time_event is of type TIMESTAMP
-                    insertStatement.setInt(6, evenement.getMax_places());
-                    insertStatement.setDouble(7, evenement.getPrix());
-                    insertStatement.setString(8, evenement.getLieu());
-                    insertStatement.setString(9, Status.VALID.toString());
+                    insertStatement.setString(1, evenement.getLibelle());
+                    insertStatement.setInt(2, evenement.getDuration());
+                    insertStatement.setDate(3, Date.valueOf(evenement.getDate_event()));
+                    insertStatement.setTime(4, Time.valueOf(evenement.getTime_event())); // Assuming time_event is of type TIMESTAMP
+                    insertStatement.setInt(5, evenement.getMax_places());
+                    insertStatement.setDouble(6, evenement.getPrix());
+                    insertStatement.setString(7, evenement.getLieu());
+                    insertStatement.setString(8, Status.VALID.toString());
 
                     insertStatement.executeUpdate();
                     System.out.println("successfully added");

@@ -45,17 +45,16 @@ public class ReservationServiceImpl implements ICrud<Reserver> {
             selectStatement.setString(1, reserver.getCodeQR());
             ResultSet resultSet = selectStatement.executeQuery();
             if (!resultSet.next()) {
-                String insertQuery = "INSERT INTO reserver(id_Res,codeQR,prix_total,date_res,idevenement,user_id,status) " +
-                        "VALUES (?,?,?,?,?,?,?)";
+                String insertQuery = "INSERT INTO reserver(codeQR,prix_total,date_res,idevenement,user_id,status) " +
+                        "VALUES (?,?,?,?,?,?)";
 
                 try (PreparedStatement insertStatement = DbConnection.getCnx().prepareStatement(insertQuery)) {
-                    insertStatement.setInt(1, reserver.getId_Res());
-                    insertStatement.setString(2, reserver.getCodeQR());
-                    insertStatement.setFloat(3, reserver.getPrix_total());
-                    insertStatement.setDate(4, Date.valueOf(reserver.getDate()));
-                    insertStatement.setInt(5, reserver.getEvenement().getIdEvenement());
-                    insertStatement.setInt(6, reserver.getUser().getIdUser());
-                    insertStatement.setString(7, Status.VALID.toString());
+                    insertStatement.setString(1, reserver.getCodeQR());
+                    insertStatement.setFloat(2, reserver.getPrix_total());
+                    insertStatement.setDate(3, Date.valueOf(reserver.getDate()));
+                    insertStatement.setInt(4, reserver.getEvenement().getIdEvenement());
+                    insertStatement.setInt(5, reserver.getUser().getIdUser());
+                    insertStatement.setString(6, Status.VALID.toString());
 
                     insertStatement.executeUpdate();
                     System.out.println("successfully added");
