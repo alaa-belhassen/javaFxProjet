@@ -1,7 +1,7 @@
 package tn.esprit.javafxproject.services;
 
-
-import tn.esprit.javafxproject.models.*;
+import tn.esprit.javafxproject.models.Categorie;
+import tn.esprit.javafxproject.models.Evenement;
 import tn.esprit.javafxproject.utils.DbConnection;
 import tn.esprit.javafxproject.utils.Status;
 
@@ -18,7 +18,7 @@ public class EvenementServiceImpl implements ICrud<Evenement> {
     @Override
     public ArrayList<Evenement> getAll() throws SQLException {
         ArrayList<Evenement> evenements = new ArrayList<Evenement>();
-        String query1="select * from evenement where status='"+ Status.VALID.toString()+"'";
+        String query1="select * from evenement where status='"+ Status.VALID.toString() +"' ;";
         Statement statement= DbConnection.getCnx().createStatement();
         ResultSet resultSet= statement.executeQuery(query1);
         while (resultSet.next()) {
@@ -32,9 +32,28 @@ public class EvenementServiceImpl implements ICrud<Evenement> {
             evenement.setTime_event(resultSet.getTime(7).toLocalTime());
             evenement.setDuration(resultSet.getInt(8));
             evenement.setStatus(resultSet.getString(9));
+
+            String query3="select * from categorie where idcategorie=?" ;
+            PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(query3);
+            selectStatement.setInt(1, resultSet.getInt("idcategorie"));
+            ResultSet resultSet3= selectStatement.executeQuery();
+
+
+            Categorie categorie1=new Categorie();
+            if (resultSet3.next()) {
+                categorie1.setIdCategorie(resultSet3.getInt("idcategorie"));
+                categorie1.setNom(resultSet3.getString("nom"));
+
+
+            }
+            evenement.setId_categorie(categorie1);
+
+            evenement.setPhoto(resultSet.getString(11));
+
+            evenement.setIdUser(resultSet.getInt(12));
+
             evenements.add(evenement);
         }
-
 
         return evenements;
     }
@@ -46,8 +65,8 @@ public class EvenementServiceImpl implements ICrud<Evenement> {
             selectStatement.setString(1, evenement.getLibelle());
             ResultSet resultSet = selectStatement.executeQuery();
             if (!resultSet.next()) {
-                String insertQuery = "INSERT INTO Evenement(libelle, duration, date_event, time_event, max_places, prix, lieu,status) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+                String insertQuery = "INSERT INTO Evenement(libelle, duration, date_event, time_event, max_places, prix, lieu,status,photo,idcategorie,iduser) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
 
                 try (PreparedStatement insertStatement = DbConnection.getCnx().prepareStatement(insertQuery)) {
                     insertStatement.setString(1, evenement.getLibelle());
@@ -57,7 +76,10 @@ public class EvenementServiceImpl implements ICrud<Evenement> {
                     insertStatement.setInt(5, evenement.getMax_places());
                     insertStatement.setDouble(6, evenement.getPrix());
                     insertStatement.setString(7, evenement.getLieu());
-                    insertStatement.setString(8, Status.VALID.toString());
+                    insertStatement.setString(8, evenement.getStatus());
+                    insertStatement.setString(9, evenement.getPhoto());
+                    insertStatement.setInt(10, evenement.getId_categorie().getIdCategorie());
+                    insertStatement.setInt(11, evenement.getIdUser());
 
                     insertStatement.executeUpdate();
                     System.out.println("successfully added");
@@ -74,15 +96,15 @@ public class EvenementServiceImpl implements ICrud<Evenement> {
     @Override
     public boolean delete(Evenement evenement) throws SQLException {
         Statement statement=DbConnection.getCnx().createStatement();
-        String query2="update evenement set status= '"+Status.SUPPRIMER.toString()+"' where idEvenement ="+evenement.getIdEvenement()+";";
+        String query2="update evenement set status= 'Supprimé' where idEvenement ="+evenement.getIdEvenement()+";";
         statement.executeUpdate(query2);
         return  true;
     }
 
     @Override
     public boolean delete(int id) throws SQLException {
-        String selectQuery = "SELECT * FROM evenement WHERE idEvenement = ? and status='"+ Status.VALID.toString()+"'";
-        String updateQuery = "UPDATE evenement SET status = '"+Status.SUPPRIMER.toString()+"' WHERE idEvenement = ?";
+        String selectQuery = "SELECT * FROM evenement WHERE idEvenement = ? and status='valid'";
+        String updateQuery = "UPDATE evenement SET status = 'Supprimé' WHERE idEvenement = ?";
         try (Connection connection = DbConnection.getCnx();
              PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
              PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
