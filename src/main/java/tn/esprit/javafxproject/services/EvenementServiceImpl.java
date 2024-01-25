@@ -45,7 +45,7 @@ public class EvenementServiceImpl implements ICrud<Evenement> {
                 categorie1.setNom(resultSet3.getString("nom"));
 
 
-                
+
 
             }
             evenement.setId_categorie(categorie1);
