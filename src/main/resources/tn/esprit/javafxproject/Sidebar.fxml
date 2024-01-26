@@ -17,17 +17,17 @@
    <top>
       <HBox prefHeight="69.0" prefWidth="1315.0" styleClass="white-background" stylesheets="@css/styles.css" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" opacity="0.72" prefHeight="106.0" prefWidth="183.0" text="TicketBooking" textAlignment="CENTER" textFill="#254441">
+            <Label alignment="CENTER" opacity="0.72" prefHeight="69.0" prefWidth="216.0" text="TicketBooking" textAlignment="CENTER" textFill="#254441">
                <font>
                   <Font name="Georgia" size="23.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="33.0" prefWidth="271.0" styleClass="round-layout" stylesheets="@css/styles.css">
+            <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="33.0" prefWidth="302.0" styleClass="round-layout" stylesheets="@css/styles.css">
                <children>
                   <TextField alignment="CENTER" prefHeight="25.0" prefWidth="237.0" promptText="Recherche.." styleClass="transparent" stylesheets="@css/styles.css" />
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/search_icon.png" />
+                        <Image url="@image/images-removebg-preview%20(1).png" />
                      </image>
                   </ImageView>
                </children>
@@ -35,7 +35,7 @@
                   <Insets top="20.0" />
                </HBox.margin>
             </HBox>
-            <Pane prefHeight="69.0" prefWidth="496.0" />
+            <Pane prefHeight="69.0" prefWidth="488.0" />
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="53.0" prefWidth="109.0" text="Sarra Aloui">
@@ -66,7 +66,7 @@
                      <children>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/homez.jpg" />
+                              <Image url="@image/home1.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="9.0" top="12.0" />
@@ -82,12 +82,54 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Separator layoutX="10.0" layoutY="392.0" prefWidth="200.0" />
+                  <Separator layoutX="10.0" layoutY="386.0" prefWidth="200.0" />
+                  <HBox layoutX="10.0" layoutY="63.0" prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/event-icon.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="9.0" top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Evenements">
+                           <font>
+                              <Font name="Georgia" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="11.0" top="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Separator layoutX="10.0" layoutY="389.0" prefWidth="200.0" />
+                  <HBox prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/shop2.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="7.0" top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="22.0" prefWidth="85.0" text="Shop">
+                           <font>
+                              <Font name="Georgia" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="11.0" top="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
                   <HBox layoutX="10.0" layoutY="213.0" prefHeight="50.0" prefWidth="200.0" stylesheets="@css/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/don.jpg" />
+                              <Image url="@image/mo.jpg" />
                            </image>
                            <HBox.margin>
                               <Insets left="7.0" top="12.0" />
@@ -110,49 +152,7 @@
                         <String fx:value="selected" />
                      </styleClass>
                   </HBox>
-                  <Separator layoutX="10.0" layoutY="386.0" prefWidth="200.0" />
-                  <HBox prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@image/shop.jpg" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="7.0" top="12.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="22.0" prefWidth="85.0" text="Shop">
-                           <font>
-                              <Font name="Georgia" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="11.0" top="15.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Separator layoutX="10.0" layoutY="389.0" prefWidth="200.0" />
-                  <HBox layoutX="10.0" layoutY="63.0" prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
-                     <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@image/events.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="9.0" top="12.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label text="Evenements">
-                           <font>
-                              <Font name="Georgia" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="11.0" top="15.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Separator prefWidth="200.0" />
+                  <Separator layoutX="10.0" layoutY="392.0" prefWidth="200.0" />
                   <HBox layoutX="10.0" layoutY="163.0" prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -178,7 +178,7 @@
                      <children>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/decnx.png" />
+                              <Image url="@image/decx.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="9.0" top="12.0" />
