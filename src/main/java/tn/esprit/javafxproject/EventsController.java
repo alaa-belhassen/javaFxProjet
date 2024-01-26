@@ -6,9 +6,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import tn.esprit.javafxproject.models.Evenement;
+import tn.esprit.javafxproject.services.EvenementServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,15 +29,14 @@ public class EventsController implements Initializable {
 
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle)  {
 
-        evenements=new ArrayList<>(afficher());
-        evenementslist=new ArrayList<>(evenements());
-        int column=0;
-        int row=1;
+
 
         try {
-
+            evenements=new ArrayList<>(afficher());
+            int column=0;
+            int row=1;
             for (int i = 0; i < evenements.size() ; i++) {
             FXMLLoader fxmlLoader=new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("card1.fxml"));
@@ -43,46 +44,24 @@ public class EventsController implements Initializable {
 
                 HBox cardBox= fxmlLoader.load();
                 Card1Controller card1Controller=fxmlLoader.getController();
-                card1Controller.setData(afficher().get(i));
+                card1Controller.setData(evenements.get(i));
                 cardLayout.getChildren().add(cardBox);
 
             }
 
 
-            for (Evenement evenement: evenementslist ) {
-                
-            }
             
             
-            }catch (IOException e) {
+            }catch (Exception e) {
                 e.printStackTrace();
 
         }
 
-        afficher();
 
     }
-private List<Evenement> afficher(){
-        List<Evenement> evenements=new ArrayList<>();
-        Evenement evenement=new Evenement();
-        evenement.setLibelle("Ons JABEUR & Coco GAUFF");
-        evenement.setPhoto("/image/oj.jpg");
-        evenement.setPrix(400.0f);
-        evenements.add(evenement);
-
-        evenement=new Evenement();
-    evenement.setLibelle("Ons JABEUR & Coco GAUFF");
-    evenement.setPhoto("/image/psg.jpg");
-    evenement.setPrix(400.0f);
-    evenements.add(evenement);
-
-    evenement=new Evenement();
-    evenement.setLibelle("Ons JABEUR & Coco GAUFF");
-    evenement.setPhoto("/image/oj.jpg");
-    evenement.setPrix(400.0f);
-    evenements.add(evenement);
-
-    return evenements;
+private List<Evenement> afficher() throws SQLException {
+    EvenementServiceImpl evenementService=new EvenementServiceImpl();
+    return evenementService.getAll();
 
 }
 
