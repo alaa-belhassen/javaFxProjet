@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="226.0" prefWidth="400.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="226.0" prefWidth="400.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.CardController">
    <children>
       <ImageView fx:id="image" fitHeight="227.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -82,7 +82,7 @@
                <children>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/ticket.png" />
+                        <Image url="@img/ticket.png" />
                      </image>
                      <HBox.margin>
                         <Insets />

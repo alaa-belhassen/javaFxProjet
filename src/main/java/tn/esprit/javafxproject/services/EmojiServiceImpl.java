@@ -1,8 +1,6 @@
 package tn.esprit.javafxproject.services;
 
-
-
-import tn.esprit.javafxproject.models.Emoji;
+import tn.esprit.javafxproject.models.*;
 import tn.esprit.javafxproject.utils.DbConnection;
 import tn.esprit.javafxproject.utils.Status;
 
@@ -16,39 +14,42 @@ public class EmojiServiceImpl implements ICrud<Emoji>{
 
     @Override
     public ArrayList<Emoji> getAll() throws SQLException {
-            ArrayList<Emoji> emojis = new ArrayList<Emoji>();
-            String query1="select * from emoji where status= '"+ Status.VALID.toString()+"';";
-            Statement statement= DbConnection.getCnx().createStatement();
-            ResultSet resultSet= statement.executeQuery(query1);
-            while (resultSet.next())
-            {
-                Emoji emoji=new Emoji();
-                emoji.setIdEmoji(resultSet.getInt(1));
-                emoji.setNomEmoji(resultSet.getString(2));
-                emoji.setRank(resultSet.getInt(3));
-                emoji.setImageUrl(resultSet.getString(4));
-                emojis.add(emoji);
-            }
-            return emojis ;
+        ArrayList<Emoji> emojis = new ArrayList<Emoji>();
+        String query1="select * from emoji where status= '"+ Status.VALID.toString()+"';";
+        Statement statement= DbConnection.getCnx().createStatement();
+        ResultSet resultSet= statement.executeQuery(query1);
+        while (resultSet.next())
+        {
+            Emoji emoji=new Emoji();
+            emoji.setIdEmoji(resultSet.getInt(1));
+            emoji.setNomEmoji(resultSet.getString(2));
+            emoji.setRank(resultSet.getInt(3));
+            emoji.setPrix(resultSet.getInt(4));
+            emoji.setImageUrl(resultSet.getString(5));
+            emoji.setImageUrl(resultSet.getString(6));
+            emojis.add(emoji);
         }
+        return emojis ;
+    }
 
 
     @Override
     public boolean add(Emoji emoji) {
-        String selectQuery = "SELECT * FROM emoji WHERE idemoji = ?";
+        String selectQuery = "SELECT * FROM emoji WHERE nomemoji = ?";
         try (PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(selectQuery)) {
-            selectStatement.setInt(1,emoji.getIdEmoji());
+            selectStatement.setString(1,emoji.getNomEmoji());
             ResultSet resultSet = selectStatement.executeQuery();
             if (!resultSet.next()) {
-                String insertQuery = "INSERT INTO emoji(idemoji,nomemoji,rank,imageurl,status) " +
-                        "VALUES (?,?, ?, ?, ?)";
+                String insertQuery = "INSERT INTO emoji(nomemoji,rank,imageurl,status,prix) " +
+                        "VALUES (?, ?, ?, ?,?)";
 
                 try (PreparedStatement insertStatement = DbConnection.getCnx().prepareStatement(insertQuery)) {
-                    insertStatement.setInt(1,emoji.getIdEmoji());
-                    insertStatement.setString(2,emoji.getNomEmoji());
-                    insertStatement.setInt(3,emoji.getRank());
-                    insertStatement.setString(4,emoji.getImageUrl());
-                    insertStatement.setString(5, Status.VALID.toString());
+                    insertStatement.setString(1,emoji.getNomEmoji());
+                    insertStatement.setInt(2,emoji.getRank());
+                    insertStatement.setString(3,emoji.getImageUrl());
+                    insertStatement.setString(4, Status.VALID.toString());
+                    insertStatement.setInt(5,emoji.getPrix());
+
                     int res = insertStatement.executeUpdate();
                     if(res > 0 )
                         System.out.println("successfully added");

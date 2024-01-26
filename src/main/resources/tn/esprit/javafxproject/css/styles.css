@@ -8,3 +8,8 @@
     -fx-border-radius: 50;
     -fx-border-color:#D7D7D7;
 }
+
+.white-background-card{
+    -fx-background-color: #fff;
+    -fx-background-radius: 20;
+}
