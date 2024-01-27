@@ -1,16 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="tn.esprit.javafxproject.Controllers.LoginController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.HelloController">
+   <children>
+      <ImageView fitHeight="708.0" fitWidth="1315.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../tn.esprit.javafxproject.img/Login.jpg" />
+         </image></ImageView>
+      <VBox alignment="CENTER" layoutX="406.0" layoutY="183.0" prefHeight="524.0" prefWidth="484.0">
+         <children>
+            <Label alignment="CENTER" graphicTextGap="3.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="91.0" prefWidth="243.0" text="Connectez-vous" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+               <font>
+                  <Font name="Eras Demi ITC" size="31.0" />
+               </font>
+            </Label>
+            <Label fx:id="welcomeText" prefHeight="25.0" prefWidth="0.0" textFill="#bf2020">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Email" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="email" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextField>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="73.0" prefWidth="360.0">
+               <children>
+                  <Label text="Mot de passe">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="password" prefHeight="40.0" prefWidth="360.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </VBox>
+            <Button fx:id="connect" onAction="#connect" prefHeight="46.0" prefWidth="130.0" text="Connecter">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Hyperlink fx:id="resetPassword" onAction="#resetPassword" text="Mot de passe oublié ? ">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Hyperlink>
+         </children>
+      </VBox>
+      <HBox alignment="TOP_RIGHT" layoutX="25.0" layoutY="47.0" prefHeight="46.0" prefWidth="1281.0">
+         <children>
+            <Button fx:id="ajout" mnemonicParsing="false" prefHeight="46.0" prefWidth="144.0" text="Ajouter équipe">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="CreateAccount" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#creerCompte" prefHeight="46.0" prefWidth="141.0" text="Créer Compte" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import tn.esprit.javafxproject.services.UserServiceImpl;
 import tn.esprit.javafxproject.utils.DbConnection;
@@ -33,7 +30,7 @@ public class HelloController {
     private Button CreateAccount;
 
     @FXML
-    private Button resetPassword;
+    private Hyperlink resetPassword;
 
     @FXML
     private Button liste;
