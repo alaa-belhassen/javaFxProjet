@@ -41,11 +41,11 @@ public class EventsController implements Initializable {
             FXMLLoader fxmlLoader=new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("card1.fxml"));
 
-
                 HBox cardBox= fxmlLoader.load();
                 Card1Controller card1Controller=fxmlLoader.getController();
                 card1Controller.setData(evenements.get(i));
                 cardLayout.getChildren().add(cardBox);
+
 
             }
 

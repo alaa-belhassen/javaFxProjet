@@ -1,6 +1,8 @@
 package tn.esprit.javafxproject;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -32,8 +34,16 @@ public class Card1Controller {
     @FXML
     private Label titre_id;
 
+  public EventsController eventsController;
+
     @FXML
     void goToEventDetail(MouseEvent event) {
+
+        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("EventDetail.fxml"));
+        EventDetailController eventDetailController= fxmlLoader.getController();
+        eventDetailController.card1Controller=this;
+
+
 
     }
 

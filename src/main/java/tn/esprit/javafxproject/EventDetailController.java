@@ -24,13 +24,17 @@ public class EventDetailController  {
     @FXML
     private Label eventprice;
 
-public void setData(Evenement event){
+    public Card1Controller card1Controller;
+
+
+    public void setData(Evenement event){
     Image image=new Image(getClass().getResourceAsStream(event.getPhoto()));
     eventimage.setImage(image);
     eventdate.setText(event.getLibelle());
     eventduration.setText(String.valueOf(event.getDuration()));
     eventprice.setText(String.valueOf(event.getPrix()));
     eventplace.setText(event.getLieu());
+
 }
 
 }
