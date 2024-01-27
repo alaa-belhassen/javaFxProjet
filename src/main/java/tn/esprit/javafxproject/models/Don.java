@@ -1,6 +1,5 @@
 package tn.esprit.javafxproject.models;
 
-
 public class Don {
     private  int idDon;
     private double montant;
@@ -11,8 +10,7 @@ public class Don {
     public Don() {
 
     }
-    public Don(int idDon, double montant, String commentaire, Emoji emoji, User donneur, User receveur) {
-        this.idDon = idDon;
+    public Don(double montant, String commentaire, Emoji emoji, User donneur, User receveur) {
         this.montant = montant;
         this.commentaire = commentaire;
         this.emoji = emoji;

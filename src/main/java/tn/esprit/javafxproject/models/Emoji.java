@@ -5,15 +5,24 @@ public class Emoji {
     private String nomEmoji;
     private int rank;
     private String imageUrl;
+    private int prix;
 
     public Emoji() {
     }
 
-    public Emoji(int idEmoji, String nomEmoji, int rank, String imageUrl) {
-        this.idEmoji = idEmoji;
+    public Emoji( String nomEmoji, int rank, String imageUrl,int prix) {
         this.nomEmoji = nomEmoji;
         this.rank = rank;
         this.imageUrl = imageUrl;
+        this.prix = prix;
+    }
+
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
     }
 
     public int getIdEmoji() {
@@ -55,6 +64,7 @@ public class Emoji {
                 ", nomEmoji='" + nomEmoji + '\'' +
                 ", rank=" + rank +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", prix=" + prix +
                 '}';
     }
 }
