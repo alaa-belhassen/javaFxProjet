@@ -12,6 +12,7 @@ public class User {
     private Role role;
     private PageActu pageActu;
     private String password;
+    private byte[] image;
 
     public User() {
     }
@@ -113,6 +114,14 @@ public class User {
 
     public String hashPassword(String plainPassword) {
         return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

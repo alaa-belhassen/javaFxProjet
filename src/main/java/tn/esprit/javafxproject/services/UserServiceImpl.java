@@ -13,6 +13,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.mindrot.jbcrypt.BCrypt;
+import tn.esprit.javafxproject.utils.Status;
 
 public class UserServiceImpl implements ICrud <User> {
 
@@ -100,8 +101,8 @@ public class UserServiceImpl implements ICrud <User> {
     public boolean add(User user) {
         if (!emailExists(user.getEmail())){
         String req = "INSERT INTO \"User\" "
-                + "( nom, email, telephone, adresse, idrole, status, password)\r\n"
-                + "VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+                + "( nom, email, telephone, adresse, idrole, status, password,image)\r\n"
+                + "VALUES ( ?, ?, ?, ?, ?, ?, ?,?)";
 
         try (PreparedStatement pst = cnx.prepareStatement(req)) {
 
@@ -109,9 +110,10 @@ public class UserServiceImpl implements ICrud <User> {
             pst.setString(2, user.getEmail());
             pst.setString(3, user.getTelephone());
             pst.setString(4, user.getAdresse());
-            pst.setInt(5, user.getRole().getIdRole());
-            pst.setString(6, user.getStatus());
+            pst.setInt(5, 2);
+            pst.setString(6, Status.VALID.toString());
             pst.setString(7, user.getPassword());
+            pst.setBytes(8, user.getImage());
 
             int result = pst.executeUpdate();
 
@@ -202,8 +204,8 @@ public class UserServiceImpl implements ICrud <User> {
 
       if (!emailExists(user.getEmail())){
         String req = "INSERT INTO \"User\" "
-                + "( nom, email, telephone, adresse, idrole, status, password)\r\n"
-                + "VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+                + "( nom, email, telephone, adresse, idrole, status, password,image)\r\n"
+                + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pst = cnx.prepareStatement(req)) {
 
@@ -211,9 +213,10 @@ public class UserServiceImpl implements ICrud <User> {
             pst.setString(2, user.getEmail());
             pst.setString(3, user.getTelephone());
             pst.setString(4, user.getAdresse());
-            pst.setInt(5, user.getRole().getIdRole());
-            pst.setString(6, user.getStatus());
+            pst.setInt(5,3);
+            pst.setString(6, Status.VALID.toString());
             pst.setString(7, user.getPassword());
+            pst.setBytes(8, user.getImage());
 
             int result = pst.executeUpdate();
 
@@ -260,7 +263,14 @@ public class UserServiceImpl implements ICrud <User> {
             message.setFrom(new InternetAddress("khouloudmhamdi7@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userEmail));
             message.setSubject("Your New Password");
-            message.setText("Your new password is: " + password);
+
+            String htmlContent = "<p>Dear User,</p>"
+                    + "<p>Your new password is: <strong>" + password + "</strong></p>"
+                    + "<p>Please keep this password secure and consider changing it after logging in.</p>"
+                    + "<p>Best regards,<br/>Your Application Team</p>";
+
+            message.setContent(htmlContent, "text/html; charset=utf-8");
+
 
             // Envoyer le message
             Transport.send(message);
@@ -325,7 +335,7 @@ public class UserServiceImpl implements ICrud <User> {
 
             return updateSuccess;
         } else {
-            // Si l'ancien mot de passe ne correspond pas, retourner false (échec)
+
             return false;
         }
     }
@@ -337,6 +347,25 @@ public class UserServiceImpl implements ICrud <User> {
             updateStatement.setString(2, userEmail);
 
             int rowsUpdated = updateStatement.executeUpdate();
+
+            // Vérifier si la mise à jour a réussi
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors de la mise à jour du mot de passe : " + e.getMessage());
+            return false;
+        }
+    }
+    public boolean ResetPassword(String userEmail) {
+        String updateQuery = "UPDATE \"User\" SET password = ? WHERE email = ?";
+        String randomPassword = generateRandomPassword(8);
+        try (PreparedStatement updateStatement = cnx.prepareStatement(updateQuery)) {
+            updateStatement.setString(1, randomPassword);
+            updateStatement.setString(2, userEmail);
+
+            int rowsUpdated = updateStatement.executeUpdate();
+            // Envoyer le mot de passe par e-mail
+            sendPasswordByEmail(userEmail, randomPassword);
 
             // Vérifier si la mise à jour a réussi
             return rowsUpdated > 0;

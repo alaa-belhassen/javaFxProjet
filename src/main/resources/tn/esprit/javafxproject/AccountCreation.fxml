@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.AccountCreationController">
+   <children>
+      <Label layoutX="40.0" layoutY="55.0" text="nom" />
+      <TextField fx:id="nom" layoutX="107.0" layoutY="51.0" />
+      <Label layoutX="38.0" layoutY="103.0" text="Email" />
+      <TextField fx:id="email" layoutX="108.0" layoutY="99.0" />
+      <Label layoutX="38.0" layoutY="153.0" text="Telephone" />
+      <Label layoutX="38.0" layoutY="200.0" text="Adresse" />
+      <Label layoutX="40.0" layoutY="247.0" text="Password" />
+      <Label fx:id="resultat" layoutX="40.0" layoutY="294.0" prefHeight="66.0" prefWidth="461.0" textFill="#960d0d">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TextField fx:id="telephone" layoutX="117.0" layoutY="149.0" />
+      <TextField fx:id="adresse" layoutX="118.0" layoutY="196.0" />
+      <PasswordField fx:id="password" layoutX="118.0" layoutY="243.0" />
+      <Button fx:id="CreateAccount" layoutX="502.0" layoutY="360.0" mnemonicParsing="false" onAction="#CreateAcoount" prefHeight="58.0" prefWidth="119.0" text="Créer compte" />
+   </children>
+</AnchorPane>
