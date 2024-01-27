@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.SidebarController">
+   <top>
+      <HBox prefHeight="69.0" prefWidth="1315.0" styleClass="white-background" stylesheets="@css/styles.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" opacity="0.72" prefHeight="69.0" prefWidth="216.0" text="TicketBooking" textAlignment="CENTER" textFill="#254441">
+               <font>
+                  <Font name="Georgia" size="23.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="33.0" prefWidth="302.0" styleClass="round-layout" stylesheets="@css/styles.css">
+               <children>
+                  <TextField prefHeight="25.0" prefWidth="237.0" promptText="Recherche.." styleClass="transparent" stylesheets="@css/styles.css" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/images-removebg-preview%20(1).png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin>
+            </HBox>
+            <Pane prefHeight="69.0" prefWidth="488.0" />
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="53.0" prefWidth="109.0" text="Sarra Aloui">
+                     <font>
+                        <Font name="Georgia" size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/1696348579560.jpeg" />
+                     </image>
+                  </ImageView>
+               </children>
+               <HBox.margin>
+                  <Insets left="150.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="821.0" prefWidth="210.0" styleClass="white-background" stylesheets="@css/styles.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="546.0" prefWidth="208.0" spacing="6.0">
+               <children>
+                  <Separator layoutX="10.0" layoutY="395.0" prefWidth="200.0" />
+                  <HBox prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#goAcceuil" prefHeight="50.0" prefWidth="184.0" text="Acceuil">
+                           <font>
+                              <Font name="Georgia" size="13.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="transparent" />
+                              <String fx:value="mouse-moved" />
+                              <String fx:value="selected" />
+                           </styleClass>
+                        </Button>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/hp.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="9.0" right="10.0" top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Separator layoutX="10.0" layoutY="386.0" prefWidth="200.0" />
+                  <HBox layoutX="10.0" layoutY="63.0" prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#goEvenement" prefHeight="50.0" prefWidth="189.0" styleClass="transparent" text="Evenements">
+                           <font>
+                              <Font name="Georgia" size="13.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/Events-icon.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="9.0" right="10.0" top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Separator layoutX="10.0" layoutY="389.0" prefWidth="200.0" />
+                  <HBox prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#goShop" prefHeight="50.0" prefWidth="179.0" styleClass="transparent" text="Shop">
+                           <font>
+                              <Font name="Georgia" size="13.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/shop.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="7.0" right="10.0" top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <HBox layoutX="10.0" layoutY="213.0" prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#goDonation" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Donation">
+                           <font>
+                              <Font name="Georgia" size="13.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/doon.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="7.0" top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <Separator layoutX="10.0" layoutY="392.0" prefWidth="200.0" />
+                  <HBox layoutX="10.0" layoutY="163.0" prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#goReclamation" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Reclamation">
+                           <font>
+                              <Font name="Georgia" size="13.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/rec.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="7.0" top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <HBox prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#goDeconect" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Deconnexion">
+                           <font>
+                              <Font name="Georgia" size="13.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/decnx.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="9.0" top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Separator layoutX="10.0" layoutY="133.0" prefWidth="200.0" />
+               </children>
+               <padding>
+                  <Insets top="70.0" />
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="830.0" prefWidth="1098.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
