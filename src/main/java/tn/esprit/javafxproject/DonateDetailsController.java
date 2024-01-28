@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import tn.esprit.javafxproject.models.Don;
@@ -13,10 +15,14 @@ import tn.esprit.javafxproject.models.Emoji;
 import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.DonServiceImpl;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class DonateDetailsController {
+    @FXML
+    private Label errortext;
 
     @FXML
     private TextField Receveur = new TextField();
@@ -24,6 +30,8 @@ public class DonateDetailsController {
     @FXML
     private TextField comment = new TextField();
 
+    @FXML
+    private ImageView found;
 
     @FXML
     private Label exp;
@@ -92,24 +100,44 @@ public class DonateDetailsController {
         //fill don
 
         don.setCommentaire(comment.getText());
-        System.out.println(comment.getText());
 
-        receveur.setIdUser(Integer.parseInt(Receveur.getText()));
-        System.out.println(Integer.parseInt(Receveur.getText()));
 
+        receveur.setNom(Receveur.getText());
         don.setReceveur(receveur);
-        donneur.setIdUser(Integer.parseInt(Receveur.getText()));
+
+        donneur.setNom(Receveur.getText());
+        don.setDonneur(donneur);
 
         emoji.setNomEmoji(name.getText());
         don.setEmoji(emoji);
 
         don.setMontant(Integer.parseInt(totale.getText()));
 
-        don.setDonneur(donneur);
+        if(checkUserByName()){
+            addDon(don);
+            loadPage("donation");
+        }else{
+            errortext.setText("userNotFound");
+            errortext.setVisible(true);
+        }
+    }
 
-        addDon(don);
-        loadPage("donation");
+    @FXML
+    void checkuser(MouseEvent event) throws SQLException, FileNotFoundException {
+        if(checkUserByName()){
+            Image image =  new Image(new FileInputStream("C:/Users/msi/Desktop/projectjavaGeeksFInale/javaFxProject/src/main/resources/tn/esprit/javafxproject/img/R.png"));
+            found.setImage(image);
+            found.setVisible(true);
+        }else{
+            Image image =  new Image(new FileInputStream("C:/Users/msi/Desktop/projectjavaGeeksFInale/javaFxProject/src/main/resources/tn/esprit/javafxproject/img/error.jpg"));
+            found.setImage(image);
+            found.setVisible(true);
+        }
 
+    }
+    private boolean checkUserByName() throws SQLException {
+        DonServiceImpl donService = new DonServiceImpl();
+        return donService.chearchUserByName(Receveur.getText());
     }
     private void addDon(Don don) throws SQLException {
         //db call
@@ -121,8 +149,8 @@ public class DonateDetailsController {
         FXMLLoader root = new FXMLLoader(getClass().getResource(name+".fxml"));
         Parent parent = root.load();
         DonController donController = root.getController();
-        donController.clientLayoutController = donationCardController.donController.clientLayoutController;
-        donationCardController.donController.clientLayoutController.screen.setCenter(parent);
+        donController.sidebarController = donationCardController.donController.sidebarController;
+        donationCardController.donController.sidebarController.getScreen().setCenter(parent);
     }
 
 

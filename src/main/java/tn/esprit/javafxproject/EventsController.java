@@ -18,7 +18,7 @@ public class EventsController implements Initializable {
     @FXML
     private HBox CardLayout;
     List<Evenement> events ;
-    ClientLayoutController clientLayoutController;
+    SidebarController sidebarController;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         events = new ArrayList<Evenement>(getEvents());

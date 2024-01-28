@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 public class DonServiceImpl implements ICrud<Don> {
     @Override
     public ArrayList<Don> getAll() throws SQLException {
@@ -88,12 +89,20 @@ public class DonServiceImpl implements ICrud<Don> {
     public boolean add(Don don) {
         String selectQuery = "SELECT * FROM don WHERE iddon = ?";
         String getemoji = "SELECT idemoji FROM emoji WHERE nomemoji = ?";
+        String getUser = "SELECT idUser FROM utilisateur WHERE nom = ?";
         int idemoji = -1;
-        try (PreparedStatement selectStatementEmoji = DbConnection.getCnx().prepareStatement(getemoji)) {
+        int idUserReceveur = -1;
+        try ( PreparedStatement selectStatementEmoji = DbConnection.getCnx().prepareStatement(getemoji);
+             PreparedStatement selectStatementUser = DbConnection.getCnx().prepareStatement(getemoji) ) {
             selectStatementEmoji.setString(1,don.getEmoji().getNomEmoji());
             ResultSet emojiRs = selectStatementEmoji.executeQuery();
             if (emojiRs.next()) {
                 idemoji= emojiRs.getInt(1);
+            }
+            selectStatementUser.setString(1,don.getEmoji().getNomEmoji());
+            ResultSet userRS = selectStatementUser.executeQuery();
+            if (userRS.next()) {
+                idUserReceveur= userRS.getInt(1);
             }
             try (PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(selectQuery)) {
                 selectStatement.setInt(1,don.getIdDon());
@@ -106,8 +115,8 @@ public class DonServiceImpl implements ICrud<Don> {
                         insertStatement.setDouble(1,don.getMontant());
                         insertStatement.setString(2,don.getCommentaire());
                         insertStatement.setInt(3,idemoji);
-                        insertStatement.setInt(4, don.getDonneur().getIdUser());
-                        insertStatement.setInt(5, don.getReceveur().getIdUser());
+                        insertStatement.setInt(4, 1);
+                        insertStatement.setInt(5, idUserReceveur);
                         insertStatement.setString(6, Status.VALID.toString());
 
                         int res = insertStatement.executeUpdate();
@@ -191,4 +200,13 @@ public class DonServiceImpl implements ICrud<Don> {
         System.out.println(sum);
         return sum;
     }
+
+    public boolean chearchUserByName(String name) throws SQLException {
+        String cherchUser = "select nom from utilisateur where nom=?";
+        PreparedStatement preparedStatement = DbConnection.getCnx().prepareStatement(cherchUser);
+        preparedStatement.setString(1,name);
+        ResultSet cherchUserRS = preparedStatement.executeQuery();
+        return cherchUserRS.next();
+    }
+
 }

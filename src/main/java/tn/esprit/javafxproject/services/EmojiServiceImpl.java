@@ -26,7 +26,6 @@ public class EmojiServiceImpl implements ICrud<Emoji>{
             emoji.setRank(resultSet.getInt(3));
             emoji.setPrix(resultSet.getInt(4));
             emoji.setImageUrl(resultSet.getString(5));
-            emoji.setImageUrl(resultSet.getString(6));
             emojis.add(emoji);
         }
         return emojis ;

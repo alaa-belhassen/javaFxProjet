@@ -39,7 +39,6 @@ public class HistoriqueRowController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("invoice.fxml"));
-
             Scene scene = new Scene(fxmlLoader.load(), 583, 400);
             InvoiceController invoiceController = fxmlLoader.getController();
             invoiceController.setQt(qt.getText());

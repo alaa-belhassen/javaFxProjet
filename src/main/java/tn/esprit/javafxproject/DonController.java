@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import tn.esprit.javafxproject.models.Emoji;
@@ -21,11 +22,9 @@ import java.util.ResourceBundle;
 public class DonController implements Initializable {
     @FXML
     private GridPane donationsContainer;
-    @FXML
-    private ScrollPane scrollPane;
     private List<Emoji> emojis;
 
-    ClientLayoutController clientLayoutController;
+    SidebarController sidebarController;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int column = 0;
@@ -53,6 +52,15 @@ public class DonController implements Initializable {
         }
     }
 
+    @FXML
+    void goToHistorque(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("historiqueDonation.fxml"));
+        Parent parent = fxmlLoader.load();
+        DonationHistoriqueController historiqueController =fxmlLoader.getController();
+        historiqueController.donController = this;
+        sidebarController.getScreen().setCenter(parent);
+    }
     private List<Emoji> getEmojis() throws SQLException {
         List<Emoji> emojis ;
         EmojiServiceImpl emoji = new EmojiServiceImpl();

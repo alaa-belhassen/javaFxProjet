@@ -32,7 +32,7 @@ public class DonationHistoriqueController implements Initializable {
     private VBox rowsContainer;
     private List<Don> dons;
 
-    ClientLayoutController clientLayoutController;
+    DonController donController;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
