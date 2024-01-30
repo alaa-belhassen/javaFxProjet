@@ -9,6 +9,11 @@ public class Role {
     public Role() {
 
     }
+    public Role(int idRole) {
+        super();
+        this.idRole = idRole;
+
+    }
 
     public Role(int idRole, String name, String status) {
         super();

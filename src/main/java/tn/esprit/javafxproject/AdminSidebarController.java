@@ -7,14 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import tn.esprit.javafxproject.models.User;
 
 import java.io.IOException;
 
-public class SidebarController {
+public class AdminSidebarController {
 
-public int id;
-    public User user;
     @FXML
     private Hyperlink profil;
     @FXML
@@ -24,9 +21,6 @@ public int id;
 
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @FXML
     void profil (ActionEvent event) throws IOException {
@@ -34,16 +28,13 @@ public int id;
 
         Parent parent = (Parent)root.load();
 
-       ProfilController profilController = root.getController();
-      profilController.setUser(this.user);
-
+        Object profilController = root.getController();
         if(root.getController() instanceof ProfilController){
-            ((ProfilController) profilController).SidebarController = this;
+            ((ProfilController) profilController).AdminSidebarController = this;
             borderPane.setCenter(parent);
         }
-        //Passage de variabl
 
-        System.out.println(this.id);
+        System.out.println(root);
     }
     @FXML
     void goDeconect(MouseEvent event) {
@@ -69,12 +60,4 @@ public int id;
     void goShop(MouseEvent event) {
 
     }
-
-    public void setUser(User u) {
-        this.user=u;
-    }
-    public void initialize() {
-       System.out.println("bonjour c bon "+this.user);
-    }
-
 }

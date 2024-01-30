@@ -304,16 +304,18 @@ public class UserServiceImpl implements ICrud <User> {
 
         return result;
     }
-    public boolean authenticate(String email, String password) {
-        String query = "SELECT password FROM  utilisateur WHERE email = ?";
+    public User authenticate(String email, String password) {
+        String query = "SELECT iduser, idrole, password FROM utilisateur WHERE email = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+                    int userId = resultSet.getInt("iduser");
+                    int roleId = resultSet.getInt("idrole");
+                    Role role =new Role(roleId);
                     String storedPassword = resultSet.getString("password");
-
                     if (passwordHashMatches(password, storedPassword)) {
-                        return true;
+                        return new User(userId, role);
                     }
                 }
             }
@@ -321,12 +323,12 @@ public class UserServiceImpl implements ICrud <User> {
             e.printStackTrace();
             System.out.println("Erreur SQL : " + e.getMessage());
         }
-        return false;
+        return null; // Retourne null si l'authentification échoue ou s'il y a une erreur
     }
 
     public boolean changePassword(String email, String oldPassword, String newPassword) {
         // Vérifier la correspondance de l'ancien mot de passe en utilisant la méthode authenticate
-        if (authenticate(email, oldPassword)) {
+        if (authenticate(email, oldPassword)!=null) {
           User u =new User();
             String newHashedPassword = u.hashPassword(newPassword);
 
