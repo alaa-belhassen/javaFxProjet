@@ -42,13 +42,12 @@ public class CategorieServiceImpl implements ICrud<Categorie> {
             selectStatement.setString(1, categorie.getNom());
             ResultSet resultSet = selectStatement.executeQuery();
             if (!resultSet.next()) {
-                String insertQuery = "INSERT INTO categorie(idcategorie,nom,status) " +
-                        "VALUES (?,?,?)";
+                String insertQuery = "INSERT INTO categorie(nom,status) " +
+                        "VALUES (?,?)";
 
                 try (PreparedStatement insertStatement = DbConnection.getCnx().prepareStatement(insertQuery)) {
-                    insertStatement.setInt(1, categorie.getIdCategorie());
-                    insertStatement.setString(2, categorie.getNom());
-                    insertStatement.setString(3, Status.VALID.toString());
+                    insertStatement.setString(1, categorie.getNom());
+                    insertStatement.setString(2, Status.VALID.toString());
 
                     insertStatement.executeUpdate();
                     System.out.println("successfully added");
