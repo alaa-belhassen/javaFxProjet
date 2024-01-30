@@ -14,7 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.mindrot.jbcrypt.BCrypt;
 import tn.esprit.javafxproject.utils.Status;
-
+import org.mindrot.jbcrypt.BCrypt;
 public class UserServiceImpl implements ICrud <User> {
 
     private Connection cnx ;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements ICrud <User> {
     public ArrayList<User> getAll() {
         ArrayList<User> Users = new ArrayList<User>();
 
-        String req = "SELECT u.*, r.role FROM \"User\" u JOIN \"role\" r ON u.idrole = r.idrole";
+        String req = "SELECT u.*, r.role FROM utilisateur u JOIN \"role\" r ON u.idrole = r.idrole";
         Statement st;
         try {
             st = cnx.createStatement();
@@ -73,7 +73,7 @@ public class UserServiceImpl implements ICrud <User> {
     public User getUser(int id) {
         User u = new User();
 
-        String req = "SELECT u.*, r.role FROM \"User\" u JOIN \"role\" r ON u.idrole = r.idrole WHERE iduser =" + id + ";";
+        String req = "SELECT u.*, r.role FROM utilisateur u JOIN \"role\" r ON u.idrole = r.idrole WHERE iduser =" + id + ";";
         Statement st;
         try {
             st = cnx.createStatement();
@@ -100,7 +100,7 @@ public class UserServiceImpl implements ICrud <User> {
     @Override
     public boolean add(User user) {
         if (!emailExists(user.getEmail())){
-        String req = "INSERT INTO \"User\" "
+        String req = "INSERT INTO utilisateur "
                 + "( nom, email, telephone, adresse, idrole, status, password,image)\r\n"
                 + "VALUES ( ?, ?, ?, ?, ?, ?, ?,?)";
 
@@ -137,7 +137,7 @@ public class UserServiceImpl implements ICrud <User> {
     @Override
     public boolean delete(User U ) {
 
-        String req = "UPDATE \"User\" "
+        String req = "UPDATE utilisateur "
 
                 + " SET status='supprimé' "
                 + "WHERE iduser='" + U.getIdUser() + "';";
@@ -176,7 +176,7 @@ public class UserServiceImpl implements ICrud <User> {
 
     @Override
     public boolean update(User U) {
-        String req = "UPDATE \"User\" "
+        String req = "UPDATE utilisateur "
                 + "SET nom='" + U.getNom() + "', "
                 + "email='" + U.getEmail() + "', "
                 + "telephone='" + U.getTelephone() + "', "
@@ -203,7 +203,7 @@ public class UserServiceImpl implements ICrud <User> {
         user.setPassword(randomPassword);
 
       if (!emailExists(user.getEmail())){
-        String req = "INSERT INTO \"User\" "
+        String req = "INSERT INTO utilisateur "
                 + "( nom, email, telephone, adresse, idrole, status, password,image)\r\n"
                 + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -282,7 +282,7 @@ public class UserServiceImpl implements ICrud <User> {
         }
     }
     public boolean emailExists(String email) {
-        String query = "SELECT COUNT(*) FROM \"User\" WHERE email = ?";
+        String query = "SELECT COUNT(*) FROM utilisateur WHERE email = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -305,7 +305,7 @@ public class UserServiceImpl implements ICrud <User> {
         return result;
     }
     public boolean authenticate(String email, String password) {
-        String query = "SELECT password FROM  \"User\" WHERE email = ?";
+        String query = "SELECT password FROM  utilisateur WHERE email = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -340,7 +340,7 @@ public class UserServiceImpl implements ICrud <User> {
         }
     }
     private boolean updatePasswordInDatabase(String userEmail, String newHashedPassword) {
-        String updateQuery = "UPDATE \"User\" SET password = ? WHERE email = ?";
+        String updateQuery = "UPDATE utilisateur SET password = ? WHERE email = ?";
 
         try (PreparedStatement updateStatement = cnx.prepareStatement(updateQuery)) {
             updateStatement.setString(1, newHashedPassword);
@@ -357,16 +357,19 @@ public class UserServiceImpl implements ICrud <User> {
         }
     }
     public boolean ResetPassword(String userEmail) {
-        String updateQuery = "UPDATE \"User\" SET password = ? WHERE email = ?";
+
+        String updateQuery = "UPDATE utilisateur SET password = ? WHERE email = ?";
         String randomPassword = generateRandomPassword(8);
+        String randomPasswordHashed =BCrypt.hashpw(randomPassword, BCrypt.gensalt());
+
         try (PreparedStatement updateStatement = cnx.prepareStatement(updateQuery)) {
-            updateStatement.setString(1, randomPassword);
+            updateStatement.setString(1, randomPasswordHashed);
             updateStatement.setString(2, userEmail);
 
             int rowsUpdated = updateStatement.executeUpdate();
             // Envoyer le mot de passe par e-mail
             sendPasswordByEmail(userEmail, randomPassword);
-
+System.out.println("Update réussi ");
             // Vérifier si la mise à jour a réussi
             return rowsUpdated > 0;
         } catch (SQLException e) {

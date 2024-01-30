@@ -2,10 +2,14 @@ package tn.esprit.javafxproject;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.UserServiceImpl;
 import tn.esprit.javafxproject.utils.DbConnection;
@@ -56,6 +60,25 @@ public class ResetPasswordController {
     @FXML
     private Button resetPassword;
     @FXML
+    private Button retour;
+
+    @FXML
+    void retour (ActionEvent event)
+    {
+        try{ Stage stage;
+            Parent root;
+            stage = (Stage) retour.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch(Exception errr){
+
+        }
+    }
+
+    @FXML
     void resetPassword (ActionEvent event) {
 
         if( !verif_mail())
@@ -66,9 +89,17 @@ public class ResetPasswordController {
 
 
         else if(verif_mail())
-        {UserService.ResetPassword(email.getText());
+        {
+            System.out.println("Bonjour");
+            if (UserService.emailExists(email.getText()))
+        { UserService.ResetPassword(email.getText());
             Alert al= new Alert(Alert.AlertType.CONFIRMATION);
-            al.setTitle("Alert");al.setContentText("Votre nouveau mot de passe est envoyé par email");al.show();
+            al.setTitle("Alert");al.setContentText("Votre nouveau mot de passe est envoyé par email");al.show();}
+        }
+        else
+        {
+            Alert al= new Alert(Alert.AlertType.CONFIRMATION);
+            al.setTitle("Alert");al.setContentText("Vérifier l'adresse email ");al.show();
         }
 
 

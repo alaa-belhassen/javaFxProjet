@@ -46,15 +46,7 @@ public class HelloController {
         stage.setScene(scene);
         stage.show();
     }
-    void AddUser (ActionEvent event) throws IOException {
-        Stage stage;
-        Parent root;
-        stage = (Stage) ajout.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("AjouterEquipe.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
@@ -64,12 +56,12 @@ public class HelloController {
         if (controle())
         { if( UserService.authenticate(email.getText(),password.getText()))
        {
-           welcomeText.setText("utilisateur existe ");
+           welcomeText.setText("Connexion réussie ");
 
        }
 
        else {
-           welcomeText.setText("User n'existe pas !");
+           welcomeText.setText("Utilisateur inexistant ");
        } }
         else
         {welcomeText.setText("Veuillez remplir les champs ");}
@@ -92,11 +84,26 @@ public class HelloController {
     }
 
     @FXML
+    void ajout (ActionEvent event)
+    {
+        try{ Stage stage;
+            Parent root;
+            stage = (Stage) ajout.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("AjouterEquipe.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch(Exception errr){
+
+        }
+    }
+    @FXML
     void creerCompte (ActionEvent event)
     {
         try{ Stage stage;
             Parent root;
-            stage = (Stage) connect.getScene().getWindow();
+            stage = (Stage) CreateAccount.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("AccountCreation.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);

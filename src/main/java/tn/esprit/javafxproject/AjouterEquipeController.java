@@ -2,9 +2,14 @@ package tn.esprit.javafxproject;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.UserServiceImpl;
 import tn.esprit.javafxproject.utils.DbConnection;
@@ -100,9 +105,26 @@ public class AjouterEquipeController {
         }
         return test;}
 
+    @FXML
+    private Button retour;
 
     @FXML
-    void AddUser7
+    void retour (ActionEvent event)
+    {
+        try{ Stage stage;
+            Parent root;
+            stage = (Stage) retour.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch(Exception errr){
+
+        }
+    }
+    @FXML
+    void AddUser
             (ActionEvent event) {
         User user = new User();
         user.setNom(nom.getText());
@@ -126,7 +148,7 @@ public class AjouterEquipeController {
             al.setTitle("Alert");al.setContentText("Vérifier le numéro de téléphone saisi ");al.show();  }
 
         else if(verif_Telephone()&&verif_nom(nom)&&verif_mail())
-        {UserService.add(user);
+        {UserService.CreateAccount(user);
             Alert al= new Alert(Alert.AlertType.CONFIRMATION);
             al.setTitle("Alert");al.setContentText("Votre compte est bien enregistré");al.show();
         }
