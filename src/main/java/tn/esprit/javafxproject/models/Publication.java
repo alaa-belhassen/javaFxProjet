@@ -83,7 +83,7 @@ public class Publication {
     public void setAttachments(String attachments) {
         this.attachments = attachments;
     }
-
+/*
     @Override
     public String toString() {
         return "Publication{" +
@@ -95,5 +95,10 @@ public class Publication {
                 ", shares=" + shares +
                 ", attachments='" + attachments + '\'' +
                 '}';
-    }
+    } */
+@Override
+public String toString() {
+    return "User ID: " + idUser + "\nContent: " + content + "\nLikes: " + likes + "\nShares: " + shares;
+}
+
 }

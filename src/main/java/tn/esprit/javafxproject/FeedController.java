@@ -1,21 +1,23 @@
 package tn.esprit.javafxproject;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import tn.esprit.javafxproject.models.Publication;
 import tn.esprit.javafxproject.services.PublicationService;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class FeedController {
+public class FeedController implements Initializable {
 
     @FXML
     private TextArea publicationInput;
@@ -24,14 +26,17 @@ public class FeedController {
     private Button postButton;
 
     @FXML
-    private ListView<String> publicationListView;
+    private VBox publicationVBox;
 
     private PublicationService publicationService;
 
-    // Initialize the PublicationService with a database connection
-    public FeedController() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         try {
             this.publicationService = new PublicationService(getDatabaseConnection());
+
+            // Call updatePublicationVBox to load and display publications on initialization
+            updatePublicationVBox();
         } catch (SQLException e) {
             handleDatabaseConnectionError(e);
         }
@@ -51,7 +56,7 @@ public class FeedController {
     }
 
     @FXML
-    private void addPublication(ActionEvent event) {
+    private void addPublication() {
         String content = publicationInput.getText();
 
         // Assuming IdUser, Likes, Shares, Attachments need default or specific values
@@ -62,7 +67,7 @@ public class FeedController {
 
             if (success) {
                 Platform.runLater(() -> {
-                    updatePublicationListView();
+                    updatePublicationVBox();
                     publicationInput.clear();
                 });
             } else {
@@ -75,17 +80,19 @@ public class FeedController {
         }
     }
 
-    private void updatePublicationListView() {
+    private void updatePublicationVBox() {
         try {
             // Get all publications from the database
             ArrayList<Publication> publications = publicationService.getAll();
 
-            // Clear the current items in the ListView
-            publicationListView.getItems().clear();
+            // Clear the current items in the VBox
+            publicationVBox.getChildren().clear();
 
-            // Add the content of each publication to the ListView
+            // Add each publication to the VBox
             for (Publication publication : publications) {
-                publicationListView.getItems().add(publication.getContent());
+                // Create a label for each publication and add it to the VBox
+                Label publicationLabel = new Label(publication.toString());
+                publicationVBox.getChildren().add(publicationLabel);
             }
         } catch (SQLException e) {
             e.printStackTrace();
