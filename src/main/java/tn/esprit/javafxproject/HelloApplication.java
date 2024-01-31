@@ -28,13 +28,11 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
 
-<<<<<<< Updated upstream
-=======
 
         DbConnection db = DbConnection.getInstance();
         ServiceAchat SA = new ServiceAchat();
         ServiceProduit SP = new ServiceProduit();
-        Produit p = new Produit ();
+        Produit p = new Produit();
         p.setProductID(19);
         SP.add(p);
 
@@ -53,12 +51,11 @@ public class HelloApplication extends Application {
 
         }
 
-        ArrayList<Produit> Lesproduits  = new ArrayList<>();
+        ArrayList<Produit> Lesproduits = new ArrayList<>();
         Lesproduits = SP.getAll();
         for (Produit pc : Lesproduits) {
             System.out.println(pc.toString());
 
         }
->>>>>>> Stashed changes
-    }
-}
+
+    }}
