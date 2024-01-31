@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tn.esprit.javafxproject.models.Publication;
 import tn.esprit.javafxproject.services.PublicationService;
@@ -90,13 +91,38 @@ public class FeedController implements Initializable {
 
             // Add each publication to the VBox
             for (Publication publication : publications) {
-                // Create a label for each publication and add it to the VBox
-                Label publicationLabel = new Label(publication.toString());
-                publicationVBox.getChildren().add(publicationLabel);
+                // Create a custom HBox for each publication and add it to the VBox
+                VBox publicationBox = createPublicationBox(publication);
+                publicationVBox.getChildren().add(publicationBox);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             // Handle SQL exception
         }
     }
+
+    private VBox createPublicationBox(Publication publication) {
+        // Create a custom VBox to represent a publication
+        VBox publicationBox = new VBox();
+        publicationBox.getStyleClass().add("publication-box");
+
+        // Add labels or other nodes to display details of the publication
+        Label userIdLabel = new Label("User ID: " + publication.getIdUser());
+        Label contentLabel = new Label("Content: " + publication.getContent());
+        Label likesLabel = new Label("Likes: " + publication.getLikes());
+        Label sharesLabel = new Label("Shares: " + publication.getShares());
+
+        // Apply styles to labels
+        userIdLabel.getStyleClass().add("publication-label");
+        contentLabel.getStyleClass().add("publication-label");
+        likesLabel.getStyleClass().add("publication-label");
+        sharesLabel.getStyleClass().add("publication-label");
+
+        // Add labels to the VBox
+        publicationBox.getChildren().addAll(userIdLabel, contentLabel, likesLabel, sharesLabel);
+
+        return publicationBox;
+    }
+
+
 }
