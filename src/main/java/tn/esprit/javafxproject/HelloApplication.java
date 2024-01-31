@@ -17,6 +17,10 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("feed.fxml"));
@@ -32,6 +36,9 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+}
+
+/*
 
 
     public static void main(String[] args) {
@@ -99,3 +106,4 @@ public class HelloApplication extends Application {
         }
     }
 }
+ */

@@ -26,6 +26,8 @@ public class Publication {
         this.attachments = attachments;
     }
 
+
+
     public int getPublicationID() {
         return publicationID;
     }

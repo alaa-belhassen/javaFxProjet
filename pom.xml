@@ -33,7 +33,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.23</version> <!-- Replace with the version you want to use -->
+            <version>42.2.23</version> <!-- Use the version you downloaded -->
         </dependency>
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
