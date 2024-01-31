@@ -2,6 +2,7 @@ package tn.esprit.javafxproject;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -18,12 +19,20 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Sidebar.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1315, 890);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("feed.fxml"));
+
+        // Set the controller for the FXMLLoader
+        FeedController feedController = new FeedController();
+        loader.setController(feedController);
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 1315, 890);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
+
 
     public static void main(String[] args) {
 
