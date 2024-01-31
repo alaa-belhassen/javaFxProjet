@@ -8,11 +8,8 @@
       </list>
     </option>
   </component>
-<<<<<<< Updated upstream
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="corretto-18" project-jdk-type="JavaSDK">
-=======
   <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="18 (2)" project-jdk-type="JavaSDK">
->>>>>>> Stashed changes
+
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectType">

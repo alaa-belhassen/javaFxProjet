@@ -42,15 +42,15 @@ public class ServiceProduit implements ICrud<Produit> {
 
     @Override
     public boolean add(Produit produit) {
-        String requete = "INSERT INTO produit (productID, productName, productDescription, price, quantityInStock) VALUES (?,?,?,?,?)";
+        String requete = "INSERT INTO produit ( productName, productDescription, price, quantityInStock) VALUES (?,?,?,?)";
         int er = 0;
 
         try (PreparedStatement preparedStatement = cnx.prepareStatement(requete)) {
-            preparedStatement.setInt(1, produit.getProductID());
-            preparedStatement.setString(2, produit.getProductName());
-            preparedStatement.setString(3, produit.getProductDescription());
-            preparedStatement.setDouble(4, produit.getPrice());
-            preparedStatement.setInt(5, produit.getQuantityInStock());
+
+            preparedStatement.setString(1, produit.getProductName());
+            preparedStatement.setString(2, produit.getProductDescription());
+            preparedStatement.setDouble(3, produit.getPrice());
+            preparedStatement.setInt(4, produit.getQuantityInStock());
 
             er = preparedStatement.executeUpdate();
             System.out.println("Ajout réussi");
