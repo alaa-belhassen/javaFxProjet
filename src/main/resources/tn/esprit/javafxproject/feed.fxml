@@ -8,30 +8,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1098.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1098.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.FeedController">
 
-    <children>
-        <SplitPane dividerPositions="0.23067632850241546" orientation="VERTICAL" prefHeight="830.0" prefWidth="1115.0">
-            <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                    <children>
-                        <TextArea fx:id="publicationInput" layoutX="236.0" layoutY="54.0" prefHeight="65.0" prefWidth="625.0" />
-                        <Button id="addButton" layoutX="726.0" layoutY="138.0" mnemonicParsing="false" onAction="#addPublication" text="Add new publication" />
-                        <Label layoutX="257.0" layoutY="26.0" text="Write what you think!" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                    <children>
-                        <!-- Wrap VBox with a ScrollPane -->
-                        <ScrollPane fx:id="scrollPane" layoutX="62.0" prefHeight="634.0" prefWidth="972.0">
-                            <content>
-                                <VBox fx:id="publicationVBox" layoutX="236.0" layoutY="14.0" prefHeight="136.0" prefWidth="740.0" />
-                            </content>
-                        </ScrollPane>
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
-    </children>
-</HBox>
+        <children>
+            <SplitPane dividerPositions="0.23067632850241546" orientation="VERTICAL" prefHeight="830.0" prefWidth="1115.0">
+                <items>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                        <children>
+                            <TextArea fx:id="publicationInput" layoutX="236.0" layoutY="54.0" prefHeight="65.0" prefWidth="625.0" />
+                            <Button id="addButton" layoutX="726.0" layoutY="138.0" mnemonicParsing="false" onAction="#addPublication" text="Add new publication" />
+                            <Label layoutX="257.0" layoutY="26.0" text="Write what you think!" />
+                        </children>
+                    </AnchorPane>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                        <children>
+                            <!-- Wrap VBox with a ScrollPane -->
+                            <ScrollPane fx:id="scrollPane" layoutX="62.0" prefHeight="634.0" prefWidth="972.0">
+                                <content>
+                                    <VBox fx:id="publicationVBox" alignment="CENTER" layoutX="350.0" layoutY="14.0" prefHeight="88.0" prefWidth="625.0" style="-fx-padding: 10;" translateX="180.0" />
+                                </content>
+                            </ScrollPane>
+                        </children>
+                    </AnchorPane>
+                </items>
+            </SplitPane>
+        </children>
+    </HBox>

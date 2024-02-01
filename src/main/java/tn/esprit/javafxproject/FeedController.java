@@ -3,9 +3,12 @@ package tn.esprit.javafxproject;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tn.esprit.javafxproject.models.Publication;
@@ -15,13 +18,16 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class FeedController implements Initializable {
 
     @FXML
     private TextArea publicationInput;
+    public SidebarController sideBarController;
 
     @FXML
     private Button postButton;
@@ -80,20 +86,24 @@ public class FeedController implements Initializable {
             // Handle SQL exception
         }
     }
-
     private void updatePublicationVBox() {
         try {
             // Get all publications from the database
             ArrayList<Publication> publications = publicationService.getAll();
+
+            // Sort publications by timestamp in descending order
+            publications.sort(Comparator.comparing(Publication::getTimestamp).reversed());
 
             // Clear the current items in the VBox
             publicationVBox.getChildren().clear();
 
             // Add each publication to the VBox
             for (Publication publication : publications) {
-                // Create a custom HBox for each publication and add it to the VBox
+                // Create a custom VBox for each publication and add it to the VBox
                 VBox publicationBox = createPublicationBox(publication);
                 publicationVBox.getChildren().add(publicationBox);
+                // Add spacing between each VBox
+                publicationVBox.setSpacing(10); // Adjust the spacing as needed
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,23 +116,64 @@ public class FeedController implements Initializable {
         VBox publicationBox = new VBox();
         publicationBox.getStyleClass().add("publication-box");
 
-        // Add labels or other nodes to display details of the publication
+        publicationBox.setPadding(new Insets(100, 100, 100, 100)); // Adjust the values as needed
+
+        // Create an HBox for userIdLabel
+        HBox userIdBox = new HBox();
+        userIdBox.setSpacing(10);
+
+        // Add label for user ID
         Label userIdLabel = new Label("User ID: " + publication.getIdUser());
+
+        // Add userIdLabel to the HBox
+        userIdBox.getChildren().add(userIdLabel);
+
+        // Format timestamp to display only date and time (hours and minutes)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String formattedTimestamp = publication.getTimestamp().toLocalDateTime().format(formatter);
+
+        // Create a Label for displaying the formatted timestamp
+        Label timestampLabel = new Label("Time: " + formattedTimestamp);
+        timestampLabel.getStyleClass().add("timestamp-label");
+
+        // Create an HBox for timestampLabel, aligned to the right
+        HBox timestampBox = new HBox();
+        timestampBox.setAlignment(Pos.TOP_RIGHT);
+        timestampBox.getChildren().add(timestampLabel);
+
+        // Create a Label for displaying the content
         Label contentLabel = new Label("Content: " + publication.getContent());
+
+        // Create an HBox for Likes and Shares, aligned to the bottom right
+        HBox likesSharesBox = new HBox(10); // Adjust the spacing as needed
         Label likesLabel = new Label("Likes: " + publication.getLikes());
         Label sharesLabel = new Label("Shares: " + publication.getShares());
 
+        // Add Likes and Shares labels to the HBox
+        likesSharesBox.getChildren().addAll(likesLabel, sharesLabel);
+
+        // Set alignment for Likes and Shares HBox to bottom right
+        likesSharesBox.setAlignment(Pos.BOTTOM_RIGHT);
+
         // Apply styles to labels
         userIdLabel.getStyleClass().add("publication-label");
-        contentLabel.getStyleClass().add("publication-label");
-        likesLabel.getStyleClass().add("publication-label");
-        sharesLabel.getStyleClass().add("publication-label");
+        userIdLabel.getStyleClass().add("user-id-label");
 
-        // Add labels to the VBox
-        publicationBox.getChildren().addAll(userIdLabel, contentLabel, likesLabel, sharesLabel);
+        timestampLabel.getStyleClass().add("timestamp-label");
+
+        contentLabel.getStyleClass().add("publication-label");
+        contentLabel.getStyleClass().add("content-label");
+
+        likesLabel.getStyleClass().add("publication-label");
+        likesLabel.getStyleClass().add("likes-shares-label");
+
+        sharesLabel.getStyleClass().add("publication-label");
+        sharesLabel.getStyleClass().add("likes-shares-label");
+
+        // Add userIdBox, timestampBox, contentLabel, and Likes/Shares HBox to the VBox with appropriate spacing
+        publicationBox.getChildren().addAll(userIdBox, timestampBox, contentLabel, likesSharesBox);
 
         return publicationBox;
     }
-
 
 }

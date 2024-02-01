@@ -23,13 +23,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("feed.fxml"));
-
-        // Set the controller for the FXMLLoader
-        FeedController feedController = new FeedController();
-        loader.setController(feedController);
-
-        Parent root = loader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("Sidebar.fxml"));
 
         Scene scene = new Scene(root, 1315, 890);
         stage.setTitle("Hello!");
@@ -37,6 +31,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
 }
+
 
 /*
 
