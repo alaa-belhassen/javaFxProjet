@@ -87,6 +87,29 @@ public class PublicationService implements ICrud<Publication> {
             return rowsAffected > 0;
         }
     }
+    public boolean updateLikes(int publicationId, int newLikesCount) throws SQLException {
+        String query = "UPDATE publication SET likes = ? WHERE publicationid = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, newLikesCount);
+            preparedStatement.setInt(2, publicationId);
+            int updatedRows = preparedStatement.executeUpdate();
+            return updatedRows > 0;
+        }
+    }
 
-
+    private ArrayList<Publication> extractPublicationsFromResultSet(ResultSet resultSet) throws SQLException {
+        ArrayList<Publication> publications = new ArrayList<>();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            int idUser = resultSet.getInt("id_user");
+            String content = resultSet.getString("content");
+            int likes = resultSet.getInt("likes");
+            int shares = resultSet.getInt("shares");
+            String attachments = resultSet.getString("attachments");
+            // Assuming you have a constructor in the Publication class
+            publications.add(new Publication(id, idUser, content, likes, shares, attachments));
+        }
+        return publications;
+    }
 }
+

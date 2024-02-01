@@ -63,6 +63,7 @@ public class FeedController implements Initializable {
     }
 
 
+
     @FXML
     private void addPublication() {
         String content = publicationInput.getText();
@@ -87,6 +88,7 @@ public class FeedController implements Initializable {
             // Handle SQL exception
         }
     }
+
     private void updatePublicationVBox() {
         try {
             // Get all publications from the database
@@ -117,14 +119,14 @@ public class FeedController implements Initializable {
         VBox publicationBox = new VBox();
         publicationBox.getStyleClass().add("publication-box");
 
-        publicationBox.setPadding(new Insets(100, 100, 100, 100)); // Adjust the values as needed
+        publicationBox.setPadding(new Insets(10, 10, 10, 10)); // Adjust the values as needed
 
         // Create an HBox for userIdLabel
         HBox userIdBox = new HBox();
         userIdBox.setSpacing(10);
 
         // Add label for user ID
-        Label userIdLabel = new Label(publication.getIdUser()+ "posted");
+        Label userIdLabel = new Label(publication.getIdUser() + " posted");
 
         // Add userIdLabel to the HBox
         userIdBox.getChildren().add(userIdLabel);
@@ -143,15 +145,19 @@ public class FeedController implements Initializable {
         timestampBox.getChildren().add(timestampLabel);
 
         // Create a Label for displaying the content
-        Label contentLabel = new Label( publication.getContent());
+        Label contentLabel = new Label(publication.getContent());
 
         // Create an HBox for Likes and Shares, aligned to the bottom right
         HBox likesSharesBox = new HBox(10); // Adjust the spacing as needed
-        Label likesLabel = new Label("Likes: " + publication.getLikes());
+        Label likesLabel = new Label(String.valueOf(publication.getLikes()));
         Label sharesLabel = new Label("Shares: " + publication.getShares());
 
-        // Add Likes and Shares labels to the HBox
-        likesSharesBox.getChildren().addAll(likesLabel, sharesLabel);
+        // Create a Button for likes
+        Button likeButton = new Button("Like");
+        likeButton.setOnAction(e -> handleLikeButtonClick(publication));
+
+        // Add Like button to the Likes/Shares HBox
+        likesSharesBox.getChildren().addAll(likesLabel, likeButton, sharesLabel);
 
         // Set alignment for Likes and Shares HBox to bottom right
         likesSharesBox.setAlignment(Pos.BOTTOM_RIGHT);
@@ -175,6 +181,22 @@ public class FeedController implements Initializable {
         publicationBox.getChildren().addAll(userIdBox, timestampBox, contentLabel, likesSharesBox);
 
         return publicationBox;
+    }
+
+    private void handleLikeButtonClick(Publication publication) {
+        try {
+            // Increment likes count
+            int newLikesCount = publication.getLikes() + 1;
+
+            // Update likes count in the database
+            publicationService.updateLikes(publication.getPublicationID(), newLikesCount);
+
+            // Update UI
+            Platform.runLater(this::updatePublicationVBox);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQL exception
+        }
     }
 
 }

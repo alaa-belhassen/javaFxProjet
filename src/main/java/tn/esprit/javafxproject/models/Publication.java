@@ -26,6 +26,8 @@ public class Publication {
         this.attachments = attachments;
     }
 
+    public Publication(int id, int idUser, String content, int likes, int shares, String attachments) {
+    }
 
 
     public int getPublicationID() {
