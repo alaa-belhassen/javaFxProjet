@@ -8,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tn.esprit.javafxproject.models.Publication;
@@ -21,6 +20,7 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class FeedController implements Initializable {
@@ -61,6 +61,7 @@ public class FeedController implements Initializable {
         e.printStackTrace();
         // Handle database connection exception, e.g., show an error dialog
     }
+
 
     @FXML
     private void addPublication() {
@@ -123,7 +124,7 @@ public class FeedController implements Initializable {
         userIdBox.setSpacing(10);
 
         // Add label for user ID
-        Label userIdLabel = new Label("User ID: " + publication.getIdUser());
+        Label userIdLabel = new Label(publication.getIdUser()+ "posted");
 
         // Add userIdLabel to the HBox
         userIdBox.getChildren().add(userIdLabel);
@@ -142,7 +143,7 @@ public class FeedController implements Initializable {
         timestampBox.getChildren().add(timestampLabel);
 
         // Create a Label for displaying the content
-        Label contentLabel = new Label("Content: " + publication.getContent());
+        Label contentLabel = new Label( publication.getContent());
 
         // Create an HBox for Likes and Shares, aligned to the bottom right
         HBox likesSharesBox = new HBox(10); // Adjust the spacing as needed

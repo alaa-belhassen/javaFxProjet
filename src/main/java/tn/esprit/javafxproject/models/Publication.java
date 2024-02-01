@@ -98,7 +98,7 @@ public class Publication {
     } */
 @Override
 public String toString() {
-    return "User ID: " + idUser + "\nContent: " + content + "\nLikes: " + likes + "\nShares: " + shares + "\nTimestamp: " + timestamp;
+    return "User ID: " + idUser  + content + "\nLikes: " + likes + "\nShares: " + shares + "\nTimestamp: " + timestamp;
 }
 
 }
