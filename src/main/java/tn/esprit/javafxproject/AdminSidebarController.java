@@ -24,6 +24,9 @@ import java.util.ResourceBundle;
 
 public class AdminSidebarController  implements Initializable {
 
+
+
+
     @FXML
     private Hyperlink profil;
     @FXML
@@ -34,9 +37,21 @@ public class AdminSidebarController  implements Initializable {
     @FXML
     private Button deconnecter;
 
+
     @FXML
     void goAcceuil(MouseEvent event) {
-
+        try {
+            FXMLLoader root = new FXMLLoader(getClass().getResource("feed.fxml"));
+            Parent parent = root.load();
+            Object feedController = root.getController();
+            if (root.getController() instanceof FeedController) {
+                ((FeedController) feedController).setAdminsidebarController(this);
+                this.borderPane.setCenter(parent);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading Acceuil: " + e.getMessage());
+        }
     }
 
 
@@ -120,6 +135,9 @@ public class AdminSidebarController  implements Initializable {
         }
         this.image.setImage(image);
 
+        System.out.println("Loading Acceuil...");
+        goAcceuil(null);
+        System.out.println("Acceuil loaded successfully.");
 
     }
 }

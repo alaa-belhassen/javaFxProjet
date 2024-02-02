@@ -19,8 +19,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import tn.esprit.javafxproject.models.Comment;
 import tn.esprit.javafxproject.models.Publication;
+import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.CommentService;
 import tn.esprit.javafxproject.services.PublicationService;
+import tn.esprit.javafxproject.services.UserServiceImpl;
 
 import java.io.File;
 import java.net.URL;
@@ -37,6 +39,10 @@ public class FeedController implements Initializable {
     private Map<Integer, HBox> publicationCommentBoxes = new HashMap<>();
     @FXML
     private TextArea publicationInput;
+    private AdminSidebarController adminSidebarController;
+    public void setAdminsidebarController(AdminSidebarController adminSidebarController) {
+        this.adminSidebarController = adminSidebarController;
+    }
     public SidebarController sideBarController;
     public CommentService commentService;
     @FXML
@@ -125,7 +131,7 @@ public class FeedController implements Initializable {
         String content = publicationInput.getText();
 
         // Assuming IdUser, Likes, Shares need default or specific values
-        Publication newPublication = new Publication(1, content, 0, 0, currentImagePath);
+        Publication newPublication = new Publication(User.UserConnecte, content, 0, 0, currentImagePath);
 
         try {
             boolean success = publicationService.add(newPublication);
@@ -192,8 +198,13 @@ public class FeedController implements Initializable {
         HBox userIdBox = new HBox();
         userIdBox.setSpacing(0);
 
+        UserServiceImpl UserService = new UserServiceImpl();
         // Add label for user ID
-        Label userIdLabel = new Label(comment.getUserId() + " commented");
+        User user = UserService.getUser(comment.getUserId());
+        String userName = user.getNom();
+
+        // Add label for user ID
+        Label userIdLabel = new Label(userName + " commented");
 
         // Add userIdLabel to the HBox
         userIdBox.getChildren().add(userIdLabel);
@@ -256,7 +267,7 @@ public class FeedController implements Initializable {
         String commentContent = commentTextArea.getText();
 
         // Assuming IdUser, Likes, Attachments need default or specific values
-        Comment newComment = new Comment(publication.getPublicationID(), 1, commentContent, LocalDateTime.now(), 0, null);
+        Comment newComment = new Comment(publication.getPublicationID(), User.UserConnecte, commentContent, LocalDateTime.now(), 0, null);
         System.out.println(publication.getPublicationID());
         boolean success = commentService.addComment(newComment);
 
@@ -307,8 +318,13 @@ public class FeedController implements Initializable {
         HBox userIdBox = new HBox();
         userIdBox.setSpacing(2);
 
+        UserServiceImpl UserService = new UserServiceImpl();
         // Add label for user ID
-        Label userIdLabel = new Label(publication.getIdUser() + " posted");
+        User user = UserService.getUser(publication.getIdUser());
+        String userName = user.getNom();
+
+// Create the label using the userName
+        Label userIdLabel = new Label(userName + " posted");
 
         // Add userIdLabel to the HBox
         userIdBox.getChildren().add(userIdLabel);
