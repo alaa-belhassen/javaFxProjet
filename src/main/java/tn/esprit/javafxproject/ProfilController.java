@@ -66,7 +66,6 @@ public class ProfilController {
 
     }
 
-
     @FXML
     private Button modifierProfil;
 

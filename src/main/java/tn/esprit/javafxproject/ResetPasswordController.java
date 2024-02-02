@@ -90,15 +90,20 @@ public class ResetPasswordController {
 
         else if(verif_mail())
         {
-            System.out.println("Bonjour");
+
             if (UserService.emailExists(email.getText()))
         { UserService.ResetPassword(email.getText());
             Alert al= new Alert(Alert.AlertType.CONFIRMATION);
             al.setTitle("Alert");al.setContentText("Votre nouveau mot de passe est envoyé par email");al.show();}
+            else
+            {
+                Alert al= new Alert(Alert.AlertType.ERROR);
+                al.setTitle("Alert");al.setContentText("Vérifier l'adresse email ");al.show();
+            }
         }
         else
         {
-            Alert al= new Alert(Alert.AlertType.CONFIRMATION);
+            Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Alert");al.setContentText("Vérifier l'adresse email ");al.show();
         }
 

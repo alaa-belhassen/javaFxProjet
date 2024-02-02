@@ -38,10 +38,6 @@ public class SidebarController  {
             this.image.setImage(image);
         }
 
-
-
-
-
     }
 
     public int id;
