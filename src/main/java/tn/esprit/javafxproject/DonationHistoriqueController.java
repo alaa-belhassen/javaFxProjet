@@ -29,7 +29,7 @@ public class DonationHistoriqueController implements Initializable {
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private VBox rowsContainer;
+    public VBox rowsContainer;
     private List<Don> dons;
 
     DonController donController;
@@ -41,10 +41,12 @@ public class DonationHistoriqueController implements Initializable {
             for(Don don : dons){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("historiqueRow.fxml"));
-                VBox hbox = fxmlLoader.load();
+                VBox vbox = fxmlLoader.load();
                 HistoriqueRowController historiqueRowController = fxmlLoader.getController();
+                historiqueRowController.don = don;
+                historiqueRowController.donationHistoriqueController = this;
                 historiqueRowController.setData(don);
-                rowsContainer.getChildren().add(hbox);
+                rowsContainer.getChildren().add(vbox);
             }
 
         }catch (Exception e) {
@@ -52,6 +54,15 @@ public class DonationHistoriqueController implements Initializable {
         }
     }
 
+    public void deleteSelectedRow(HistoriqueRowController rowController) {
+        // Remove the corresponding VBox from rowsContainer
+        rowsContainer.getChildren().remove(rowController.getRow());
+
+        // Now remove the data from your list or wherever it is stored
+        Don deletedDon = rowController.don;
+        dons.remove(deletedDon);
+        // Call any other necessary cleanup or update methods
+    }
     @FXML
     void userInvoice(MouseEvent event) {
         Parent root;
@@ -73,12 +84,8 @@ public class DonationHistoriqueController implements Initializable {
         }
     }
 
-    private void openInvoice(){
 
-    }
     private List<Don> getDons() throws SQLException {
-
-
         List<Don> dons ;
         DonServiceImpl donService = new DonServiceImpl();
         dons = donService.getAll();

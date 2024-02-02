@@ -17,6 +17,11 @@
     -fx-background-color: #E4E4E4;
 }
 
+.button :hover{
+    -fx-background-color: #cc1c23;
+}
+
+
 .white-background-card{
     -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0),10,0,0,10);
     -fx-background-color: #fff;

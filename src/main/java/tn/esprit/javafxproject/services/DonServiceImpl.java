@@ -61,6 +61,8 @@ public class DonServiceImpl implements ICrud<Don> {
                     ResultSet getUserDonneurRs = selectStatement.executeQuery();
                     while (getUserDonneurRs.next()) {
                         userDonneur.setIdUser(getUserDonneurRs.getInt(1));
+                        userDonneur.setNom(getUserDonneurRs.getString(2));
+                        userDonneur.setEmail(getUserDonneurRs.getString(3));
                     }
                 }
 
@@ -70,6 +72,8 @@ public class DonServiceImpl implements ICrud<Don> {
                     ResultSet getUserReceveurRs = selectStatement.executeQuery();
                     while (getUserReceveurRs.next()) {
                         userReceveur.setIdUser(getUserReceveurRs.getInt(1));
+                        userReceveur.setNom(getUserReceveurRs.getString(2));
+                        userReceveur.setEmail(getUserReceveurRs.getString(3));
                     }
                 }
 
@@ -93,16 +97,17 @@ public class DonServiceImpl implements ICrud<Don> {
         int idemoji = -1;
         int idUserReceveur = -1;
         try ( PreparedStatement selectStatementEmoji = DbConnection.getCnx().prepareStatement(getemoji);
-             PreparedStatement selectStatementUser = DbConnection.getCnx().prepareStatement(getemoji) ) {
+             PreparedStatement selectStatementUser = DbConnection.getCnx().prepareStatement(getUser) ) {
             selectStatementEmoji.setString(1,don.getEmoji().getNomEmoji());
             ResultSet emojiRs = selectStatementEmoji.executeQuery();
             if (emojiRs.next()) {
                 idemoji= emojiRs.getInt(1);
             }
-            selectStatementUser.setString(1,don.getEmoji().getNomEmoji());
+            selectStatementUser.setString(1,don.getReceveur().getNom());
             ResultSet userRS = selectStatementUser.executeQuery();
             if (userRS.next()) {
                 idUserReceveur= userRS.getInt(1);
+                System.out.println(idUserReceveur);
             }
             try (PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(selectQuery)) {
                 selectStatement.setInt(1,don.getIdDon());

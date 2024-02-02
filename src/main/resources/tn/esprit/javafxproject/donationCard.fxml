@@ -14,7 +14,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="195.0" prefWidth="240.0">
          <children>
-            <ImageView fitHeight="105.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="image" fitHeight="105.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../../Downloads/magnifying-glass_8336351.png" />
                </image>

@@ -98,21 +98,15 @@ public class DonateDetailsController {
         User donneur = new User();
         Emoji emoji = new Emoji();
         //fill don
-
         don.setCommentaire(comment.getText());
-
-
         receveur.setNom(Receveur.getText());
         don.setReceveur(receveur);
-
+        System.out.println(Receveur.getText());
         donneur.setNom(Receveur.getText());
         don.setDonneur(donneur);
-
         emoji.setNomEmoji(name.getText());
         don.setEmoji(emoji);
-
         don.setMontant(Integer.parseInt(totale.getText()));
-
         if(checkUserByName()){
             addDon(don);
             loadPage("donation");

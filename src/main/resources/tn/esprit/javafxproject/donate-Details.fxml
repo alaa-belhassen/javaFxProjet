@@ -16,11 +16,11 @@
    <children>
       <VBox prefHeight="830.0" prefWidth="1103.0">
          <children>
-            <HBox prefHeight="617.0" prefWidth="1103.0">
+            <HBox prefHeight="741.0" prefWidth="1103.0">
                <children>
-                  <VBox prefHeight="603.0" prefWidth="474.0">
+                  <VBox prefHeight="422.0" prefWidth="428.0">
                      <children>
-                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="177.0" prefWidth="345.0" style="-fx-background-color: #000080; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@css/styles.css">
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="177.0" prefWidth="345.0" style="-fx-background-color: green; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@css/styles.css">
                            <children>
                               <HBox prefHeight="74.0" prefWidth="345.0">
                                  <children>
@@ -32,16 +32,10 @@
                                           <Insets left="25.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <HBox prefHeight="76.0" prefWidth="89.0">
+                                    <HBox prefHeight="76.0" prefWidth="89.0" />
+                                    <HBox alignment="CENTER" prefHeight="106.0" prefWidth="82.0">
                                        <children>
-                                          <ImageView fitHeight="66.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets top="10.0" />
-                                             </HBox.margin>
-                                             <image>
-                                                <Image url="@img/bank.png" />
-                                             </image>
-                                          </ImageView>
+                                          <HBox prefHeight="65.0" prefWidth="17.0" style="-fx-background-color: #ffff;" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -71,67 +65,12 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <HBox alignment="CENTER" prefHeight="106.0" prefWidth="82.0">
+                                    <HBox alignment="CENTER" prefHeight="112.0" prefWidth="85.0">
                                        <children>
-                                          <HBox prefHeight="106.0" prefWidth="23.0" style="-fx-background-color: #ffff;" />
+                                          <HBox prefHeight="112.0" prefWidth="17.0" style="-fx-background-color: #ffff;" />
                                        </children>
                                     </HBox>
                                  </children>
-                              </HBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="50.0" />
-                           </VBox.margin>
-                        </VBox>
-                        <VBox prefHeight="259.0" prefWidth="537.0">
-                           <children>
-                              <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="583.0" />
-                              <Separator prefWidth="200.0" />
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="61.0" prefHeight="51.0" prefWidth="583.0">
-                                 <children>
-                                    <Label prefHeight="51.0" prefWidth="129.0" text="qantité">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox prefHeight="51.0" prefWidth="255.0" />
-                                    <Label fx:id="qt" prefHeight="33.0" prefWidth="109.0" text="1" />
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="115.0" prefHeight="51.0" prefWidth="583.0">
-                                 <children>
-                                    <Label prefHeight="51.0" prefWidth="129.0" text="prix  ">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox prefHeight="51.0" prefWidth="252.0" />
-                                    <Label fx:id="prix" prefHeight="61.0" prefWidth="109.0" text="24 dt" />
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                              </HBox>
-                              <Separator prefWidth="200.0" />
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="217.0" prefHeight="51.0" prefWidth="583.0">
-                                 <children>
-                                    <Label prefHeight="51.0" prefWidth="137.0" text="prixTotal ">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox prefHeight="51.0" prefWidth="258.0" />
-                                    <Label fx:id="totale" prefHeight="45.0" prefWidth="109.0" text="48" />
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
                               </HBox>
                            </children>
                            <VBox.margin>
@@ -143,7 +82,7 @@
                         <Insets left="30.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="603.0" prefWidth="576.0">
+                  <VBox prefHeight="733.0" prefWidth="569.0">
                      <children>
                         <HBox prefHeight="64.0" prefWidth="555.0">
                            <children>
@@ -202,7 +141,7 @@
                                     <Insets left="5.0" />
                                  </padding>
                                  <children>
-                                    <Button mnemonicParsing="false" onMouseClicked="#checkuser" style="-fx-background-color: green;" text="chearch" textFill="WHITE">
+                                    <Button mnemonicParsing="false" onMouseClicked="#checkuser" prefHeight="25.0" prefWidth="44.0" style="-fx-background-color: green;" text="Find" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets right="10.0" />
                                        </HBox.margin>
@@ -216,7 +155,7 @@
                               </HBox>
                            </children>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="237.0" prefHeight="64.0" prefWidth="555.0">
+                        <HBox layoutX="10.0" layoutY="237.0" prefHeight="127.0" prefWidth="550.0">
                            <children>
                               <Label prefHeight="61.0" prefWidth="129.0" text="Comment">
                                  <font>
@@ -228,29 +167,10 @@
                               </Label>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="comment" prefWidth="208.0" promptText="comment" />
+                                    <TextField fx:id="comment" alignment="TOP_LEFT" prefHeight="88.0" prefWidth="200.0" promptText="comment" />
                                  </children>
                               </HBox>
                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="306.0" prefHeight="64.0" prefWidth="555.0">
-                           <children>
-                              <Button fx:id="donate" mnemonicParsing="false" onMouseClicked="#donate" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: green;" text="Donate" textFill="WHITE" />
-                              <HBox prefHeight="64.0" prefWidth="108.0" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" onMouseClicked="#plus" prefHeight="33.0" prefWidth="36.0" style="-fx-background-color: green;" text="+" textFill="WHITE">
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#moin" prefHeight="33.0" prefWidth="36.0" style="-fx-background-color: red;" text="-" textFill="WHITE" />
-                                 </children>
-                              </HBox>
-                           </children>
-                           <padding>
-                              <Insets left="30.0" />
-                           </padding>
                         </HBox>
                         <Label fx:id="errortext" prefHeight="36.0" prefWidth="488.0" text="Label" textFill="#dd0e0e" visible="false">
                            <font>
@@ -260,6 +180,75 @@
                               <Insets left="30.0" />
                            </VBox.margin>
                         </Label>
+                        <VBox prefHeight="259.0" prefWidth="537.0">
+                           <children>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="583.0" />
+                              <Separator prefWidth="200.0" />
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="61.0" prefHeight="51.0" prefWidth="583.0">
+                                 <children>
+                                    <Label prefHeight="51.0" prefWidth="129.0" text="qantité">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox prefHeight="46.0" prefWidth="232.0" />
+                                    <Button mnemonicParsing="false" onMouseClicked="#plus" prefHeight="33.0" prefWidth="36.0" style="-fx-background-color: green;" text="+" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Label fx:id="qt" prefHeight="33.0" prefWidth="20.0" text="1" />
+                                    <Button mnemonicParsing="false" onMouseClicked="#moin" prefHeight="33.0" prefWidth="36.0" style="-fx-background-color: red;" text="-" textFill="WHITE" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="115.0" prefHeight="51.0" prefWidth="583.0">
+                                 <children>
+                                    <Label prefHeight="51.0" prefWidth="129.0" text="prix  ">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox prefHeight="46.0" prefWidth="270.0" />
+                                    <Label fx:id="prix" prefHeight="61.0" prefWidth="109.0" text="24 dt" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                              <Separator prefWidth="200.0" />
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="217.0" prefHeight="51.0" prefWidth="583.0">
+                                 <children>
+                                    <Label prefHeight="51.0" prefWidth="157.0" text="prixTotal ">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox prefHeight="46.0" prefWidth="243.0" />
+                                    <Label fx:id="totale" prefHeight="45.0" prefWidth="109.0" text="48" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="555.0">
+                                 <children>
+                                    <Button fx:id="donate" mnemonicParsing="false" onMouseClicked="#donate" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: green;" text="Donate" textFill="WHITE" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </VBox>
                      </children>
                      <padding>
                         <Insets top="40.0" />

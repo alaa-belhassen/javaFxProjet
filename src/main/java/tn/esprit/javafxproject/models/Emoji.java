@@ -6,6 +6,7 @@ public class Emoji {
     private int rank;
     private String imageUrl;
     private int prix;
+    private String Status;
 
     public Emoji() {
     }
@@ -15,6 +16,15 @@ public class Emoji {
         this.rank = rank;
         this.imageUrl = imageUrl;
         this.prix = prix;
+    }
+
+    public Emoji(Emoji emoji) {
+        this.idEmoji = emoji.getIdEmoji();
+        this.nomEmoji = emoji.getNomEmoji();
+        this.rank = emoji.getRank();
+        this.imageUrl = emoji.getImageUrl();
+        this.prix = emoji.getPrix();
+        Status = emoji.getStatus();
     }
 
     public int getPrix() {
@@ -55,6 +65,14 @@ public class Emoji {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 
     @Override

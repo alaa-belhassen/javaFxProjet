@@ -26,6 +26,7 @@ public class EmojiServiceImpl implements ICrud<Emoji>{
             emoji.setRank(resultSet.getInt(3));
             emoji.setPrix(resultSet.getInt(4));
             emoji.setImageUrl(resultSet.getString(5));
+            emoji.setStatus(resultSet.getString(6));
             emojis.add(emoji);
         }
         return emojis ;
@@ -59,7 +60,8 @@ public class EmojiServiceImpl implements ICrud<Emoji>{
                 return false;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("error"+e.getMessage());
+            return false;
         }
     }
 
@@ -104,11 +106,12 @@ public class EmojiServiceImpl implements ICrud<Emoji>{
     @Override
     public boolean update(Emoji emoji) throws SQLException {
         try (PreparedStatement statement = DbConnection.getCnx().prepareStatement(
-                "UPDATE emoji SET nomemoji = ? ,  rank = ? , imageurl = ? WHERE idemoji=?")) {
+                "UPDATE emoji SET nomemoji = ? ,  rank = ? , imageurl = ? , prix =? WHERE idemoji=?")) {
             statement.setString(1,emoji.getNomEmoji());
             statement.setInt(2, emoji.getRank());
             statement.setString(3, emoji.getImageUrl());
-            statement.setInt(4, emoji.getIdEmoji());
+            statement.setInt(4, emoji.getPrix());
+            statement.setInt(5, emoji.getIdEmoji());
             int rowsUpdated = statement.executeUpdate();
             if(rowsUpdated > 0) {
                 return true;

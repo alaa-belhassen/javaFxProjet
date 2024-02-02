@@ -7,19 +7,18 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.DonController">
    <children>
-      <VBox alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="1098.0">
+      <VBox alignment="CENTER_RIGHT" prefHeight="101.0" prefWidth="1098.0" style="-fx-background-color: #ffff;" stylesheets="@css/styles.css">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#goToHistorque" prefHeight="30.0" prefWidth="77.0" text="historique">
+            <Button mnemonicParsing="false" onMouseClicked="#goToHistorque" prefHeight="30.0" prefWidth="77.0" style="-fx-background-color: green;" text="historique" textFill="WHITE">
                <VBox.margin>
                   <Insets right="20.0" />
                </VBox.margin>
             </Button>
          </children>
       </VBox>
-      <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="1099.0">
+      <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="783.0" prefWidth="1099.0">
          <content>
             <GridPane fx:id="donationsContainer" prefHeight="10.0" prefWidth="0.0">
                <rowConstraints>

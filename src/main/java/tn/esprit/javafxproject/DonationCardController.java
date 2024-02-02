@@ -38,7 +38,7 @@ public class DonationCardController {
     private Label prix;
 
     @FXML
-    private ImageView image = new ImageView();
+    private ImageView image;
     DonController donController;
     DonationHistoriqueController donationHistoriqueController;
 
@@ -47,7 +47,9 @@ public class DonationCardController {
         loadPage("donate-Details");
     }
     public void setDataEmoji(Emoji emoji) throws FileNotFoundException {
-       // Image image =  new Image(new FileInputStream(emoji.getImageUrl()));
+
+        Image image =  new Image(new FileInputStream(emoji.getImageUrl()));
+        this.image.setImage(image);
         exp.setText(Integer.toString(emoji.getRank()));
         name.setText(emoji.getNomEmoji());
         prix.setText(Integer.toString(emoji.getPrix()));

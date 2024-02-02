@@ -65,9 +65,17 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="780.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
+            <HBox alignment="CENTER" layoutX="780.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#getInvoice" prefHeight="36.0" prefWidth="94.0" style="-fx-background-color: #19D547; -fx-background-radius: 20;" text="Invoice" textAlignment="CENTER" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onMouseClicked="#getInvoice" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: #19D547; -fx-background-radius: 100;" stylesheets="@css/styles.css" text="I" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Button>
+                  <Button layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#revoke" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: #cc1c23; -fx-background-radius: 100;" text="D" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
@@ -12,89 +11,67 @@
    <content>
       <VBox fx:id="rowsContainer" prefHeight="904.0" prefWidth="1081.0">
          <children>
-            <HBox prefHeight="68.0" prefWidth="1095.0" style="-fx-background-color: white;">
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="68.0" prefWidth="1095.0" style="-fx-background-color: white;" stylesheets="@css/styles.css">
                <children>
                   <HBox alignment="CENTER" prefHeight="59.0" prefWidth="154.0">
                      <children>
-                        <Label prefHeight="63.0" prefWidth="142.0" text="Historique des dons">
+                        <Label prefHeight="63.0" prefWidth="113.0" text="nomDonneur">
                            <font>
-                              <Font name="Bernard MT Condensed" size="15.0" />
+                              <Font name="Georgia" size="15.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox prefHeight="68.0" prefWidth="716.0" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#userInvoice" prefHeight="33.0" prefWidth="78.0" style="-fx-background-color: #0834e4;" text="userInvoice" textFill="WHITE" />
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="10.0" prefHeight="68.0" prefWidth="1095.0" style="-fx-background-color: white;">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="59.0" prefWidth="154.0">
-                     <children>
-                        <Label prefHeight="63.0" prefWidth="81.0" text="nomdonneur">
+                        <Label prefHeight="63.0" prefWidth="128.0" text="nomReceveur">
                            <font>
-                              <Font name="Bernard MT Condensed" size="15.0" />
+                              <Font name="Georgia" size="15.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
-                     <children>
-                        <Label prefHeight="63.0" prefWidth="81.0" text="nomreceveur">
-                           <font>
-                              <Font name="Bernard MT Condensed" size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="164.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
                      <children>
                         <Label prefHeight="63.0" prefWidth="81.0" text="montant">
                            <font>
-                              <Font name="Bernard MT Condensed" size="15.0" />
+                              <Font name="Georgia" size="15.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="318.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
+                  <HBox alignment="CENTER" layoutX="974.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
                      <children>
-                        <Label prefHeight="63.0" prefWidth="81.0" text="commentaire">
+                        <Label prefHeight="63.0" prefWidth="111.0" text="commentaire">
                            <font>
-                              <Font name="Bernard MT Condensed" size="15.0" />
+                              <Font name="Georgia" size="15.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="472.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
                      <children>
-                        <Label prefHeight="63.0" prefWidth="81.0" text="nomemoji">
+                        <Label prefHeight="63.0" prefWidth="81.0" text="nomEmoji">
                            <font>
-                              <Font name="Bernard MT Condensed" size="15.0" />
+                              <Font name="Georgia" size="15.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="626.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
                      <children>
                         <Label prefHeight="63.0" prefWidth="81.0" text="Quantiter">
                            <font>
-                              <Font name="Bernard MT Condensed" size="15.0" />
+                              <Font name="Georgia" size="15.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="780.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="10.0" prefHeight="59.0" prefWidth="154.0">
                      <children>
                         <Label prefHeight="63.0" prefWidth="81.0" text="action">
                            <font>
-                              <Font name="Bernard MT Condensed" size="15.0" />
+                              <Font name="Georgia" size="15.0" />
                            </font>
                         </Label>
                      </children>

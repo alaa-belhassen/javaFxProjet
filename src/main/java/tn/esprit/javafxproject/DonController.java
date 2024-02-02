@@ -39,7 +39,7 @@ public class DonController implements Initializable {
                 DonationCardController donationCardController = fxmlLoader.getController();
                 donationCardController.donController = this;
                 donationCardController.setDataEmoji(emoji);
-                if(column==3){
+                if(column==4){
                     column=0;
                     ++row;
                 }
@@ -55,9 +55,9 @@ public class DonController implements Initializable {
     @FXML
     void goToHistorque(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("historiqueDonation.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("DonationHistoriqueLV.fxml"));
         Parent parent = fxmlLoader.load();
-        DonationHistoriqueController historiqueController =fxmlLoader.getController();
+        DonationHistoriqueLVController historiqueController =fxmlLoader.getController();
         historiqueController.donController = this;
         sidebarController.getScreen().setCenter(parent);
     }

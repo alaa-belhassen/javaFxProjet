@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import tn.esprit.javafxproject.models.Emoji;
 
 import java.io.IOException;
 
@@ -33,13 +34,13 @@ public class SidebarController {
     }
 
     @FXML
-    void goReclamation(MouseEvent event) {
-
+    void goReclamation(MouseEvent event) throws IOException {
+        loadPage("EmoteAddCardAdmin");
     }
 
     @FXML
-    void goShop(MouseEvent event) {
-
+    void goShop(MouseEvent event) throws IOException {
+        loadPage("EmojiAdminLV");
     }
 
     public void loadPage(String name) throws IOException {
@@ -50,8 +51,13 @@ public class SidebarController {
             ((EventsController) eventsController).sidebarController= this;
             borderPane.setCenter(parent);
         }else if (root.getController() instanceof DonController){
-            System.out.println("salut0"+parent);
-            ((DonController) eventsController).sidebarController= this;
+           ((DonController) eventsController).sidebarController= this;
+            borderPane.setCenter(parent);
+        }else if (root.getController() instanceof EmoteAddCardAdmin){
+            ((EmoteAddCardAdmin) eventsController).sidebarController= this;
+            borderPane.setCenter(parent);
+        }else if (root.getController() instanceof EmojiAdminLVController) {
+            ((EmojiAdminLVController) eventsController).sidebarController = this;
             borderPane.setCenter(parent);
         }
 

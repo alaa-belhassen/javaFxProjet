@@ -7,11 +7,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tn.esprit.javafxproject.models.Don;
+import tn.esprit.javafxproject.services.DonServiceImpl;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class HistoriqueRowController {
     @FXML
@@ -32,7 +36,11 @@ public class HistoriqueRowController {
     @FXML
     private Label qt;
 
+    public Don don;
 
+    @FXML
+    private HBox row;
+    DonationHistoriqueController donationHistoriqueController;
     @FXML
     void getInvoice(MouseEvent event) {
         Parent root;
@@ -53,7 +61,12 @@ public class HistoriqueRowController {
             e.printStackTrace();
         }
     }
-
+    @FXML
+    void revoke(MouseEvent event) throws SQLException {
+        DonServiceImpl donService = new DonServiceImpl();
+        donService.delete(don.getIdDon());
+        donationHistoriqueController.deleteSelectedRow(this);
+    }
     public void setData(Don don){
         comment.setText(don.getCommentaire());
         nomDonneur.setText(don.getDonneur().getNom());
@@ -62,6 +75,18 @@ public class HistoriqueRowController {
         montant.setText(Double.toString(don.getMontant()));
         qt.setText(Double.toString(don.getMontant()/don.getEmoji().getPrix()));
     }
-    
+
+    public HBox getRow() {
+        return row;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HistoriqueRowController that = (HistoriqueRowController) o;
+        return Objects.equals(comment, that.comment) && Objects.equals(montant, that.montant) && Objects.equals(nomDonneur, that.nomDonneur) && Objects.equals(nomEmoji, that.nomEmoji) && Objects.equals(nomReceveur, that.nomReceveur) && Objects.equals(qt, that.qt) && Objects.equals(don, that.don) && Objects.equals(row, that.row) && Objects.equals(donationHistoriqueController, that.donationHistoriqueController);
+    }
+
 
 }
