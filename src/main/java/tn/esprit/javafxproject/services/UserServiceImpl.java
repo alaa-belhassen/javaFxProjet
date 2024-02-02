@@ -137,17 +137,16 @@ public class UserServiceImpl implements ICrud <User> {
 
     public List<User> search(String searchTerm) {
         List<User> users = new ArrayList<>();
-        String req = "SELECT u.*, r.name FROM utilisateur u JOIN role r ON u.idrole = r.idrole WHERE nom LIKE ? OR telephone LIKE ? OR email LIKE ? OR adresse LIKE ? OR status LIKE ?";
+        String req = "SELECT u.*, r.name FROM utilisateur u JOIN role r ON u.idrole = r.idrole WHERE nom LIKE ? OR telephone LIKE ? OR email LIKE ? OR adresse LIKE ? ";
         try (PreparedStatement pst = cnx.prepareStatement(req)) {
             pst.setString(1, "%" + searchTerm + "%");
             pst.setString(2, "%" + searchTerm + "%");
             pst.setString(3, "%" + searchTerm + "%");
             pst.setString(4, "%" + searchTerm + "%");
-            pst.setString(5, "%" + searchTerm + "%");
+
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 User user = new User();
-
                 user.setNom(rs.getString("nom"));
                 user.setEmail(rs.getString("email"));
                 user.setTelephone(rs.getString("telephone"));
@@ -365,17 +364,21 @@ public class UserServiceImpl implements ICrud <User> {
     public boolean changePassword(String email, String oldPassword, String newPassword) {
 
         if (authenticate(email, oldPassword)!=null) {
-          User u =new User();
-            String newHashedPassword = u.hashPassword(newPassword);
+            String updateQuery = "UPDATE utilisateur SET password = ? WHERE email = ?";
 
+            try (PreparedStatement updateStatement = cnx.prepareStatement(updateQuery)) {
+                updateStatement.setString(1, newPassword);
+                updateStatement.setString(2, email);
 
-            boolean updateSuccess = updatePasswordInDatabase(email, newHashedPassword);
+                int rowsUpdated = updateStatement.executeUpdate();
 
-            return updateSuccess;
-        } else {
+                // Vérifier si la mise à jour a réussi
+                return rowsUpdated > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Erreur lors de la mise à jour du mot de passe : " + e.getMessage());
 
-            return false;
-        }
+            }}return false;
     }
 
     private boolean updatePasswordInDatabase(String userEmail, String newHashedPassword) {

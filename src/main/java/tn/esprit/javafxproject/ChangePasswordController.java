@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.mindrot.jbcrypt.BCrypt;
 import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.UserServiceImpl;
 
@@ -50,6 +52,22 @@ public class ChangePasswordController {
 
     public void resetPassword(ActionEvent event) {
      User u =userService.getUser(User.UserConnecte);
+     String passwordHashed = BCrypt.hashpw(NewPassword.getText(), BCrypt.gensalt());
+
+     if(userService.changePassword(u.getEmail(),OldPassword.getText(),passwordHashed))
+     {
+         Alert al = new Alert(Alert.AlertType.CONFIRMATION);
+         al.setTitle("Alert");
+         al.setContentText("Mot de passe changé ");
+         al.show();
+     }
+     else {
+         Alert al = new Alert(Alert.AlertType.CONFIRMATION);
+         al.setTitle("Alert");
+         al.setContentText("Les deux mots de passe ne sont pas correspondants");
+         al.show();
+
+     }
 
     }
 }
