@@ -47,15 +47,13 @@ public class SidebarController {
 
     @FXML
     void goReclamation(MouseEvent event) throws IOException {
-        // scenario admin
-        this.loadPage("AdminEvents");
+
 
     }
 
     @FXML
     void goShop(MouseEvent event) throws IOException {
-        //scenario equipe
-        this.loadPage("ListEventsEquipes");
+
 
     }
 
