@@ -1,4 +1,6 @@
 package tn.esprit.javafxproject;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import javafx.application.Platform;
@@ -13,11 +15,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import tn.esprit.javafxproject.models.Comment;
 import tn.esprit.javafxproject.models.Publication;
 import tn.esprit.javafxproject.services.CommentService;
 import tn.esprit.javafxproject.services.PublicationService;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,6 +32,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class FeedController implements Initializable {
+    private String currentImagePath;
+
     private Map<Integer, HBox> publicationCommentBoxes = new HashMap<>();
     @FXML
     private TextArea publicationInput;
@@ -50,11 +57,54 @@ public class FeedController implements Initializable {
 
             // Call updatePublicationVBox to load and display publications on initialization
             updatePublicationVBox();
+            if (importButton == null) {
+                importButton = new Button("Import"); // Adjust the label as needed
+            }
         } catch (SQLException e) {
             handleDatabaseConnectionError(e);
         }
     }
 
+
+    @FXML
+    private Button importButton;
+
+    @FXML
+    private ImageView imageView;
+
+    // ... existing code
+
+    @FXML
+    private void importPicture() {
+        FileChooser fileChooser = new FileChooser();
+        configureFileChooser(fileChooser);
+
+        Stage stage = (Stage) importButton.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            displayImage(selectedFile);
+            currentImagePath = selectedFile.getAbsolutePath();
+            System.out.println("Image Path: " + currentImagePath);
+        }
+    }
+
+
+    private void configureFileChooser(FileChooser fileChooser) {
+        fileChooser.setTitle("Choose Image File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+    }
+
+    private void displayImage(File imageFile) {
+        Image image = new Image(imageFile.toURI().toString());
+        imageView.setImage(image);
+        imageView.setFitWidth(200); // Adjust the width as needed
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+    }
     private Connection getDatabaseConnection() throws SQLException {
         String url = "jdbc:postgresql://localhost:5432/JavaGeeks";
         String username = "postgres";
@@ -77,8 +127,8 @@ public class FeedController implements Initializable {
     private void addPublication() {
         String content = publicationInput.getText();
 
-        // Assuming IdUser, Likes, Shares, Attachments need default or specific values
-        Publication newPublication = new Publication(1, content, 0, 0, "");
+        // Assuming IdUser, Likes, Shares need default or specific values
+        Publication newPublication = new Publication(1, content, 0, 0, currentImagePath);
 
         try {
             boolean success = publicationService.add(newPublication);
@@ -87,16 +137,18 @@ public class FeedController implements Initializable {
                 Platform.runLater(() -> {
                     updatePublicationVBox();
                     publicationInput.clear();
+                    // Reset the currentImagePath after adding a publication
+                    currentImagePath = null;
                 });
             } else {
-                // Handle failure to add the publication (e.g., show an error message)
+                // Handle failure to add the publication
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             // Handle SQL exception
         }
     }
+
 
     private void updatePublicationVBox() {
         try {
@@ -280,11 +332,21 @@ public class FeedController implements Initializable {
         TextFlow contentFlow = new TextFlow(new Text(publication.getContent()));
         contentFlow.setPrefWidth(600);  // Set the desired width for text wrapping (adjust as needed)
 
+
         // Create a Label for displaying the content
         Label contentLabel = new Label(publication.getContent());
         contentLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F4DECB;"); // Set font size, weight, and color
         contentLabel.setWrapText(true); // Set wrapText property to true
+        // Check if there is an image path associated
+        if (publication.getAttachments() != null && !publication.getAttachments().isEmpty()) {
+            // Create an ImageView to display the image
+            ImageView attachmentImageView = new ImageView(new Image("file:" + publication.getAttachments()));
+            attachmentImageView.setFitWidth(200); // Adjust the width as needed
+            attachmentImageView.setPreserveRatio(true);
 
+            // Add the ImageView to the VBox
+            publicationBox.getChildren().add(attachmentImageView);
+        }
 
 
         // Create an HBox for Likes and Shares, aligned to the bottom right
