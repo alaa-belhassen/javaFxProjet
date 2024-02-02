@@ -32,11 +32,12 @@ Wareth -Job
 /* Style for the publication box */
 .publication-box {
     -fx-background-color: #f0f0f0; /* Light grey background */
-    -fx-padding: 10px;
-    -fx-spacing: 5px;
+    -fx-padding: 5px;
+    -fx-spacing: 2px;
     -fx-border-color: #d0d0d0; /* Light border color */
     -fx-border-width: 1px;
-    -fx-border-radius: 5px;
+    -fx-border-radius: 50px;
+
 }
 
 /* Style for the User ID label */
@@ -45,20 +46,8 @@ Wareth -Job
     -fx-text-fill: #888888; /* Grey text color */
 }
 
-/* Style for the Content label */
-.content-label {
-    -fx-font-size: 14px; /* Large font size */
-    -fx-text-fill: #000000; /* Black text color */
-}
+
 
 /* Style for the Likes and Shares labels */
-.likes-shares-label {
-    -fx-font-size: 12px; /* Medium font size */
-    -fx-text-fill: #3366cc; /* Blue text color */
-}
 
-.timestamp-label {
-    -fx-font-size: 12px;
-    -fx-text-fill: #808080; /* Grey color */
-}
 

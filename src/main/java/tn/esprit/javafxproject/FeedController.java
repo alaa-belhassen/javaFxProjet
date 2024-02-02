@@ -1,4 +1,5 @@
 package tn.esprit.javafxproject;
+import javafx.scene.text.Text;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
+
 import tn.esprit.javafxproject.models.Comment;
 import tn.esprit.javafxproject.models.Publication;
 import tn.esprit.javafxproject.services.CommentService;
@@ -21,13 +24,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class FeedController implements Initializable {
-
+    private Map<Integer, HBox> publicationCommentBoxes = new HashMap<>();
     @FXML
     private TextArea publicationInput;
     public SidebarController sideBarController;
@@ -136,11 +136,12 @@ public class FeedController implements Initializable {
         VBox commentBox = new VBox();
         commentBox.getStyleClass().add("comment-box");
 
-        commentBox.setPadding(new Insets(10, 10, 10, 10)); // Adjust the values as needed
+
+        commentBox.setPadding(new Insets(0, 0, 00, 00)); // Adjust the values as needed
 
         // Create an HBox for userIdLabel
         HBox userIdBox = new HBox();
-        userIdBox.setSpacing(10);
+        userIdBox.setSpacing(0);
 
         // Add label for user ID
         Label userIdLabel = new Label(comment.getUserId() + " commented");
@@ -152,8 +153,9 @@ public class FeedController implements Initializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String formattedTimestamp = comment.getTimestamp().format(formatter);
 
+
         // Create a Label for displaying the formatted timestamp
-        Label timestampLabel = new Label("Time: " + formattedTimestamp);
+        Label timestampLabel = new Label(formattedTimestamp);
         timestampLabel.getStyleClass().add("timestamp-label");
 
         // Create an HBox for timestampLabel, aligned to the right
@@ -163,6 +165,8 @@ public class FeedController implements Initializable {
 
         // Create a Label for displaying the content
         Label contentLabel = new Label(comment.getContent());
+        contentLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #000000;"); // Set font size, weight, and color
+        contentLabel.setWrapText(true); // Set wrapText property to true
 
         // Add userIdBox, timestampBox, and contentLabel to the VBox with appropriate spacing
         commentBox.getChildren().addAll(userIdBox, timestampBox, contentLabel);
@@ -215,17 +219,44 @@ public class FeedController implements Initializable {
         }
 
     }
+
+    private void handleShowCommentsButtonClick(Publication publication) {
+        // Retrieve the comment box associated with the publication
+        HBox commentBoxWithButtons = publicationCommentBoxes.get(publication.getPublicationID());
+
+        if (commentBoxWithButtons != null) {
+            // Get the comment VBox inside the HBox
+            VBox commentBox = (VBox) commentBoxWithButtons.getChildren().get(0);
+
+            if (commentBox != null) {
+                // Toggle the visibility of the commentBox
+                commentBox.setVisible(!commentBox.isVisible());
+
+                // If the comment box is now visible, update the UI
+                if (commentBox.isVisible()) {
+                    // Delay the UI update to ensure visibility change is applied
+                    Platform.runLater(() -> {
+                        // Clear and reload the entire publicationVBox
+                        updatePublicationVBox();
+                    });
+                }
+            }
+        }
+    }
+
+
+
     private VBox createPublicationBox(Publication publication) {
         // Create a custom VBox to represent a publication
         VBox publicationBox = new VBox();
         publicationBox.getStyleClass().add("publication-box");
 
         publicationBox.setStyle("-fx-background-color: #e0e0e0;");
-        publicationBox.setPadding(new Insets(10, 10, 10, 10)); // Adjust the values as needed
+        publicationBox.setPadding(new Insets(0, 0, 0, 0)); // Adjust the values as needed
 
         // Create an HBox for userIdLabel
         HBox userIdBox = new HBox();
-        userIdBox.setSpacing(10);
+        userIdBox.setSpacing(2);
 
         // Add label for user ID
         Label userIdLabel = new Label(publication.getIdUser() + " posted");
@@ -238,7 +269,7 @@ public class FeedController implements Initializable {
         String formattedTimestamp = publication.getTimestamp().toLocalDateTime().format(formatter);
 
         // Create a Label for displaying the formatted timestamp
-        Label timestampLabel = new Label("Time: " + formattedTimestamp);
+        Label timestampLabel = new Label(formattedTimestamp);
         timestampLabel.getStyleClass().add("timestamp-label");
 
         // Create an HBox for timestampLabel, aligned to the right
@@ -246,20 +277,30 @@ public class FeedController implements Initializable {
         timestampBox.setAlignment(Pos.TOP_RIGHT);
         timestampBox.getChildren().add(timestampLabel);
 
+        TextFlow contentFlow = new TextFlow(new Text(publication.getContent()));
+        contentFlow.setPrefWidth(600);  // Set the desired width for text wrapping (adjust as needed)
+
         // Create a Label for displaying the content
         Label contentLabel = new Label(publication.getContent());
+        contentLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F4DECB;"); // Set font size, weight, and color
+        contentLabel.setWrapText(true); // Set wrapText property to true
+
+
 
         // Create an HBox for Likes and Shares, aligned to the bottom right
-        HBox likesSharesBox = new HBox(10); // Adjust the spacing as needed
+        HBox likesSharesBox = new HBox(2); // Adjust the spacing as needed
         Label likesLabel = new Label(String.valueOf(publication.getLikes()));
         Label sharesLabel = new Label("Shares: " + publication.getShares());
 
         // Create a Button for likes
         Button likeButton = new Button("Like");
         likeButton.setOnAction(e -> handleLikeButtonClick(publication));
+        likeButton.setStyle("-fx-font-size: 10; -fx-background-color: green; -fx-text-fill: white;");
+        likeButton.setPrefWidth(100);
+
 
         // Add Like button to the Likes/Shares HBox
-        likesSharesBox.getChildren().addAll(likesLabel, likeButton, sharesLabel);
+        likesSharesBox.getChildren().addAll(likesLabel, likeButton);
 
         // Set alignment for Likes and Shares HBox to bottom right
         likesSharesBox.setAlignment(Pos.BOTTOM_RIGHT);
@@ -272,35 +313,55 @@ public class FeedController implements Initializable {
 
         contentLabel.getStyleClass().add("publication-label");
         contentLabel.getStyleClass().add("content-label");
+        contentLabel.setWrapText(true); // Set wrapText property to true
 
         likesLabel.getStyleClass().add("publication-label");
         likesLabel.getStyleClass().add("likes-shares-label");
 
-        sharesLabel.getStyleClass().add("publication-label");
-        sharesLabel.getStyleClass().add("likes-shares-label");
+
 
         // Add userIdBox, timestampBox, contentLabel, and Likes/Shares HBox to the VBox with appropriate spacing
-        publicationBox.getChildren().addAll(userIdBox, timestampBox, contentLabel, likesSharesBox);
+        publicationBox.getChildren().addAll(userIdBox, timestampBox, contentFlow, likesSharesBox);
         // Create a Button for comments
         Button commentButton = new Button("Comment");
         commentButton.setOnAction(e -> handleCommentButtonClick(publication, commentButton));
-        commentButton.setStyle("-fx-font-size: 10;");
+        commentButton.setStyle("-fx-font-size: 10; -fx-background-color: green; -fx-text-fill: white;");
         commentButton.setPrefWidth(100);
+        commentButton.setPrefHeight(30);
 
-        // Create a TextArea for comments
+// Create a TextArea for comments
         TextArea commentTextArea = new TextArea();
         commentTextArea.setPromptText("Write a comment...");
         commentTextArea.setVisible(false); // Initially, hide the commentTextArea
 
-        // Create a Button for posting comments
+// Create a Button for posting comments
         Button postCommentButton = new Button("Post Comment");
         postCommentButton.setOnAction(e -> handlePostCommentButtonClick(publication, commentTextArea));
         postCommentButton.setVisible(false);
 
+// Create a Button for showing/hiding comments
+        Button showCommentsButton = new Button("Show Comments");
+        showCommentsButton.setOnAction(e -> handleShowCommentsButtonClick(publication));
+        showCommentsButton.setVisible(false);
 
-        // Create an HBox for commentButton, commentTextArea, and postCommentButton
-        HBox commentBox = new HBox(10); // Adjust the spacing as needed
-        commentBox.getChildren().addAll(commentButton, commentTextArea, postCommentButton);
+// Create an HBox for commentButton, commentTextArea, postCommentButton, and showCommentsButton
+        HBox buttonsBox = new HBox(0);
+        buttonsBox.getChildren().addAll(commentButton);
+
+// Create an VBox for comments (initially invisible)
+        VBox commentBox = new VBox(0); // Adjust the spacing as needed
+
+// Create an HBox for Comment button, Like button, and number of likes
+        HBox commentAndLikeBox = new HBox(5);
+        commentAndLikeBox.getChildren().addAll(commentButton, likeButton, likesLabel);
+        commentAndLikeBox.setAlignment(Pos.BOTTOM_RIGHT);
+
+// Create an HBox for commentTextArea and postCommentButton
+        HBox inputBox = new HBox(5);
+        inputBox.getChildren().addAll(commentTextArea, postCommentButton);
+
+// Add commentAndLikeBox, inputBox, and other elements to the commentBox
+        commentBox.getChildren().addAll(commentAndLikeBox, inputBox);
 
         // ... (existing code)
 
