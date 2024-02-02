@@ -16,6 +16,9 @@ public class Reserver {
 
     private String status;
 
+
+
+
     public Reserver() {
     }
 

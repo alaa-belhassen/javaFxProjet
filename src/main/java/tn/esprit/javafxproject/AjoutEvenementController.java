@@ -96,7 +96,6 @@ public class AjoutEvenementController implements Initializable {
                 test = false;
                 break;
             }
-
             if (currentChar == '.' ) {
                 // Ensure there is only one decimal separator
                 if (hasDecimalSeparator) {

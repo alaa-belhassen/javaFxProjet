@@ -8,6 +8,7 @@ package tn.esprit.javafxproject;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -21,6 +22,8 @@ import tn.esprit.javafxproject.models.Reserver;
 import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.EvenementServiceImpl;
 import tn.esprit.javafxproject.services.ReservationServiceImpl;
+import tn.esprit.javafxproject.utils.PdfLoaderReservation;
+import tn.esprit.javafxproject.utils.PdfLoaderReservation;
 import tn.esprit.javafxproject.utils.Status;
 
 import java.io.FileInputStream;
@@ -122,7 +125,7 @@ public class EventDetailController  {
     @FXML
     private Label eventpricetotal1;
     @FXML
-    void addReserver(MouseEvent event) throws SQLException {
+    void addReserver(MouseEvent event) throws SQLException, IOException {
         ReservationServiceImpl reservationService=new ReservationServiceImpl();
         Reserver reserver=new Reserver();
         reserver.setDate(LocalDate.now());
@@ -135,7 +138,26 @@ public class EventDetailController  {
         reserver.setPrix_total(Integer.parseInt(places.getText())*Float.parseFloat(eventprice.getText()));
 
         reserver.setEvenement(evenement);
+        PdfLoaderReservation pdfLoader=new PdfLoaderReservation();
+        pdfLoader.generatePdf(reserver);
        reservationService.add(reserver);
+
+
+        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("Events.fxml"));
+        //nekhou akber parent ml page events
+        VBox vBox=  fxmlLoader.load();
+        EventsController eventsController=fxmlLoader.getController();
+        if(card1Controller != null ){
+            eventsController.sidebarController= card1Controller.eventsController.sidebarController;
+            card1Controller.eventsController.sidebarController.borderPane.setCenter(vBox);
+
+        }else{
+            eventsController.sidebarController= cardEventGridController.eventsController.sidebarController;
+            cardEventGridController.eventsController.sidebarController.borderPane.setCenter(vBox);
+
+        }
+
+
     }
 
     @FXML
@@ -157,8 +179,11 @@ public class EventDetailController  {
         evenement=event;
         eventpricetotal1.setText(String.valueOf(Integer.parseInt(places.getText())*Float.parseFloat(eventprice.getText())));
 
-        if(event.getMax_places()==0){
 
+
+
+
+        if(event.getMax_places()==0){
             btn_reserver.setDisable(true);
             expired.setVisible(true);
             expired.setText("Tickets épuisés");
