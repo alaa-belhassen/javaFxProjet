@@ -30,6 +30,28 @@ public class ChangePasswordController {
 
     @FXML
     private Button retour;
+    public Boolean verif_password() {
+        Boolean test = true;
+        String champ = NewPassword.getText();
+        if (champ == "") {
+            test = false;
+        }
+        int count = 0;
+        for (int i = 0; i < champ.length(); i++) {
+            if (champ.charAt(i) == ' ') {
+                count = count + 1;
+            }
+        }
+
+        if (count == champ.length()) {
+            test = false;
+        }
+        if (champ.length() < 6) {
+            test = false;
+        }
+
+        return test;
+    }
 
 
     public void retour(ActionEvent event) throws IOException {
@@ -53,7 +75,13 @@ public class ChangePasswordController {
     public void resetPassword(ActionEvent event) {
      User u =userService.getUser(User.UserConnecte);
      String passwordHashed = BCrypt.hashpw(NewPassword.getText(), BCrypt.gensalt());
-
+      if (!verif_password())
+       {
+           Alert al = new Alert(Alert.AlertType.ERROR);
+           al.setTitle("Alert");
+           al.setContentText("Mot de passe doit contenir au moins 6 caractères");
+           al.show();
+       } else {
      if(userService.changePassword(u.getEmail(),OldPassword.getText(),passwordHashed))
      {
          Alert al = new Alert(Alert.AlertType.CONFIRMATION);
@@ -64,10 +92,10 @@ public class ChangePasswordController {
      else {
          Alert al = new Alert(Alert.AlertType.CONFIRMATION);
          al.setTitle("Alert");
-         al.setContentText("Les deux mots de passe ne sont pas correspondants");
+         al.setContentText("Ancien mot de passe incorrect ");
          al.show();
 
-     }
+     }}
 
     }
 }

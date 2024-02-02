@@ -49,20 +49,46 @@ public class ProfilController {
 
     @FXML
     private Button ChangePassword;
+    // Méthode pour valider un email
+    private boolean isValidEmail(String email) {
 
+        return email.matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b");
+    }
+
+    // Méthode pour valider un numéro de téléphone
+    private boolean isValidPhoneNumber(String phoneNumber) {
+
+        return phoneNumber.matches("\\d{8}");
+    }
     @FXML
     void ModifierProfil(ActionEvent event) throws IOException {
         User u = userService.getUser(User.UserConnecte);
-        boolean passwordUpdated = false;
+        // Récupération des valeurs des champs de saisie
+        String nomText = nom.getText().trim();
+        String emailText = email.getText().trim();
+        String telephoneText = telephone.getText().trim().replaceAll("\\s", ""); // Supprimer les espaces
+        String adresseText = adresse.getText().trim();
 
-        u.setNom(nom.getText());
-        u.setEmail(email.getText());
-        u.setTelephone(telephone.getText());
-        u.setAdresse(adresse.getText());
+        // Validation des champs
+        if (nomText.isEmpty() || !isValidEmail(emailText) || !isValidPhoneNumber(telephoneText) || adresseText.isEmpty()) {
+            Alert al = new Alert(Alert.AlertType.ERROR);
+            al.setTitle("Erreur");
+            al.setContentText("Veuillez vérifier les champs de saisie.");
+            al.show();
+        } else {
+            // Mise à jour de l'utilisateur si les champs sont valides
+            u.setNom(nomText);
+            u.setEmail(emailText);
+            u.setTelephone(telephoneText);
+            u.setAdresse(adresseText);
 
-        userService.update(u);
-        Alert al= new Alert(Alert.AlertType.CONFIRMATION);
-        al.setTitle("Alert");al.setContentText("Profil modifié ");al.show();
+            userService.update(u);
+
+            Alert al = new Alert(Alert.AlertType.CONFIRMATION);
+            al.setTitle("Succès");
+            al.setContentText("Profil modifié avec succès !");
+            al.show();
+        }
 
     }
 

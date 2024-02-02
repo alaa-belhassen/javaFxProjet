@@ -47,7 +47,7 @@
                   </Hyperlink>
                   <ImageView fx:id="image" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/1696348579560.jpeg" />
+                        <Image url="@image/userr.png" />
                      </image>
                   </ImageView>
                </children>
