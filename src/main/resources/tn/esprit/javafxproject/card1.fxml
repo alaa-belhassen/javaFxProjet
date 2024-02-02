@@ -9,64 +9,95 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="box" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="400.0" style="-fx-background-radius: 15;" styleClass="shadow" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.Card1Controller">
-   <children>
-      <ImageView fx:id="image" fitHeight="109.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
-         <HBox.margin>
-            <Insets right="10.0" top="60.0" />
-         </HBox.margin>
-         <image>
-            <Image url="@image/oj.jpg" />
-         </image>
-      </ImageView>
-      <VBox alignment="CENTER_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="126.0" prefWidth="371.0">
-         <children>
-            <Label fx:id="titre_id" alignment="CENTER" prefHeight="26.0" prefWidth="181.0" text="Ons JABEUR &amp; Coco GAUFF" textAlignment="CENTER" textFill="#fcfcfc">
-               <VBox.margin>
-                  <Insets left="15.0" top="70.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Berlin Sans FB Bold" size="12.0" />
-               </font>
-            </Label>
-            <HBox prefHeight="34.0" prefWidth="167.0">
+<HBox fx:id="box" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="171.0" prefWidth="371.0" style="-fx-background-radius: 4; -fx-border-color: #597D35; -fx-border-width: 0;" styleClass="shadow" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.Card1Controller">
+    <children>
+        <ImageView fx:id="imageCard" fitHeight="104.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
+            <HBox.margin>
+                <Insets right="10.0" top="70.0" />
+            </HBox.margin>
+            <image>
+                <Image url="@image/oj.jpg" />
+            </image>
+        </ImageView>
+        <VBox alignment="CENTER_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="162.0" prefWidth="185.0">
+            <children>
+                <Label fx:id="titre_id" alignment="CENTER" prefHeight="21.0" prefWidth="197.0" text="Ons JABEUR &amp; Coco GAUFF" textAlignment="CENTER" textFill="#597d35">
+                    <VBox.margin>
+                        <Insets left="15.0" top="70.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Georgia Bold" size="18.0" />
+                    </font>
+                </Label>
+                <HBox prefHeight="34.0" prefWidth="167.0">
+                    <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                              <Label fx:id="date_id" contentDisplay="CENTER" prefHeight="26.0" prefWidth="221.0" text="date">
+                                  <HBox.margin>
+                                      <Insets left="7.0" right="7.0" />
+                                  </HBox.margin>
+                              </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="118.0">
+                     <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="70.0" text="Le :  " textFill="#1b1b1b" underline="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                    </children>
+                </HBox>
+                <HBox layoutX="10.0" layoutY="112.0" prefHeight="34.0" prefWidth="167.0">
+                    <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                              <Label fx:id="tarif_id" contentDisplay="CENTER" prefHeight="26.0" prefWidth="135.0" text="date">
+                                  <HBox.margin>
+                                      <Insets left="7.0" />
+                                  </HBox.margin>
+                              </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="113.0">
+                     <children>
+                              <Label contentDisplay="CENTER" prefHeight="26.0" prefWidth="65.0" text="Tarif :" underline="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                    </children>
+                </HBox>
+            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="183.0" styleClass="transparent">
                <children>
-                  <Label fx:id="date_id" contentDisplay="CENTER" prefHeight="27.0" prefWidth="240.0" text="date">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="96.0" text="Le: " />
+                      <Button fx:id="btn_details" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#goToEventDetail" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #597d35; -fx-background-repeat: 7;" styleClass="transparent" stylesheets="@css/styles.css" text="consulter" textFill="#597d35">
+                          <opaqueInsets>
+                              <Insets bottom="20.0" />
+                          </opaqueInsets>
+                     <font>
+                        <Font name="Georgia Bold" size="13.0" />
+                     </font>
+                      </Button>
                </children>
             </HBox>
-            <HBox layoutX="10.0" layoutY="112.0" prefHeight="34.0" prefWidth="167.0">
-               <children>
-                  <Label fx:id="tarif_id" contentDisplay="CENTER" prefHeight="27.0" prefWidth="226.0" text="date">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="96.0" text="Tarif" />
-               </children>
-            </HBox>
-            <Button fx:id="btn_details" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#goToEventDetail" prefHeight="25.0" prefWidth="166.0" text="Voir plus">
-               <VBox.margin>
-                  <Insets bottom="50.0" top="10.0" />
-               </VBox.margin>
-               <opaqueInsets>
-                  <Insets bottom="20.0" />
-               </opaqueInsets>
-            </Button>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <HBox.margin>
-            <Insets bottom="-5.0" top="-10.0" />
-         </HBox.margin>
-      </VBox>
-   </children>
-   <padding>
-      <Insets left="20.0" top="-25.0" />
-   </padding>
+            </children>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <HBox.margin>
+                <Insets bottom="-5.0" top="-10.0" />
+            </HBox.margin>
+        </VBox>
+    </children>
+    <padding>
+        <Insets left="20.0" top="-25.0" />
+    </padding>
 </HBox>

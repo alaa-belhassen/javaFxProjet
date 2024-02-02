@@ -29,6 +29,9 @@ public class Reserver {
         this.status = "valid";
     }
 
+    public Reserver(int i) {
+    }
+
     public LocalDate getDate_res() {
         return date_res;
     }
@@ -130,4 +133,7 @@ public class Reserver {
     public void setUser(User user) {
         this.idUser = user;
     }
+
+
+
 }

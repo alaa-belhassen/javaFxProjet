@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1098.0" style="-fx-background-color: #FAF5EF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.MyListReservationController">
+   <children>
+      <HBox prefHeight="58.0" prefWidth="1143.0">
+         <children>
+            <Label onMouseClicked="#goBack" prefHeight="17.0" prefWidth="204.0" text="&lt; Retour à la page précédente" textFill="#597d35" underline="true">
+               <font>
+                  <Font name="Georgia Bold" size="13.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="30.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </HBox>
+      <HBox layoutY="71.0" prefHeight="43.0" prefWidth="1098.0">
+         <children>
+            <Label prefHeight="56.0" prefWidth="263.0" text="Mes réservations" textFill="#597d35">
+               <HBox.margin>
+                  <Insets left="90.0" top="40.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Georgia Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <TableView fx:id="table" layoutX="83.0" layoutY="192.0" prefHeight="223.0" prefWidth="977.0" styleClass="transparent" stylesheets="@css/styles.css">
+        <columns>
+          <TableColumn fx:id="id_Res" prefWidth="170.0" text="ID Reservation" />
+          <TableColumn fx:id="date_Res" minWidth="0.0" prefWidth="167.0" text="Date Reservation" />
+            <TableColumn fx:id="titre_Res" prefWidth="149.0" text="Titre Evenement" />
+            <TableColumn fx:id="prix_Res" prefWidth="116.0" text="Prix Total" />
+            <TableColumn fx:id="status_Res" prefWidth="139.0" text="Status" />
+            <TableColumn fx:id="categorie_Res" prefWidth="118.0" text="Categorie" />
+            <TableColumn fx:id="btn" prefWidth="120.0" text="-" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

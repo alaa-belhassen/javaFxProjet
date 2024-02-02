@@ -9,4 +9,7 @@ module tn.esprit.javafxproject {
 
     opens tn.esprit.javafxproject to javafx.fxml;
     exports tn.esprit.javafxproject;
+    opens tn.esprit.javafxproject.models to javafx.base;
+
+
 }

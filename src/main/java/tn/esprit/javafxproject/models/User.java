@@ -15,7 +15,7 @@ public class User {
     public User() {
     }
 
-    public User(String nom, String email, String telephone, String adresse, String status,  String password, String image, Role role) {
+    public User(String nom, String email, String telephone, String adresse, String  status,  String password, String image, Role role) {
         this.nom = nom;
         this.email = email;
         this.telephone = telephone;
@@ -100,4 +100,6 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+
 }

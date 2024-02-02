@@ -1,3 +1,8 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package tn.esprit.javafxproject.utils;
 
 import java.sql.Connection;
@@ -16,32 +21,33 @@ public class DbConnection {
         return cnx;
     }
 
-    private DbConnection()  {
+    private DbConnection() {
         try {
-            cnx = DriverManager.getConnection(url,user,password);
+            cnx = DriverManager.getConnection(this.url, this.user, this.password);
             System.out.println("connected!!");
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
+        } catch (SQLException var2) {
+            System.err.println(var2.getMessage());
         }
+
     }
 
-    public static DbConnection getInstance(){
-        if(instance==null) instance= new DbConnection();
-        return instance;
-    };
+    public static DbConnection getInstance() {
+        if (instance == null) {
+            instance = new DbConnection();
+        }
 
-    public static void createTable(Connection cnx , String table,String fields){
-        Statement statement;
-        try{
-            String query= "create table "+table+"("+fields+");";
-            statement=cnx.createStatement();
+        return instance;
+    }
+
+    public static void createTable(Connection cnx, String table, String fields) {
+        try {
+            String query = "create table " + table + "(" + fields + ");";
+            Statement statement = cnx.createStatement();
             statement.executeUpdate(query);
             System.out.println("table created ");
-        }catch(Exception e){
-            System.err.println(e.getMessage());
+        } catch (Exception var5) {
+            System.err.println(var5.getMessage());
         }
-    }
-
-
 
     }
+}

@@ -43,6 +43,20 @@ public class Evenement {
     }
 
 
+    public Evenement(int idEvenement, String lieu, int max_places, float prix, String libelle, LocalDate date_event, LocalTime time_event, int duration, String status, Categorie categorie, String photo, int idUser) {
+        this.idEvenement = idEvenement;
+        this.lieu = lieu;
+        this.max_places = max_places;
+        this.prix = prix;
+        this.libelle = libelle;
+        this.date_event = date_event;
+        this.time_event = time_event;
+        this.duration = duration;
+        this.status = status;
+        this.categorie = categorie;
+        this.photo = photo;
+        this.idUser = idUser;
+    }
 
     public String getStatus() {
         return status;

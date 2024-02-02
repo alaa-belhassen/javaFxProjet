@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="830.0" prefWidth="1098.0" style="-fx-background-color: #FAF5EF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.AdminEventsController">
+   <children>
+      <HBox layoutY="76.0" prefHeight="100.0" prefWidth="1098.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="1096.0">
+               <children>
+                  <HBox prefHeight="49.0" prefWidth="100.0" />
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="23.0" prefWidth="865.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="806.0" text="Liste des evenements en attente" textAlignment="CENTER" textFill="#597d35">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Georgia Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="59.0" prefHeight="49.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <TableView fx:id="eventTable" layoutX="136.0" layoutY="250.0" prefHeight="242.0" prefWidth="826.0" stylesheets="@css/styles.css">
+        <columns>
+          <TableColumn fx:id="idEvent" prefWidth="75.0" text="N°" />
+          <TableColumn fx:id="libelleEvent" prefWidth="75.0" text="Libelle" />
+            <TableColumn fx:id="lieuEvent" prefWidth="75.0" text="Lieu" />
+            <TableColumn fx:id="dateEvent" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="placesEvent" prefWidth="75.0" text="N°places" />
+            <TableColumn fx:id="prixEvent" prefWidth="75.0" text="Prix" />
+            <TableColumn fx:id="categorieEvent" prefWidth="75.0" text="Categorie" />
+            <TableColumn fx:id="dureeEvent" prefWidth="75.0" text="Durée" />
+            <TableColumn fx:id="timeEvent" prefWidth="75.0" text="Time" />
+            <TableColumn fx:id="acceptdeclineEvent" prefWidth="157.0" text="Accepté / Non Accepté" />
+        </columns>
+         <styleClass>
+            <String fx:value="transparent" />
+            <String fx:value="white-background" />
+         </styleClass>
+      </TableView>
+      <Button fx:id="btn_categorie" layoutX="739.0" layoutY="195.0" mnemonicParsing="false" onMouseClicked="#goToCategorie" prefHeight="27.0" prefWidth="223.0" style="-fx-border-color: #597d35;" styleClass="transparent" stylesheets="@css/styles.css" text="Consulter les catégories" textFill="#597d35" underline="true" />
+   </children>
+</AnchorPane>
