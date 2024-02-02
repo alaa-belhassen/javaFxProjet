@@ -1,6 +1,8 @@
 package tn.esprit.javafxproject.models;
 
 
+import javafx.scene.control.TextArea;
+
 import java.sql.Timestamp;
 
 public class Publication {
@@ -12,6 +14,8 @@ public class Publication {
     private int likes;
     private int shares;
     private String attachments;
+    private TextArea commentTextArea;
+
 
     // Constructors, getters, and setters
 
@@ -98,7 +102,19 @@ public class Publication {
                 ", attachments='" + attachments + '\'' +
                 '}';
     } */
-@Override
+
+    public TextArea getCommentTextArea() {
+        if (commentTextArea == null) {
+            commentTextArea = new TextArea();
+        }
+        return commentTextArea;
+    }
+
+    public void setCommentTextArea(TextArea commentTextArea) {
+        this.commentTextArea = commentTextArea;
+    }
+
+    @Override
 public String toString() {
     return "User ID: " + idUser  + content + "\nLikes: " + likes + "\nShares: " + shares + "\nTimestamp: " + timestamp;
 }

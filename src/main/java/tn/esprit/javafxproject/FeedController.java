@@ -10,13 +10,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tn.esprit.javafxproject.models.Comment;
 import tn.esprit.javafxproject.models.Publication;
+import tn.esprit.javafxproject.services.CommentService;
 import tn.esprit.javafxproject.services.PublicationService;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -28,7 +31,7 @@ public class FeedController implements Initializable {
     @FXML
     private TextArea publicationInput;
     public SidebarController sideBarController;
-
+    public CommentService commentService;
     @FXML
     private Button postButton;
 
@@ -41,6 +44,9 @@ public class FeedController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.publicationService = new PublicationService(getDatabaseConnection());
+
+            // Initialize CommentService with the database connection
+            initializeCommentService(getDatabaseConnection());
 
             // Call updatePublicationVBox to load and display publications on initialization
             updatePublicationVBox();
@@ -55,6 +61,9 @@ public class FeedController implements Initializable {
         String password = "SYSTEM";
 
         return DriverManager.getConnection(url, username, password);
+    }
+    public void initializeCommentService(Connection connection) {
+        commentService = new CommentService(connection);
     }
 
     private void handleDatabaseConnectionError(SQLException e) {
@@ -104,8 +113,16 @@ public class FeedController implements Initializable {
             for (Publication publication : publications) {
                 // Create a custom VBox for each publication and add it to the VBox
                 VBox publicationBox = createPublicationBox(publication);
-                publicationVBox.getChildren().add(publicationBox);
+
+                // Fetch and add comments for the current publication
+                List<Comment> comments = commentService.getCommentsForPublication(publication.getPublicationID());
+                for (Comment comment : comments) {
+                    VBox commentBox = createCommentBox(comment);
+                    publicationBox.getChildren().add(commentBox);
+                }
+
                 // Add spacing between each VBox
+                publicationVBox.getChildren().add(publicationBox);
                 publicationVBox.setSpacing(10); // Adjust the spacing as needed
             }
         } catch (SQLException e) {
@@ -114,11 +131,96 @@ public class FeedController implements Initializable {
         }
     }
 
+    private VBox createCommentBox(Comment comment) {
+        // Create a custom VBox to represent a comment
+        VBox commentBox = new VBox();
+        commentBox.getStyleClass().add("comment-box");
+
+        commentBox.setPadding(new Insets(10, 10, 10, 10)); // Adjust the values as needed
+
+        // Create an HBox for userIdLabel
+        HBox userIdBox = new HBox();
+        userIdBox.setSpacing(10);
+
+        // Add label for user ID
+        Label userIdLabel = new Label(comment.getUserId() + " commented");
+
+        // Add userIdLabel to the HBox
+        userIdBox.getChildren().add(userIdLabel);
+
+        // Format timestamp to display only date and time (hours and minutes)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String formattedTimestamp = comment.getTimestamp().format(formatter);
+
+        // Create a Label for displaying the formatted timestamp
+        Label timestampLabel = new Label("Time: " + formattedTimestamp);
+        timestampLabel.getStyleClass().add("timestamp-label");
+
+        // Create an HBox for timestampLabel, aligned to the right
+        HBox timestampBox = new HBox();
+        timestampBox.setAlignment(Pos.TOP_RIGHT);
+        timestampBox.getChildren().add(timestampLabel);
+
+        // Create a Label for displaying the content
+        Label contentLabel = new Label(comment.getContent());
+
+        // Add userIdBox, timestampBox, and contentLabel to the VBox with appropriate spacing
+        commentBox.getChildren().addAll(userIdBox, timestampBox, contentLabel);
+
+        // Apply styles to labels
+        userIdLabel.getStyleClass().add("comment-label");
+        userIdLabel.getStyleClass().add("user-id-label");
+
+        timestampLabel.getStyleClass().add("timestamp-label");
+
+        contentLabel.getStyleClass().add("comment-label");
+        contentLabel.getStyleClass().add("content-label");
+
+        return commentBox;
+    }
+    private void handleCommentButtonClick(Publication publication, Button commentButton) {
+        // Create TextArea for commenting
+        TextArea commentTextArea = new TextArea();
+        commentTextArea.setPromptText("Type your comment...");
+
+        // Create "Post Comment" button
+        Button postCommentButton = new Button("Post Comment");
+        postCommentButton.setOnAction(e -> handlePostCommentButtonClick(publication, commentTextArea));
+
+        // Create HBox to hold TextArea and "Post Comment" button
+        HBox commentBox = new HBox(commentTextArea, postCommentButton);
+        commentBox.setSpacing(10);
+
+        // Add the commentBox to the VBox
+        VBox publicationBox = createPublicationBox(publication);
+        publicationBox.getChildren().add(commentBox);
+
+        // Update the UI
+        publicationVBox.getChildren().setAll(publicationBox);
+    }
+
+    private void handlePostCommentButtonClick(Publication publication, TextArea commentTextArea) {
+        String commentContent = commentTextArea.getText();
+
+        // Assuming IdUser, Likes, Attachments need default or specific values
+        Comment newComment = new Comment(publication.getPublicationID(), 1, commentContent, LocalDateTime.now(), 0, null);
+        System.out.println(publication.getPublicationID());
+        boolean success = commentService.addComment(newComment);
+
+        if (success) {
+            // Update the UI
+            updatePublicationVBox();
+        } else {
+            // Handle failure to add the comment (e.g., show an error message)
+        }
+
+    }
     private VBox createPublicationBox(Publication publication) {
         // Create a custom VBox to represent a publication
         VBox publicationBox = new VBox();
         publicationBox.getStyleClass().add("publication-box");
 
+        publicationBox.setStyle("-fx-background-color: #e0e0e0;");
         publicationBox.setPadding(new Insets(10, 10, 10, 10)); // Adjust the values as needed
 
         // Create an HBox for userIdLabel
@@ -179,8 +281,34 @@ public class FeedController implements Initializable {
 
         // Add userIdBox, timestampBox, contentLabel, and Likes/Shares HBox to the VBox with appropriate spacing
         publicationBox.getChildren().addAll(userIdBox, timestampBox, contentLabel, likesSharesBox);
+        // Create a Button for comments
+        Button commentButton = new Button("Comment");
+        commentButton.setOnAction(e -> handleCommentButtonClick(publication, commentButton));
+        commentButton.setStyle("-fx-font-size: 10;");
+        commentButton.setPrefWidth(100);
+
+        // Create a TextArea for comments
+        TextArea commentTextArea = new TextArea();
+        commentTextArea.setPromptText("Write a comment...");
+        commentTextArea.setVisible(false); // Initially, hide the commentTextArea
+
+        // Create a Button for posting comments
+        Button postCommentButton = new Button("Post Comment");
+        postCommentButton.setOnAction(e -> handlePostCommentButtonClick(publication, commentTextArea));
+        postCommentButton.setVisible(false);
+
+
+        // Create an HBox for commentButton, commentTextArea, and postCommentButton
+        HBox commentBox = new HBox(10); // Adjust the spacing as needed
+        commentBox.getChildren().addAll(commentButton, commentTextArea, postCommentButton);
+
+        // ... (existing code)
+
+        // Add commentBox to the VBox
+        publicationBox.getChildren().add(commentBox);
 
         return publicationBox;
+
     }
 
     private void handleLikeButtonClick(Publication publication) {
