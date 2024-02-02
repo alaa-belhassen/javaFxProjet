@@ -6,7 +6,10 @@ module tn.esprit.javafxproject {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires jbcrypt;
+    requires java.mail;
 
     opens tn.esprit.javafxproject to javafx.fxml;
     exports tn.esprit.javafxproject;
+    opens tn.esprit.javafxproject.models to java.base;
 }

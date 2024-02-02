@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.control.PasswordField?>
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" style="-fx-background-color: #f6f6f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.HelloController">
+   <children>
+      <ImageView fitHeight="973.0" fitWidth="2002.0" layoutX="-387.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox alignment="CENTER" layoutX="405.0" layoutY="200.0" prefHeight="558.0" prefWidth="570.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-border-color: black;">
+         <children>
+            <Label alignment="CENTER" graphicTextGap="3.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="91.0" prefWidth="243.0" text="Connectez-vous" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+               <font>
+                  <Font name="Eras Demi ITC" size="31.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="-20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Email" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="email" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="363.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextField>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="73.0" prefWidth="360.0">
+               <children>
+                  <Label text="Mot de passe">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="password" prefHeight="40.0" prefWidth="346.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </VBox>
+            <Button fx:id="connect" onAction="#connect" prefHeight="46.0" prefWidth="130.0" style="-fx-background-color: #3f704d;" text="Connecter" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Label fx:id="welcomeText" alignment="CENTER" prefHeight="25.0" prefWidth="650.0" textFill="#bf2020">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Hyperlink fx:id="resetPassword" onAction="#resetPassword" text="Mot de passe oublié ? " textFill="#3f704d">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </VBox>
+      <HBox alignment="TOP_RIGHT" layoutX="-9.0" layoutY="47.0" prefHeight="46.0" prefWidth="1315.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);">
+         <children>
+            <Button fx:id="CreateAccount" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#creerCompte" prefHeight="46.0" prefWidth="153.0" style="-fx-background-color: #3f704d;" text="Créer Compte" textFill="WHITE" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" style="-fx-background-color: #f6f6f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.AccountCreationController">
+   <children>
+      <Label fx:id="resultat" layoutX="40.0" layoutY="294.0" prefHeight="66.0" prefWidth="461.0" textFill="#960d0d">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="288.0" layoutY="154.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="803.0">
+         <children>
+            <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Nom">
+               <font>
+                  <Font name="Baskerville Old Face" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nom" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Email">
+               <font>
+                  <Font name="Baskerville Old Face" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="email" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Téléphone">
+               <font>
+                  <Font name="Baskerville Old Face" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="telephone" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Adresse">
+               <font>
+                  <Font name="Baskerville Old Face" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="adresse" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Mot de passe">
+               <font>
+                  <Font name="Baskerville Old Face" size="24.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="password" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </PasswordField>
+            <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Image">
+               <font>
+                  <Font name="Baskerville Old Face" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="load" mnemonicParsing="false" onAction="#UploadImageActionPerformed" prefHeight="29.0" prefWidth="78.0" text="Importer" />
+            <TextField fx:id="ImageString" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0" />
+            <Button fx:id="CreateAccount" mnemonicParsing="false" onAction="#CreateAcoount" prefHeight="29.0" prefWidth="187.0" style="-fx-background-color: #3f704d;" text="Créer compte" textFill="#fffafa">
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Button fx:id="retour" layoutX="40.0" layoutY="813.0" mnemonicParsing="false" onAction="#retour" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #3f704d;" text="Retour" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="461.0" layoutY="71.0" text="Créer votre compte" textFill="#3f704d">
+         <font>
+            <Font name="System Bold" size="47.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

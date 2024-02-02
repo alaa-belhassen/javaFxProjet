@@ -22,47 +22,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SidebarController  {
+public class AdminSidebarController  implements Initializable {
 
-    private UserServiceImpl userService = new UserServiceImpl();
-
-
-    public void initialize() throws FileNotFoundException {
-
-        User user = userService.getUser(User.UserConnecte);
-        profil.setText(user.getNom());
-        System.out.println(user.getImage());
-        System.out.println(user);
-        if(!user.getImage().isEmpty()){
-            Image image =  new Image(new FileInputStream(user.getImage()));
-            this.image.setImage(image);
-        }
-
-
-
-
-
-    }
-
-    public int id;
-    public static User user ;
-    @FXML
-    private ImageView image;
-    @FXML
-    private Button deconnecter;
     @FXML
     private Hyperlink profil;
     @FXML
     public BorderPane borderPane;
+    private UserServiceImpl userService = new UserServiceImpl();
+    @FXML
+    private ImageView image;
+    @FXML
+    private Button deconnecter;
+
     @FXML
     void goAcceuil(MouseEvent event) {
 
     }
 
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @FXML
     void profil (ActionEvent event) throws IOException {
@@ -70,14 +46,35 @@ public class SidebarController  {
 
         Parent parent = (Parent)root.load();
 
-       ProfilController profilController = root.getController();
-      profilController.setUser(user);
-
+        Object profilController = root.getController();
         if(root.getController() instanceof ProfilController){
-            ((ProfilController) profilController).sidebarController = this;
+            ((ProfilController) profilController).adminsidebarController= this;
             borderPane.setCenter(parent);
         }
 
+        System.out.println(root);
+    }
+    @FXML
+    void goUsers(MouseEvent event) throws IOException {
+
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource( "Users.fxml"));
+        Parent parent = (Parent)root.load();
+        Object usersController = root.getController();
+        if (root.getController() instanceof UsersController) {
+            ((UsersController)usersController).AdminsidebarController = this;
+            this.borderPane.setCenter(parent);
+        }
+
+    }
+    @FXML
+    void goRoles(MouseEvent event) throws IOException {
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource( "Roles.fxml"));
+        Parent parent = (Parent)root.load();
+        Object rolesController = root.getController();
+        if (root.getController() instanceof RolesController) {
+            ((RolesController)rolesController).AdminsidebarController = this;
+            this.borderPane.setCenter(parent);
+        }
     }
     @FXML
     void goDeconect(MouseEvent event) throws IOException {
@@ -88,10 +85,7 @@ public class SidebarController  {
         stage.setScene(scene);
         stage.show();
         User.UserConnecte=-1;
-
     }
-
-
 
     @FXML
     void goDonation(MouseEvent event) {
@@ -113,13 +107,19 @@ public class SidebarController  {
 
     }
 
-    public User  setUser(User u) {
-        this.user=u;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-        return this.user;
-    }
+        User user = userService.getUser(User.UserConnecte);
+        profil.setText(user.getNom());
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream(user.getImage()));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        this.image.setImage(image);
 
-    public User getUser() {
-        return user;
+
     }
 }

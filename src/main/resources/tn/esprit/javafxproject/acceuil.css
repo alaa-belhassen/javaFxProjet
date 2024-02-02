@@ -1,0 +1,19 @@
+
+.button
+{
+    -fx-width :80px;
+    -fx-height:60px;
+    -fx-background-color: #3895D3;
+    -fx-font-size:16px;
+
+}
+.root
+{ -fx-width :700px;
+    -fx-height :500px;
+    -fx-background-color:black;
+}
+.table-view .table-cell{
+    -fx-border-color:#3895D3 ;
+    -fx-padding: 20px 20px 20px ;
+}
+
