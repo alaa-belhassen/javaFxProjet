@@ -282,6 +282,11 @@ public class UserServiceImpl implements ICrud <User> {
         }
     }
     public boolean emailExists(String email) {
+        if (cnx == null) {
+            System.out.println("Connection is null");
+            return false;
+        }
+
         String query = "SELECT COUNT(*) FROM utilisateur WHERE email = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
             preparedStatement.setString(1, email);
@@ -296,6 +301,7 @@ public class UserServiceImpl implements ICrud <User> {
         }
         return false;
     }
+
     private boolean passwordHashMatches(String inputPassword, String storedPassword) {
         System.out.println("inputPassword: " + inputPassword);
         System.out.println("storedPassword: " + storedPassword);

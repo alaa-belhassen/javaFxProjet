@@ -36,6 +36,14 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.23</version> <!-- Use the version you downloaded -->
         </dependency>
+
+            <!-- Other dependencies -->
+        <dependency>
+                <groupId>org.mindrot</groupId>
+                <artifactId>jbcrypt</artifactId>
+                <version>0.4</version> <!-- Or the latest version available -->
+        </dependency>
+
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
             <artifactId>formsfx-core</artifactId>
