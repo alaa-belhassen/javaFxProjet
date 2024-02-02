@@ -27,7 +27,7 @@ public class SidebarController  {
     private UserServiceImpl userService = new UserServiceImpl();
 
 
-    public void initialize() throws FileNotFoundException {
+    public void initialize() throws IOException {
 
         User user = userService.getUser(User.UserConnecte);
         profil.setText(user.getNom());
@@ -38,8 +38,8 @@ public class SidebarController  {
             this.image.setImage(image);
         }
 
-
-
+        // Automatically load goAcceuil when the sidebar is initialized
+        goAcceuil(null);
 
 
     }
@@ -55,7 +55,14 @@ public class SidebarController  {
     @FXML
     public BorderPane borderPane;
     @FXML
-    void goAcceuil(MouseEvent event) {
+    void goAcceuil(MouseEvent event) throws IOException {
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource("feed.fxml"));
+        Parent parent = (Parent) root.load();
+        Object feedController = root.getController();
+        if (root.getController() instanceof FeedController) {
+            ((FeedController) feedController).sideBarController = this;
+            this.borderPane.setCenter(parent);
+        }
 
     }
 

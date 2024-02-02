@@ -37,6 +37,11 @@
             <version>42.2.23</version> <!-- Use the version you downloaded -->
         </dependency>
         <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version> <!-- Or the latest version available -->
+        </dependency>
+        <dependency>
             <groupId>com.dlsc.formsfx</groupId>
             <artifactId>formsfx-core</artifactId>
             <version>11.6.0</version>
