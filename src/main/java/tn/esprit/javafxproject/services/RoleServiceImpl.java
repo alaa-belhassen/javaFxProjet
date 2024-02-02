@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import tn.esprit.javafxproject.utils.DbConnection;
 
 import tn.esprit.javafxproject.utils.DbConnection;
+import tn.esprit.javafxproject.utils.Status;
+
 public class RoleServiceImpl implements ICrud <Role>  {
 
     private Connection cnx ;
@@ -47,9 +49,10 @@ public class RoleServiceImpl implements ICrud <Role>  {
 
     @Override
     public boolean add(Role r) {
+        
         String req = "INSERT INTO role "
-                + "	(idrole, role, status)\r\n"
-                + "	VALUES ('"+ r.getIdRole()+"','"+r.getName()+"','"+r.getStatus()+"'  );";
+                + "	(idrole, name, status)\r\n"
+                + "	VALUES ('"+ r.getIdRole()+"','"+r.getName()+"','"+ Status.VALID.toString()+"'  );";
         Statement st;
         int er=0;
         try {
@@ -68,7 +71,7 @@ public class RoleServiceImpl implements ICrud <Role>  {
     public boolean delete(Role r) {
         String req = "UPDATE \"role\" "
 
-                + " SET status='supprim�' "
+                + " SET status='SUPPRIMER' "
                 + "WHERE idrole='" + r.getIdRole() + "';";
         Statement st;
         int er = 0;
@@ -87,7 +90,7 @@ public class RoleServiceImpl implements ICrud <Role>  {
     @Override
     public boolean delete(int id) {
         String req = "UPDATE \"role\" 	SET "
-                + "status='supprim�' "
+                + "status='SUPPRIMER' "
                 + "WHERE idrole ='" + id + "';";
         Statement st;
         int er = 0;

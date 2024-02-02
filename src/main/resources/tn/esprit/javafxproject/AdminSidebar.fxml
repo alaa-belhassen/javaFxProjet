@@ -41,7 +41,7 @@
                                 <Font name="System Bold" size="15.0" />
                             </font>
                         </Hyperlink>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@image/1696348579560.jpeg" />
                             </image>
@@ -85,7 +85,7 @@
                         <Separator layoutX="10.0" layoutY="386.0" prefWidth="200.0" />
                         <HBox layoutX="10.0" layoutY="213.0" prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#goDonation" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Utilisateurs">
+                                <Button mnemonicParsing="false" onMouseClicked="#goUsers" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Utilisateurs">
                                     <font>
                                         <Font name="Georgia" size="13.0" />
                                     </font>
@@ -106,7 +106,7 @@
                         <Separator layoutX="10.0" layoutY="386.0" prefWidth="200.0" />
                         <HBox layoutX="10.0" layoutY="213.0" prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#goDonation" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Roles">
+                                <Button mnemonicParsing="false" onMouseClicked="#goRoles" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Roles">
                                     <font>
                                         <Font name="Georgia" size="13.0" />
                                     </font>
@@ -202,7 +202,7 @@
                         <Separator prefWidth="200.0" />
                         <HBox prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#goDeconect" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Deconnexion">
+                                <Button fx:id="deconnecter" mnemonicParsing="false" onMouseClicked="#goDeconect" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Deconnexion">
                                     <font>
                                         <Font name="Georgia" size="13.0" />
                                     </font>
@@ -230,4 +230,3 @@
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="830.0" prefWidth="1098.0" BorderPane.alignment="CENTER" />
     </center>
 </BorderPane>
-

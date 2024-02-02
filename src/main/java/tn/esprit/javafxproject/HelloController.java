@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.UserServiceImpl;
@@ -17,7 +18,6 @@ import java.io.IOException;
 public class HelloController {
 
     UserServiceImpl UserService = new UserServiceImpl();
-    DbConnection db = DbConnection.getInstance();
 
 
     @FXML
@@ -35,7 +35,8 @@ public class HelloController {
 
     @FXML
     private Hyperlink resetPassword;
-
+    @FXML
+    private AnchorPane screen;
     @FXML
     private Button liste;
     @FXML
@@ -51,50 +52,44 @@ public class HelloController {
         stage.show();
     }
     @FXML
-    void connect (ActionEvent event) throws IOException {
-        if (controle())
-        { User u =UserService.authenticate(email.getText(),password.getText());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Sidebar.fxml"));
-            loader.load();
-            SidebarController sidebarController = loader.getController();
-
-            sidebarController.user=u;
+    void connect(ActionEvent event) throws IOException {
+        if (controle()) {
+            User u = UserService.authenticate(email.getText(), password.getText());
 
 
-            if( u.getRole().getIdRole()==1)
-       {
-           Stage stage;
-           Parent root;
-           stage = (Stage) connect.getScene().getWindow();
-           root = FXMLLoader.load(getClass().getResource("AdminSidebar.fxml"));
-           Scene scene = new Scene(root);
-           stage.setScene(scene);
-           stage.show();
-
-       }
-       else
-        if( (u.getRole().getIdRole()==2)||(u.getRole().getIdRole()==3))
-        {
-            Stage stage;
-            Parent root;
-            stage = (Stage) connect.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("Sidebar.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-            System.out.println(u);
-
-            //Passage de variable
+            if (u != null) {
+                User.UserConnecte=u.getIdUser();// Vérifiez si l'utilisateur existe
+                User.Role_User_Connecte=u.getRole().getIdRole();
+                if (u.getRole().getIdRole() == 0) {
+                    // Affichage pour un administrateur
+                    Stage stage = (Stage) connect.getScene().getWindow();
+                    Parent root = FXMLLoader.load(getClass().getResource("AdminSidebar.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else if (u.getRole().getIdRole() == 1 || u.getRole().getIdRole() == 2) {
+                    // Affichage pour un utilisateur
+                    Stage stage = (Stage) connect.getScene().getWindow();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Sidebar.fxml"));
+                    Parent root = loader.load();
+                   // SidebarController sidebarController = loader.getController();
+                  //  sidebarController.setUser(u);
 
 
+                   // System.out.println( sidebarController.getUser());
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                    System.out.println(u);
+                }
+            } else {
+                welcomeText.setText("Utilisateur inexistant");
+            }
+        } else {
+            welcomeText.setText("Veuillez remplir les champs");
         }
-       else {
-           welcomeText.setText("Utilisateur inexistant ");
-       } }
-        else
-        {welcomeText.setText("Veuillez remplir les champs ");}
-
     }
+
     @FXML
     void resetPassword (ActionEvent event)
     {
@@ -132,7 +127,9 @@ public class HelloController {
         try{ Stage stage;
             Parent root;
             stage = (Stage) CreateAccount.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("AccountCreation.fxml"));
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AccountCreation.fxml"));
+            root = fxmlLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

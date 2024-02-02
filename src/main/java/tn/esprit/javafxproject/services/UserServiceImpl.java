@@ -8,6 +8,7 @@ import tn.esprit.javafxproject.utils.DbConnection;
 import java.security.SecureRandom;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements ICrud <User> {
     public ArrayList<User> getAll() {
         ArrayList<User> Users = new ArrayList<User>();
 
-        String req = "SELECT u.*, r.role FROM utilisateur u JOIN \"role\" r ON u.idrole = r.idrole";
+        String req = "SELECT u.*, r.name FROM utilisateur u JOIN role r ON u.idrole = r.idrole";
         Statement st;
         try {
             st = cnx.createStatement();
@@ -54,12 +55,13 @@ public class UserServiceImpl implements ICrud <User> {
                 u.setEmail(res.getString(3));
                 u.setTelephone(res.getString(4));
                 u.setAdresse(res.getString(5));
+                u.setImage(res.getString(9));
                 Role role = new Role();
-                role.setName(res.getString("role"));
+                role.setName(res.getString("name"));
 
 
                 u.setRole(role);
-                u.setStatus(res.getString(7));
+                u.setStatus(res.getString(6));
                 Users.add(u);
             }
         } catch (SQLException e) {
@@ -73,7 +75,7 @@ public class UserServiceImpl implements ICrud <User> {
     public User getUser(int id) {
         User u = new User();
 
-        String req = "SELECT u.*, r.role FROM utilisateur u JOIN \"role\" r ON u.idrole = r.idrole WHERE iduser =" + id + ";";
+        String req = "SELECT u.*, r.name FROM utilisateur u JOIN role r ON u.idrole = r.idrole WHERE iduser =" + id + ";";
         Statement st;
         try {
             st = cnx.createStatement();
@@ -84,10 +86,11 @@ public class UserServiceImpl implements ICrud <User> {
                 u.setEmail(res.getString(3));
                 u.setTelephone(res.getString(4));
                 u.setAdresse(res.getString(5));
+                u.setImage(res.getString(9));
                 Role role = new Role();
-                role.setName(res.getString("role"));
+                role.setName(res.getString("name"));
                 u.setRole(role);
-                u.setStatus(res.getString(7));
+                u.setStatus(res.getString(6));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,7 +116,7 @@ public class UserServiceImpl implements ICrud <User> {
             pst.setInt(5, 2);
             pst.setString(6, Status.VALID.toString());
             pst.setString(7, user.getPassword());
-            pst.setBytes(8, user.getImage());
+            pst.setString(8, user.getImage());
 
             int result = pst.executeUpdate();
 
@@ -132,6 +135,35 @@ public class UserServiceImpl implements ICrud <User> {
         return false;
     }
 
+    public List<User> search(String searchTerm) {
+        List<User> users = new ArrayList<>();
+        String req = "SELECT u.*, r.name FROM utilisateur u JOIN role r ON u.idrole = r.idrole WHERE nom LIKE ? OR telephone LIKE ? OR email LIKE ? OR adresse LIKE ? OR status LIKE ?";
+        try (PreparedStatement pst = cnx.prepareStatement(req)) {
+            pst.setString(1, "%" + searchTerm + "%");
+            pst.setString(2, "%" + searchTerm + "%");
+            pst.setString(3, "%" + searchTerm + "%");
+            pst.setString(4, "%" + searchTerm + "%");
+            pst.setString(5, "%" + searchTerm + "%");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+
+                user.setNom(rs.getString("nom"));
+                user.setEmail(rs.getString("email"));
+                user.setTelephone(rs.getString("telephone"));
+                user.setAdresse(rs.getString("adresse"));
+                Role role = new Role();
+                role.setName(rs.getString("name"));
+                user.setRole(role);
+                user.setStatus(rs.getString(6));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
 
 
     @Override
@@ -139,7 +171,7 @@ public class UserServiceImpl implements ICrud <User> {
 
         String req = "UPDATE utilisateur "
 
-                + " SET status='supprimé' "
+                + " SET status='SUPPRIMER' "
                 + "WHERE iduser='" + U.getIdUser() + "';";
         Statement st;
         int er = 0;
@@ -176,16 +208,20 @@ public class UserServiceImpl implements ICrud <User> {
 
     @Override
     public boolean update(User U) {
+        int er = 0;
+
+        System.out.println(U.getIdUser());
         String req = "UPDATE utilisateur "
                 + "SET nom='" + U.getNom() + "', "
                 + "email='" + U.getEmail() + "', "
                 + "telephone='" + U.getTelephone() + "', "
-                + "adresse='" + U.getAdresse() + "', "
+                + "adresse='" + U.getAdresse() + "' "
 
-                + "status='" + U.getStatus() + "' "
-                + "WHERE iduser='" + U.getIdUser() + "'";
+
+
+                + "WHERE iduser=" + U.getIdUser() + "";
         Statement st;
-        int er = 0;
+
         try {
             st = cnx.createStatement();
             er = st.executeUpdate(req);
@@ -213,10 +249,10 @@ public class UserServiceImpl implements ICrud <User> {
             pst.setString(2, user.getEmail());
             pst.setString(3, user.getTelephone());
             pst.setString(4, user.getAdresse());
-            pst.setInt(5,3);
+            pst.setInt(5,1);
             pst.setString(6, Status.VALID.toString());
             pst.setString(7, user.getPassword());
-            pst.setBytes(8, user.getImage());
+            pst.setString(8, user.getImage());
 
             int result = pst.executeUpdate();
 
@@ -305,7 +341,7 @@ public class UserServiceImpl implements ICrud <User> {
         return result;
     }
     public User authenticate(String email, String password) {
-        String query = "SELECT iduser, idrole, password FROM utilisateur WHERE email = ?";
+        String query = "SELECT iduser, idrole, password FROM utilisateur WHERE email = ? AND status <> 'SUPPRIMER'";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -327,7 +363,7 @@ public class UserServiceImpl implements ICrud <User> {
     }
 
     public boolean changePassword(String email, String oldPassword, String newPassword) {
-        // Vérifier la correspondance de l'ancien mot de passe en utilisant la méthode authenticate
+
         if (authenticate(email, oldPassword)!=null) {
           User u =new User();
             String newHashedPassword = u.hashPassword(newPassword);
@@ -341,6 +377,7 @@ public class UserServiceImpl implements ICrud <User> {
             return false;
         }
     }
+
     private boolean updatePasswordInDatabase(String userEmail, String newHashedPassword) {
         String updateQuery = "UPDATE utilisateur SET password = ? WHERE email = ?";
 

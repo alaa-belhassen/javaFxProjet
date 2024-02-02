@@ -11,7 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" style="-fx-background-color: #f6f6f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.HelloController">
+<?import javafx.scene.control.PasswordField?>
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" style="-fx-background-color: #f6f6f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.HelloController">
    <children>
       <ImageView fitHeight="973.0" fitWidth="2002.0" layoutX="-387.0" pickOnBounds="true" preserveRatio="true" />
       <VBox alignment="CENTER" layoutX="405.0" layoutY="200.0" prefHeight="558.0" prefWidth="570.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-border-color: black;">
@@ -44,7 +45,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="password" prefHeight="40.0" prefWidth="346.0" />
+                  <PasswordField fx:id="password" prefHeight="40.0" prefWidth="346.0" />
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -75,11 +76,6 @@
       </VBox>
       <HBox alignment="TOP_RIGHT" layoutX="-9.0" layoutY="47.0" prefHeight="46.0" prefWidth="1315.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);">
          <children>
-            <Button fx:id="ajout" mnemonicParsing="false" onAction="#ajout" prefHeight="46.0" prefWidth="144.0" style="-fx-background-color: #3f704d;" text="Ajouter équipe" textFill="WHITE">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
             <Button fx:id="CreateAccount" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#creerCompte" prefHeight="46.0" prefWidth="153.0" style="-fx-background-color: #3f704d;" text="Créer Compte" textFill="WHITE" />
          </children>
       </HBox>

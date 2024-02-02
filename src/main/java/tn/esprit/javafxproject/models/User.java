@@ -12,7 +12,12 @@ public class User {
     private Role role;
     private PageActu pageActu;
     private String password;
-    private byte[] image;
+    private String image;
+
+    public static int UserConnecte;
+    public static  int Role_User_Connecte;
+
+
 
     public User() {
     }
@@ -31,7 +36,7 @@ public class User {
 
         this.password = hashPassword(password);
     }
-    public User(int idUser, String adresse, String email, String nom, String telephone, String status, Role role, PageActu pageActu, String password) {
+    public User(int idUser, String adresse, String email, String nom, String telephone, String status, Role role,String image, PageActu pageActu, String password) {
         this.idUser = idUser;
         this.adresse = adresse;
         this.email = email;
@@ -39,6 +44,7 @@ public class User {
         this.telephone = telephone;
         this.status = status;
         this.role = role;
+        this.image=image;
         this.pageActu = pageActu;
         this.password = hashPassword(password);
     }
@@ -120,11 +126,11 @@ public class User {
         return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -139,6 +145,8 @@ public class User {
                 ", status='" + status + '\'' +
                 ", role=" + role +
                 ", pageActu=" + pageActu +
+                ", password='" + password + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

@@ -16,7 +16,7 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <VBox alignment="CENTER" layoutX="291.0" layoutY="155.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="803.0">
+      <VBox alignment="CENTER" layoutX="288.0" layoutY="154.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="803.0">
          <children>
             <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Nom">
                <font>
@@ -68,22 +68,29 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </PasswordField>
-            <Button fx:id="CreateAccount" mnemonicParsing="false" onAction="#CreateAcoount" prefHeight="69.0" prefWidth="261.0" style="-fx-background-color: #3f704d;" text="Créer compte" textFill="#fffafa">
+            <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Image">
+               <font>
+                  <Font name="Baskerville Old Face" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="load" mnemonicParsing="false" onAction="#UploadImageActionPerformed" prefHeight="29.0" prefWidth="78.0" text="Importer" />
+            <TextField fx:id="ImageString" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0" />
+            <Button fx:id="CreateAccount" mnemonicParsing="false" onAction="#CreateAcoount" prefHeight="29.0" prefWidth="187.0" style="-fx-background-color: #3f704d;" text="Créer compte" textFill="#fffafa">
                <VBox.margin>
                   <Insets top="40.0" />
                </VBox.margin>
                <font>
-                  <Font size="23.0" />
+                  <Font size="19.0" />
                </font>
             </Button>
          </children>
       </VBox>
-      <Button fx:id="retour" layoutX="40.0" layoutY="781.0" mnemonicParsing="false" onAction="#retour" prefHeight="60.0" prefWidth="145.0" style="-fx-background-color: #3f704d;" text="Retour" textFill="WHITE">
+      <Button fx:id="retour" layoutX="40.0" layoutY="813.0" mnemonicParsing="false" onAction="#retour" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #3f704d;" text="Retour" textFill="WHITE">
          <font>
-            <Font size="23.0" />
+            <Font size="17.0" />
          </font>
       </Button>
-      <Label layoutX="479.0" layoutY="72.0" text="Créer votre compte" textFill="#3f704d">
+      <Label layoutX="461.0" layoutY="71.0" text="Créer votre compte" textFill="#3f704d">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>

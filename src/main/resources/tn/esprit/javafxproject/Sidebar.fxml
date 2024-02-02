@@ -45,7 +45,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Hyperlink>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="image" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/1696348579560.jpeg" />
                      </image>
@@ -164,7 +164,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox prefHeight="50.0" prefWidth="200.0" styleClass="mouse-moved" stylesheets="@css/styles.css">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#goDeconect" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Deconnexion">
+                        <Button fx:id="deconnecter" mnemonicParsing="false" onMouseClicked="#goDeconect" prefHeight="50.0" prefWidth="169.0" styleClass="transparent" text="Deconnexion">
                            <font>
                               <Font name="Georgia" size="13.0" />
                            </font>

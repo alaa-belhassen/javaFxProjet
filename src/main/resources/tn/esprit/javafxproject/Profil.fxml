@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,53 +12,76 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1098.0" style="-fx-background-color: #f6f6f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.ProfilController">
    <children>
-      <VBox alignment="CENTER" layoutX="333.0" layoutY="101.0" prefHeight="608.0" prefWidth="494.0" style="-fx-background-color: #f1f7f3; -fx-border-color: black;">
+      <VBox alignment="CENTER" layoutX="333.0" layoutY="37.0" prefHeight="773.0" prefWidth="494.0" style="-fx-background-color: #f1f7f3; -fx-border-color: black;">
          <children>
-            <ImageView fitHeight="94.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="card" fitHeight="131.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/userr.png" />
                </image>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
             </ImageView>
-            <Label fx:id="nom" text="Khouloud" textFill="#1f4028">
-               <font>
-                  <Font name="Arial Bold Italic" size="35.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="email" text="Email">
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Arial" size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="telephone" text="Téléphone">
-               <font>
-                  <Font name="Arial" size="25.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="25.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="adresse" text="Adresse">
-               <font>
-                  <Font name="Arial" size="25.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="25.0" />
-               </VBox.margin>
-            </Label>
-            <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="175.0" style="-fx-background-color: #3f704d;" text="Modifier Profil" textFill="WHITE">
-               <VBox.margin>
-                  <Insets top="40.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="465.0">
+               <children>
+                  <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="385.0" text="Nom">
+                     <font>
+                        <Font name="Baskerville Old Face" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nom" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Email">
+                     <font>
+                        <Font name="Baskerville Old Face" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="email" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Téléphone">
+                     <font>
+                        <Font name="Baskerville Old Face" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="telephone" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="385.0" text="Adresse">
+                     <font>
+                        <Font name="Baskerville Old Face" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="adresse" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="ChangePassword" mnemonicParsing="false" onAction="#ChangePassword" style="-fx-background-color: #3f704d;" text="Changer mot de passe" textFill="#fffbfb">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="modifierProfil" mnemonicParsing="false" onAction="#ModifierProfil" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #3f704d;" text="Modifier " textFill="#fffafa">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>
