@@ -65,7 +65,9 @@ public class SidebarController  {
         }
 
     }
-
+    public BorderPane getScreen() {
+        return borderPane;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -101,7 +103,14 @@ public class SidebarController  {
 
 
     @FXML
-    void goDonation(MouseEvent event) {
+    void goDonation(MouseEvent event) throws IOException {
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource("donation.fxml"));
+        Parent parent = (Parent) root.load();
+        Object donController = root.getController();
+        if (root.getController() instanceof DonController) {
+            ((DonController) donController).sidebarController = this;
+            this.borderPane.setCenter(parent);
+        }
 
     }
 
@@ -128,5 +137,24 @@ public class SidebarController  {
 
     public User getUser() {
         return user;
+    }
+
+    public void loadPage(String name) throws IOException {
+        FXMLLoader root = new FXMLLoader(getClass().getResource(name+".fxml"));
+        Parent parent = root.load();
+        Object eventsController = root.getController();
+        if(root.getController() instanceof EventsController){
+            ((EventsController) eventsController).sidebarController= this;
+            borderPane.setCenter(parent);
+        }else if (root.getController() instanceof DonController){
+            ((DonController) eventsController).sidebarController= this;
+            borderPane.setCenter(parent);
+        }else if (root.getController() instanceof EmoteAddCardAdmin){
+            ((EmoteAddCardAdmin) eventsController).sidebarController= this;
+            borderPane.setCenter(parent);
+
+        }
+
+        System.out.println(root);
     }
 }

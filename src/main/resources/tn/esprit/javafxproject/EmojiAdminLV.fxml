@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="830.0" prefWidth="1098.0" style="-fx-background-color: #f6f6f2;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.EmojiAdminLVController">
+    <children>
+        <HBox prefHeight="100.0" prefWidth="1098.0">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="18.0" style="-fx-background-color: green;" />
+                <Label prefHeight="100.0" prefWidth="591.0" text="Mes Emojis ">
+                    <HBox.margin>
+                        <Insets left="20.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font name="Georgia Bold" size="30.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+        <TableView fx:id="eventTable" layoutX="11.0" layoutY="114.0" prefHeight="333.0" prefWidth="1080.0" stylesheets="@css/styles.css">
+            <columns>
+                <TableColumn fx:id="id" prefWidth="57.0" text="N°" />
+                <TableColumn fx:id="nomemoji" prefWidth="126.0" text="nomemoji" />
+                <TableColumn fx:id="rank" prefWidth="132.0" text="rank" />
+                <TableColumn fx:id="prix" prefWidth="168.0" text="prix" />
+                <TableColumn fx:id="imageurl" prefWidth="317.0" text="imageurl" />
+                <TableColumn fx:id="status" prefWidth="128.0" text="status" />
+                <TableColumn fx:id="acceptdeclineEvent" prefWidth="147.0" text="action" />
+            </columns>
+            <styleClass>
+                <String fx:value="transparent" />
+                <String fx:value="white-background" />
+            </styleClass>
+        </TableView>
+      <VBox layoutX="-2.0" layoutY="498.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="277.0" prefWidth="1098.0">
+         <children>
+            <HBox prefHeight="91.0" prefWidth="1088.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="18.0" style="-fx-background-color: green;" />
+                  <Label prefHeight="100.0" prefWidth="591.0" text="Ajouter Emoji">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Georgia Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="481.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="303.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="112.0">
+                           <children>
+                              <Label text="nomemoji">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <TextField fx:id="nomemoji1" prefHeight="25.0" prefWidth="213.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="303.0">
+                     <children>
+                        <Label text="prix">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="prix1" prefHeight="25.0" prefWidth="213.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="73.0" prefHeight="60.0" prefWidth="481.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="303.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="112.0">
+                           <children>
+                              <Label text="rank" />
+                           </children>
+                        </HBox>
+                        <TextField fx:id="rank1" prefHeight="25.0" prefWidth="213.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="303.0">
+                     <children>
+                        <Label text="imageUrl">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Button mnemonicParsing="false" onMouseClicked="#UploadImageActionPerformed" prefHeight="25.0" prefWidth="54.0" text="import">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <TextField fx:id="imageUrl" prefHeight="25.0" prefWidth="128.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="988.0">
+               <children>
+                  <HBox prefHeight="42.0" prefWidth="245.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#ajouterEmoji" prefHeight="31.0" prefWidth="144.0" text="ajouterEvenement">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label fx:id="error" prefHeight="48.0" prefWidth="607.0" text="Label" textFill="#c31515" visible="false">
+                     <font>
+                        <Font name="Georgia Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

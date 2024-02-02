@@ -1,5 +1,6 @@
 package tn.esprit.javafxproject.models;
 
+import java.util.Objects;
 
 public class Don {
     private  int idDon;
@@ -11,8 +12,7 @@ public class Don {
     public Don() {
 
     }
-    public Don(int idDon, double montant, String commentaire, Emoji emoji, User donneur, User receveur) {
-        this.idDon = idDon;
+    public Don(double montant, String commentaire, Emoji emoji, User donneur, User receveur) {
         this.montant = montant;
         this.commentaire = commentaire;
         this.emoji = emoji;
@@ -81,4 +81,14 @@ public class Don {
                 ", Receveur=" + Receveur +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Don don = (Don) o;
+        return idDon == don.idDon && Double.compare(montant, don.montant) == 0 && Objects.equals(commentaire, don.commentaire) && Objects.equals(emoji, don.emoji) && Objects.equals(donneur, don.donneur) && Objects.equals(Receveur, don.Receveur);
+    }
+
+
 }

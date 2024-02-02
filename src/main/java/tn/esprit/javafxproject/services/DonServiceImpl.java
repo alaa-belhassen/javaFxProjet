@@ -2,7 +2,6 @@ package tn.esprit.javafxproject.services;
 
 
 
-
 import tn.esprit.javafxproject.models.*;
 import tn.esprit.javafxproject.utils.DbConnection;
 import tn.esprit.javafxproject.utils.Status;
@@ -12,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 
 public class DonServiceImpl implements ICrud<Don> {
     @Override
@@ -50,7 +50,8 @@ public class DonServiceImpl implements ICrud<Don> {
                         emoji.setIdEmoji(getEmojiRs.getInt(1));
                         emoji.setNomEmoji(getEmojiRs.getString(2));
                         emoji.setRank(getEmojiRs.getInt(3));
-                        emoji.setImageUrl(getEmojiRs.getString(4));
+                        emoji.setPrix(getEmojiRs.getInt(4));
+                        emoji.setImageUrl(getEmojiRs.getString(5));
                     }
                 }
 
@@ -59,8 +60,10 @@ public class DonServiceImpl implements ICrud<Don> {
                     selectStatement.setInt(1,getAllRs.getInt(5));
                     ResultSet getUserDonneurRs = selectStatement.executeQuery();
                     while (getUserDonneurRs.next()) {
-                            userDonneur.setIdUser(getUserDonneurRs.getInt(1));
-                        }
+                        userDonneur.setIdUser(getUserDonneurRs.getInt(1));
+                        userDonneur.setNom(getUserDonneurRs.getString(2));
+                        userDonneur.setEmail(getUserDonneurRs.getString(3));
+                    }
                 }
 
                 // receveur
@@ -69,6 +72,8 @@ public class DonServiceImpl implements ICrud<Don> {
                     ResultSet getUserReceveurRs = selectStatement.executeQuery();
                     while (getUserReceveurRs.next()) {
                         userReceveur.setIdUser(getUserReceveurRs.getInt(1));
+                        userReceveur.setNom(getUserReceveurRs.getString(2));
+                        userReceveur.setEmail(getUserReceveurRs.getString(3));
                     }
                 }
 
@@ -87,31 +92,49 @@ public class DonServiceImpl implements ICrud<Don> {
     @Override
     public boolean add(Don don) {
         String selectQuery = "SELECT * FROM don WHERE iddon = ?";
+        String getemoji = "SELECT idemoji FROM emoji WHERE nomemoji = ?";
+        String getUser = "SELECT idUser FROM utilisateur WHERE nom = ?";
+        int idemoji = -1;
+        int idUserReceveur = -1;
+        try ( PreparedStatement selectStatementEmoji = DbConnection.getCnx().prepareStatement(getemoji);
+             PreparedStatement selectStatementUser = DbConnection.getCnx().prepareStatement(getUser) ) {
+            selectStatementEmoji.setString(1,don.getEmoji().getNomEmoji());
+            ResultSet emojiRs = selectStatementEmoji.executeQuery();
+            if (emojiRs.next()) {
+                idemoji= emojiRs.getInt(1);
+            }
+            selectStatementUser.setString(1,don.getReceveur().getNom());
+            ResultSet userRS = selectStatementUser.executeQuery();
+            if (userRS.next()) {
+                idUserReceveur= userRS.getInt(1);
+                System.out.println(idUserReceveur);
+            }
+            try (PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(selectQuery)) {
+                selectStatement.setInt(1,don.getIdDon());
+                ResultSet resultSet = selectStatement.executeQuery();
+                if (!resultSet.next()) {
+                    String insertQuery = "INSERT INTO don(montant,commentaire,emoji,idUserDonneur,idUserReceveur,status) " +
+                            "VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(selectQuery)) {
-            selectStatement.setInt(1,don.getIdDon());
-            ResultSet resultSet = selectStatement.executeQuery();
-            if (!resultSet.next()) {
-                String insertQuery = "INSERT INTO don(iddon,montant,commentaire,emoji,idUserDonneur,idUserReceveur,status) " +
-                        "VALUES (?,?, ?, ?, ?, ?, ?)";
+                    try (PreparedStatement insertStatement = DbConnection.getCnx().prepareStatement(insertQuery)) {
+                        insertStatement.setDouble(1,don.getMontant());
+                        insertStatement.setString(2,don.getCommentaire());
+                        insertStatement.setInt(3,idemoji);
+                        insertStatement.setInt(4, 1);
+                        insertStatement.setInt(5, idUserReceveur);
+                        insertStatement.setString(6, Status.VALID.toString());
 
-                try (PreparedStatement insertStatement = DbConnection.getCnx().prepareStatement(insertQuery)) {
-                    insertStatement.setInt(1,don.getIdDon());
-                    insertStatement.setDouble(2,don.getMontant());
-                    insertStatement.setString(3,don.getCommentaire());
-                    insertStatement.setInt(4, don.getEmoji().getIdEmoji());
-                    insertStatement.setInt(5, don.getDonneur().getIdUser());
-                    insertStatement.setInt(6, don.getReceveur().getIdUser());
-                    insertStatement.setString(7, Status.VALID.toString());
-
-                    int res = insertStatement.executeUpdate();
-                    if(res > 0 )
-                        System.out.println("successfully added");
-                    return true;
+                        int res = insertStatement.executeUpdate();
+                        if(res > 0 )
+                            System.out.println("successfully added");
+                        return true;
+                    }
+                } else {
+                    System.out.println("don already exists");
+                    return false;
                 }
-            } else {
-                System.out.println("don already exists");
-                return false;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -132,8 +155,8 @@ public class DonServiceImpl implements ICrud<Don> {
         String selectQuery = "SELECT * FROM don WHERE iddon = ? and status='"+ Status.VALID.toString()+"'";
         String updateQuery = "UPDATE don SET status = '"+Status.SUPPRIMER.toString()+"' WHERE iddon = ?";
         try (
-             PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(selectQuery);
-             PreparedStatement updateStatement = DbConnection.getCnx().prepareStatement(updateQuery)) {
+                PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(selectQuery);
+                PreparedStatement updateStatement = DbConnection.getCnx().prepareStatement(updateQuery)) {
             // parametre requete select
             selectStatement.setInt(1, id);
             try {
@@ -175,11 +198,20 @@ public class DonServiceImpl implements ICrud<Don> {
 
     public int calculateLvl(int id) throws SQLException {
         String sumQuery = "select sum(rank) from don where iduserdonneur = "+id+"  and status ='"+Status.VALID.toString()+"'";
-            Statement statement= DbConnection.getCnx().createStatement();
-            ResultSet resultSet= statement.executeQuery(sumQuery);
-            resultSet.next();
-            int sum = resultSet.getInt(1);
-            System.out.println(sum);
+        Statement statement= DbConnection.getCnx().createStatement();
+        ResultSet resultSet= statement.executeQuery(sumQuery);
+        resultSet.next();
+        int sum = resultSet.getInt(1);
+        System.out.println(sum);
         return sum;
     }
+
+    public boolean chearchUserByName(String name) throws SQLException {
+        String cherchUser = "select nom from utilisateur where nom=?";
+        PreparedStatement preparedStatement = DbConnection.getCnx().prepareStatement(cherchUser);
+        preparedStatement.setString(1,name);
+        ResultSet cherchUserRS = preparedStatement.executeQuery();
+        return cherchUserRS.next();
+    }
+
 }

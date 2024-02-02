@@ -103,7 +103,14 @@ public class AdminSidebarController  implements Initializable {
     }
 
     @FXML
-    void goDonation(MouseEvent event) {
+    void goDonation(MouseEvent event) throws IOException {
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource("EmojiAdminLV.fxml"));
+        Parent parent = (Parent) root.load();
+        Object emojicontroller = root.getController();
+        if (root.getController() instanceof EmojiAdminLVController) {
+            ((EmojiAdminLVController) emojicontroller).sidebarController = this;
+            this.borderPane.setCenter(parent);
+        }
 
     }
 

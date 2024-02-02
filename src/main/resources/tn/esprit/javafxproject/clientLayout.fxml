@@ -1,102 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<<<<<<< HEAD
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-=======
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
->>>>>>> main
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
-<VBox alignment="CENTER" prefHeight="900.0" prefWidth="900.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-   <HBox alignment="TOP_RIGHT" prefHeight="46.0" prefWidth="894.0">
-      <children>
-         <Button fx:id="ajout" mnemonicParsing="false" prefHeight="46.0" prefWidth="144.0" text="Ajouter équipe">
-            <HBox.margin>
-               <Insets right="20.0" />
-            </HBox.margin>
-         </Button>
-      
-                <Button fx:id="CreateAccount" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#creerCompte" prefHeight="46.0" prefWidth="141.0" text="Créer Compte" />
-      </children>
-   </HBox>
-   <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="110.0" prefWidth="243.0" text="Connectez-vous" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
-      <font>
-         <Font name="Eras Demi ITC" size="31.0" />
-      </font>
-      <VBox.margin>
-         <Insets top="50.0" />
-      </VBox.margin>
-   </Label>
-   <VBox alignment="CENTER" prefHeight="73.0" prefWidth="360.0">
-      <children>
-
-                                  <Label text="Email" textAlignment="CENTER">
-              <font>
-                  <Font size="20.0" />
-              </font>
-          </Label>
-          <TextField fx:id="email" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0">
-              <font>
-                  <Font size="14.0" />
-              </font>
-            <VBox.margin>
-               <Insets />
-            </VBox.margin>
-          </TextField>
-      </children>
-      <VBox.margin>
-         <Insets top="20.0" />
-      </VBox.margin>
-   </VBox>
-   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="73.0" prefWidth="360.0">
-      <children>
-
-                      <Label text="Mot de passe">
-              <font>
-                  <Font size="20.0" />
-              </font>
-          </Label>
-          <TextField fx:id="password" prefHeight="40.0" prefWidth="360.0" />
-      </children>
-   </VBox>
-
-    <Label fx:id="welcomeText" prefHeight="25.0" prefWidth="0.0" textFill="#bf2020">
-        <font>
-            <Font size="16.0" />
-        </font>
-    </Label>
-
-    <Button fx:id="connect" onAction="#connect" prefHeight="46.0" prefWidth="130.0" text="Connecter">
-        <VBox.margin>
-            <Insets top="20.0" />
-        </VBox.margin>
-    </Button>
-
-    <Button fx:id="resetPassword" onAction="#resetPassword" prefHeight="52.0" prefWidth="174.0" text="Mot de passe oublié ?">
-        <VBox.margin>
-            <Insets top="10.0" />
-        </VBox.margin>
-    </Button>
-</VBox>
-=======
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" >
    <top>
       <HBox prefHeight="60.0" prefWidth="200.0" styleClass="white-background" BorderPane.alignment="CENTER">
          <children>
@@ -167,7 +84,7 @@
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/home%20(1).png" />
+                              <Image url="@img/home%20(1).png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="42.0" prefWidth="115.0" text="home">
@@ -180,14 +97,14 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="42.0" prefWidth="219.0">
+                  <HBox alignment="CENTER" onMouseClicked="#goDonation" prefHeight="42.0" prefWidth="219.0">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/ticket.png" />
+                              <Image url="@img/ticket.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="42.0" prefWidth="115.0" text="booking">
+                        <Label prefHeight="42.0" prefWidth="115.0" text="donation">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -197,14 +114,14 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="42.0" prefWidth="219.0">
+                  <HBox alignment="CENTER" onMouseClicked="#goHistoriqueDonation" prefHeight="42.0" prefWidth="219.0">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/history.png" />
+                              <Image url="@img/history.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="42.0" prefWidth="115.0" text="home">
+                        <Label prefHeight="42.0" prefWidth="115.0" text="historique">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -235,7 +152,7 @@
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/home%20(1).png" />
+                              <Image url="@img/home%20(1).png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="42.0" prefWidth="115.0" text="home">
@@ -252,7 +169,7 @@
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/ticket.png" />
+                              <Image url="@img/ticket.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="42.0" prefWidth="115.0" text="booking">
@@ -269,7 +186,7 @@
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/history.png" />
+                              <Image url="@img/history.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="42.0" prefWidth="115.0" text="home">
@@ -299,11 +216,11 @@
                         <Insets left="15.0" />
                      </padding>
                   </Label>
-                  <HBox alignment="CENTER" prefHeight="42.0" prefWidth="219.0">
+                  <HBox alignment="CENTER" onMouseClicked="#goEvents" prefHeight="42.0" prefWidth="219.0">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/booking%20(1).png" />
+                              <Image url="@img/booking%20(1).png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="42.0" prefWidth="115.0" text="events">
@@ -331,26 +248,6 @@
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label prefHeight="42.0" prefWidth="182.0" text="Recently Added">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets left="15.0" top="10.0" />
-               </padding>
-            </Label>
-            <ScrollPane prefHeight="244.0" prefWidth="1098.0" styleClass="transparent">
-               <content>
-                  <HBox fx:id="CardLayout" prefHeight="226.0" prefWidth="1124.0" />
-               </content>
-            </ScrollPane>
-         </children>
-      </VBox>
+      <BorderPane fx:id="dynamicX" prefHeight="830.0" prefWidth="754.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
->>>>>>> main
