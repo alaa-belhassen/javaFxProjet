@@ -124,6 +124,9 @@ public class EventDetailController  {
 
     @FXML
     private Label eventpricetotal1;
+
+    @FXML
+    private Label alreadymade;
     @FXML
     void addReserver(MouseEvent event) throws SQLException, IOException {
         ReservationServiceImpl reservationService=new ReservationServiceImpl();
@@ -142,6 +145,13 @@ public class EventDetailController  {
         pdfLoader.generatePdf(reserver);
        reservationService.add(reserver);
 
+       if(!reservationService.add(reserver)){
+           alreadymade.setVisible(true);
+           alreadymade.setText("reservation already made !");
+           alreadymade.setTextFill(Color.RED);
+       }else {
+
+
 
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("Events.fxml"));
         //nekhou akber parent ml page events
@@ -152,11 +162,12 @@ public class EventDetailController  {
             card1Controller.eventsController.sidebarController.borderPane.setCenter(vBox);
 
         }else{
+
             eventsController.sidebarController= cardEventGridController.eventsController.sidebarController;
             cardEventGridController.eventsController.sidebarController.borderPane.setCenter(vBox);
 
         }
-
+    }
 
     }
 
