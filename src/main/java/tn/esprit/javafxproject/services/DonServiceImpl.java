@@ -89,7 +89,80 @@ public class DonServiceImpl implements ICrud<Don> {
 
         return dons;
     }
+    public ArrayList<Don> getAllById(int id) throws SQLException {
+        ArrayList<Don> dons = new ArrayList<>();
 
+        // sql script
+        String getAllDons = "select * from don where iduserdonneur = "+id+" and  status='"+ Status.VALID.toString()+"'";
+        String getEmoji = "select * from emoji where idemoji = ? ";
+        String getUser = "select * from utilisateur where iduser = ? ";
+
+        // statement
+
+        try (Statement statement = DbConnection.getCnx().createStatement();
+             ResultSet getAllRs = statement.executeQuery(getAllDons) ) {
+            while (getAllRs.next()) {
+                // object init
+                Don don = new Don();
+                Emoji emoji = new Emoji();
+                User userDonneur = new User();
+                User userReceveur = new User();
+
+                // dons
+                don.setIdDon(getAllRs.getInt(1));
+                don.setMontant(getAllRs.getInt(2));
+                don.setCommentaire(getAllRs.getString(3));
+
+                // emoji
+                try (PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(getEmoji)) {
+                    //params
+
+                    selectStatement.setInt(1,getAllRs.getInt(4));
+                    //execute query
+                    ResultSet getEmojiRs = selectStatement.executeQuery();
+                    while (getEmojiRs.next()) {
+                        emoji.setIdEmoji(getEmojiRs.getInt(1));
+                        emoji.setNomEmoji(getEmojiRs.getString(2));
+                        emoji.setRank(getEmojiRs.getInt(3));
+                        emoji.setPrix(getEmojiRs.getInt(4));
+                        emoji.setImageUrl(getEmojiRs.getString(5));
+                    }
+                }
+
+                // donneur
+                try (PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(getUser)) {
+                    selectStatement.setInt(1,getAllRs.getInt(5));
+                    ResultSet getUserDonneurRs = selectStatement.executeQuery();
+                    while (getUserDonneurRs.next()) {
+                        userDonneur.setIdUser(getUserDonneurRs.getInt(1));
+                        userDonneur.setNom(getUserDonneurRs.getString(2));
+                        userDonneur.setEmail(getUserDonneurRs.getString(3));
+                    }
+                }
+
+                // receveur
+                try (PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(getUser)) {
+                    selectStatement.setInt(1,getAllRs.getInt(6));
+                    ResultSet getUserReceveurRs = selectStatement.executeQuery();
+                    while (getUserReceveurRs.next()) {
+                        userReceveur.setIdUser(getUserReceveurRs.getInt(1));
+                        userReceveur.setNom(getUserReceveurRs.getString(2));
+                        userReceveur.setEmail(getUserReceveurRs.getString(3));
+                    }
+                }
+
+                // merge object
+                don.setEmoji(emoji);
+                don.setDonneur(userDonneur);
+                don.setReceveur(userReceveur);
+
+                // add to list
+                dons.add(don);
+            }
+        }
+
+        return dons;
+    }
 
 
     @Override
@@ -123,7 +196,7 @@ public class DonServiceImpl implements ICrud<Don> {
                         insertStatement.setDouble(1,don.getMontant());
                         insertStatement.setString(2,don.getCommentaire());
                         insertStatement.setInt(3,idemoji);
-                        insertStatement.setInt(4, 1);
+                        insertStatement.setInt(4, User.UserConnecte);
                         insertStatement.setInt(5, idUserReceveur);
                         insertStatement.setString(6, Status.VALID.toString());
 

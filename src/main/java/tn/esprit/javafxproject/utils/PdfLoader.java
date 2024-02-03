@@ -9,6 +9,7 @@ import com.itextpdf.layout.borders.SolidBorder;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.TextAlignment;
 import tn.esprit.javafxproject.models.Don;
+import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.DonServiceImpl;
 
 import java.io.FileNotFoundException;
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PdfLoader {
-    String path="pdfInvoice.pdf";
+    static public int counter;
+    String path="pdfInvoiceDon"+counter+".pdf";
     float threeCol = 190f;
     float twoCol = 285f;
     float twoCOl150 = twoCol+150f;
@@ -25,7 +27,9 @@ public class PdfLoader {
     float[] fullColumnWidth = {threeCol*3};
     float[] threeColumnWidth = {threeCol,threeCol,threeCol};
 
-    public PdfLoader(){}
+    public PdfLoader(){
+        counter++;
+    }
     public void generatePdf() throws FileNotFoundException, SQLException {
         List<Don> dons = new ArrayList<Don>(getDons());
         PdfWriter pdfWriter = new PdfWriter(path);
@@ -110,6 +114,6 @@ public class PdfLoader {
     };
     private List<Don> getDons() throws SQLException {
         DonServiceImpl donService = new DonServiceImpl();
-        return donService.getAll();
+        return donService.getAllById(User.UserConnecte);
     }
 }

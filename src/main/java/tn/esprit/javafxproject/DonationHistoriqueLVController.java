@@ -16,7 +16,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import tn.esprit.javafxproject.models.*;
 import tn.esprit.javafxproject.services.DonServiceImpl;
+import tn.esprit.javafxproject.utils.PdfLoader;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -66,7 +68,7 @@ public class DonationHistoriqueLVController implements Initializable {
 
     private List<Don> afficher() throws SQLException {
         DonServiceImpl donController = new DonServiceImpl();
-        return donController.getAll();
+        return donController.getAllById(User.UserConnecte);
     }
 
 
@@ -109,11 +111,9 @@ public class DonationHistoriqueLVController implements Initializable {
         });
         acceptdeclineEvent.setCellFactory(param -> new TableCell<Don, Void>() {
             private final Button buttonDecline = new Button("refund");
-            private final Button buttonAccept = new Button("update");
 
             {
                 buttonDecline.setStyle("-fx-background-color: #B90E0A;-fx-text-fill: white;");
-                buttonAccept.setStyle("-fx-background-color: #3CB043;-fx-text-fill: white;");
 
                 // Handle decline button action
                 buttonDecline.setOnAction(event -> {
@@ -127,24 +127,7 @@ public class DonationHistoriqueLVController implements Initializable {
                     }
                 });
 
-                // Handle accept button action
-              /*  buttonAccept.setOnAction(event -> {
-                    Don don = getTableView().getItems().get(getIndex());
-                    try {
-                        DonServiceImpl donService = new DonServiceImpl();
-                        donService.update(don);
-                        observableList.remove(don);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    // Implement your accept logic here
-                });*/
 
-                buttonAccept.setOnAction(event -> {
-                    Don don = getTableView().getItems().get(getIndex());
-                    //pdf display
-                    // Implement your accept logic here
-                });
             }
 
             // Display the buttons in the cell
@@ -154,7 +137,7 @@ public class DonationHistoriqueLVController implements Initializable {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    HBox buttonBox = new HBox(buttonDecline, buttonAccept);
+                    HBox buttonBox = new HBox(buttonDecline);
                     setGraphic(buttonBox);
                 }
             }
@@ -178,7 +161,11 @@ public class DonationHistoriqueLVController implements Initializable {
         }
 
     }
-
+    @FXML
+    void getInvoice(MouseEvent event) throws SQLException, FileNotFoundException {
+        PdfLoader pdfLoader = new PdfLoader();
+        pdfLoader.generatePdf();
+    }
 
 
 
