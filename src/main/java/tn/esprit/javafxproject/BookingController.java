@@ -12,7 +12,9 @@ import javafx.scene.input.MouseEvent;
 import tn.esprit.javafxproject.models.LigneDeCommande;
 import tn.esprit.javafxproject.services.LigneDeCommandeService;
 import tn.esprit.javafxproject.services.ServiceAchat;
+import tn.esprit.javafxproject.utils.PdfShop;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ import java.util.ResourceBundle;
 
 public class BookingController implements Initializable {
 
-    float total = 0;
+    public static float total = 0;
+
     public int idAchat;
     @FXML
     private TextField CodeReduction;
@@ -94,7 +97,9 @@ public class BookingController implements Initializable {
     }
 
     @FXML
-    void generaterPDF(MouseEvent event) {
+    void generaterPDF(MouseEvent event) throws SQLException, FileNotFoundException {
+        PdfShop pdfshop = new PdfShop();
+        pdfshop.generatePdf();
 
     }
 
@@ -113,4 +118,6 @@ public class BookingController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+
 }
