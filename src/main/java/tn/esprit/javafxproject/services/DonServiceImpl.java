@@ -89,6 +89,12 @@ public class DonServiceImpl implements ICrud<Don> {
 
         return dons;
     }
+
+    @Override
+    public boolean insert(Response rep) throws SQLException {
+        return false;
+    }
+
     @Override
     public boolean add(Don don) {
         String selectQuery = "SELECT * FROM don WHERE iddon = ?";

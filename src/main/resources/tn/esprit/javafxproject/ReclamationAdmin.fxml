@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="830.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.ReclamationAdminController">
+   <children>
+      <TableView fx:id="TabRec" layoutX="278.0" layoutY="92.0" prefHeight="200.0" prefWidth="701.0">
+        <columns>
+          <TableColumn fx:id="Colnumrec" prefWidth="118.0" text="Num Reclamation" />
+          <TableColumn fx:id="colrec" prefWidth="277.0" text="Reclamtion" />
+            <TableColumn fx:id="colstatus" prefWidth="144.0" text="Status Reclamation" />
+            <TableColumn fx:id="coluser" prefWidth="161.0" text="Utilisateur" />
+        </columns>
+      </TableView>
+      <TextArea fx:id="TfRec" layoutX="447.0" layoutY="344.0" prefHeight="110.0" prefWidth="532.0" />
+      <Label layoutX="362.0" layoutY="391.0" prefHeight="17.0" prefWidth="67.0" text="Reclamation" />
+      <TextArea fx:id="tfRep" layoutX="447.0" layoutY="529.0" prefHeight="110.0" prefWidth="532.0" />
+      <Label layoutX="371.0" layoutY="576.0" prefHeight="17.0" prefWidth="49.0" text="Reponse" />
+      <ButtonBar layoutX="623.0" layoutY="663.0" prefHeight="39.0" prefWidth="162.0">
+        <buttons>
+          <Button fx:id="btnValid" mnemonicParsing="false" onAction="#ValiderReponse" style="-fx-background-color: #3f704d;" text="Valider" textFill="WHITE" />
+            <Button fx:id="btnRes" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#ResetReponse" style="-fx-background-color: #3f704d;" text="Réintialiser" textFill="#fffdfd" />
+        </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>

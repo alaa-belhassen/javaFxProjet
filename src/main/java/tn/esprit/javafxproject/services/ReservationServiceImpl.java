@@ -219,6 +219,11 @@ public class ReservationServiceImpl implements ICrud<Reserver> {
 
 
     @Override
+    public boolean insert(Response rep) throws SQLException {
+        return false;
+    }
+
+    @Override
     public boolean add(Reserver reserver) throws SQLException {
 
         String selectQuery = "SELECT * FROM reserver WHERE iduser = ? and idevenement= ? and status='"+Status.VALID.toString()+"'";
