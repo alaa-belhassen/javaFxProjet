@@ -1,7 +1,8 @@
 package tn.esprit.javafxproject.services;
 
 
-import tn.esprit.javafxproject.models.Categorie;
+
+import tn.esprit.javafxproject.models.*;
 import tn.esprit.javafxproject.utils.DbConnection;
 import tn.esprit.javafxproject.utils.Status;
 
@@ -12,14 +13,16 @@ public class CategorieServiceImpl implements ICrud<Categorie> {
 
 
 
-    public CategorieServiceImpl() {
+    public CategorieServiceImpl() throws SQLException {
+
     }
 
 
     @Override
     public ArrayList<Categorie> getAll() throws SQLException {
 
-        String query1="select * from categorie  ;";
+        ArrayList<Categorie> categories=new ArrayList<>();
+        String query1="select * from categorie where status='"+ Status.VALID.toString() +"';";
         Statement statement= DbConnection.getCnx().createStatement();
         ResultSet resultSet= statement.executeQuery(query1);
         while (resultSet.next())
@@ -27,11 +30,10 @@ public class CategorieServiceImpl implements ICrud<Categorie> {
             Categorie categorie=new Categorie();
             categorie.setIdCategorie(resultSet.getInt(1));
             categorie.setNom(resultSet.getString(2));
-
+            categories.add(categorie);
         }
 
-
-        return null ;
+        return categories ;
     }
 
     @Override
@@ -72,8 +74,8 @@ public class CategorieServiceImpl implements ICrud<Categorie> {
     @Override
     public boolean delete(int id) throws SQLException {
 
-        String selectQuery = "SELECT * FROM categorie WHERE idcategorie = ? and status='"+Status.VALID.toString()+"'";
-        String updateQuery = "UPDATE categorie SET status = '"+Status.SUPPRIMER.toString()+"' WHERE idcategorie = ?";
+        String selectQuery = "SELECT * FROM categorie WHERE idcategorie = ? and status='"+Status.VALID+"'";
+        String updateQuery = "UPDATE categorie SET status = '"+Status.SUPPRIMER+"' WHERE idcategorie = ?";
         try (Connection connection = DbConnection.getCnx();
              PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
              PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
@@ -91,8 +93,6 @@ public class CategorieServiceImpl implements ICrud<Categorie> {
                     System.out.println("deleted successfully");
 
                     //    evenements.get(evenements.indexOf(resultSet));
-
-
                     return true;
 
                 } else {
@@ -108,6 +108,7 @@ public class CategorieServiceImpl implements ICrud<Categorie> {
 
     @Override
     public boolean update(Categorie categorie) throws SQLException {
+
         try {
 
             PreparedStatement statement = DbConnection.getCnx().prepareStatement(
@@ -131,6 +132,31 @@ public class CategorieServiceImpl implements ICrud<Categorie> {
 
 
 
+/*
+    @Override
+    public boolean update(Categorie categorie) {
+        String req = "UPDATE \"Categorie\" "
+                + "SET nom='" + categorie.getNom() + "', "
+
+                + "WHERE idcategorie='" + categorie.getIdCategorie() + "'";
+        Statement st;
+        int er = 0;
+        try {
+            st = DbConnection.getCnx().createStatement();
+            er = st.executeUpdate(req);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return er != 0;
+    }
+*/
 
 
 }
+
+
+
+
+
+

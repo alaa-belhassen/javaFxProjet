@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="830.0" prefWidth="1098.0" style="-fx-background-color: #FAF5EF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.ListEventsEquipesController">
+   <children>
+      <TableView fx:id="table" layoutX="93.0" layoutY="214.0" prefHeight="223.0" prefWidth="894.0" styleClass="transparent" stylesheets="@css/styles.css">
+         <columns>
+            <TableColumn fx:id="idEvent" prefWidth="170.0" text="ID Evenement" />
+            <TableColumn fx:id="titreEvent" prefWidth="126.0" text="Titre Evenement" />
+            <TableColumn fx:id="prixEvent" prefWidth="139.0" text="Prix Ticket" />
+            <TableColumn fx:id="categorieEvent" prefWidth="182.0" text="Categorie" />
+            <TableColumn fx:id="dateEvent" prefWidth="136.0" text="Date Evenement " />
+            <TableColumn fx:id="btn" prefWidth="139.0" text="-" />
+         </columns>
+      </TableView>
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="117.0" prefWidth="1073.0">
+         <children>
+            <Label prefHeight="117.0" prefWidth="368.0" text="Liste des matchs" textFill="#597d35">
+               <font>
+                  <Font name="Georgia Bold" size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <Label layoutX="830.0" layoutY="178.0" onMouseClicked="#addEvent" prefHeight="17.0" prefWidth="203.0" text="+ Ajout un nouvel evenement " textFill="#597d35" underline="true">
+         <font>
+            <Font name="Georgia Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

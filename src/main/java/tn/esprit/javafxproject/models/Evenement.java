@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Evenement {
 
+
     private int idEvenement;
     private String lieu;
     private int max_places;
@@ -16,17 +17,33 @@ public class Evenement {
     private LocalTime time_event;
     private int duration;
     private String  status;
+    private Categorie categorie;
 
+    private String photo;
 
-
-    //add fields
-    private Reserver reserver;
+    //tebaa chkoun l event
+    private int idUser;
 
 
     public Evenement() {
     }
 
-    public Evenement(int idEvenement, String lieu, int max_places, float prix, String libelle, LocalDate date_event, LocalTime time_event, int duration,String status) {
+    public Evenement(String lieu, int max_places, float prix, String libelle, LocalDate date_event, LocalTime time_event, int duration, String status, Categorie id_categorie, String photo,int user) {
+        this.lieu = lieu;
+        this.max_places = max_places;
+        this.prix = prix;
+        this.libelle = libelle;
+        this.date_event = date_event;
+        this.time_event = time_event;
+        this.duration = duration;
+        this.status = status;
+        this.categorie = id_categorie;
+        this.photo = photo;
+        this.idUser=user;
+    }
+
+
+    public Evenement(int idEvenement, String lieu, int max_places, float prix, String libelle, LocalDate date_event, LocalTime time_event, int duration, String status, Categorie categorie, String photo, int idUser) {
         this.idEvenement = idEvenement;
         this.lieu = lieu;
         this.max_places = max_places;
@@ -35,8 +52,10 @@ public class Evenement {
         this.date_event = date_event;
         this.time_event = time_event;
         this.duration = duration;
-        //this.reserver = reserver;
         this.status = status;
+        this.categorie = categorie;
+        this.photo = photo;
+        this.idUser = idUser;
     }
 
     public String getStatus() {
@@ -111,14 +130,27 @@ public class Evenement {
         this.duration = duration;
     }
 
-    public Reserver getReserver() {
-        return reserver;
+
+    public String getPhoto() {
+        return photo;
     }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
 
     @Override
     public String toString() {
         return "Evenement{" +
-                "idEvenement=" + idEvenement +
                 ", lieu='" + lieu + '\'' +
                 ", max_places=" + max_places +
                 ", prix=" + prix +
@@ -127,11 +159,17 @@ public class Evenement {
                 ", time_event=" + time_event +
                 ", duration=" + duration +
                 ", status='" + status + '\'' +
-                ", reserver=" + reserver +
+                ", categorie=" + categorie +
+                ", photo='" + photo + '\'' +
+                ", idUser=" + idUser +
                 '}';
     }
 
-    public void setReserver(Reserver reserver) {
-        this.reserver = reserver;
+    public Categorie getId_categorie() {
+        return categorie;
+    }
+
+    public void setId_categorie(Categorie id_categorie) {
+        this.categorie = id_categorie;
     }
 }

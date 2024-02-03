@@ -1,68 +1,157 @@
-package tn.esprit.javafxproject;
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.layout.HBox;
-import tn.esprit.javafxproject.models.Evenement;
+package tn.esprit.javafxproject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import tn.esprit.javafxproject.models.Categorie;
+import tn.esprit.javafxproject.models.Evenement;
+import tn.esprit.javafxproject.services.EvenementServiceImpl;
 
 public class EventsController implements Initializable {
-
     @FXML
-    private HBox CardLayout;
-    List<Evenement> events ;
-    SidebarController sidebarController;
-    @Override
+    private HBox cardLayout;
+    @FXML
+    private GridPane eventContainer;
+    private List<Evenement> evenements;
+    private List<Evenement> evenementslist;
+    public SidebarController sidebarController;
+
+
+
+    public EventsController() {
+    }
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        events = new ArrayList<Evenement>(getEvents());
+
+
+
+
         try {
-            for (int i = 0; i < events.size(); i++) {
-                FXMLLoader fxml = new FXMLLoader();
-                fxml.setLocation(getClass().getResource("card.fxml"));
-                HBox cardBox = fxml.load();
-                CardController cardController = fxml.getController();
-                cardController.setData(events.get(i));
-                CardLayout.getChildren().add(cardBox);
+            this.evenements = new ArrayList(this.afficherHighlights());
+
+
+            for(int i = 0; i < this.evenements.size(); ++i) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(this.getClass().getResource("card1.fxml"));
+                HBox cardBox = (HBox)fxmlLoader.load();
+                Card1Controller card1Controller = fxmlLoader.getController();
+                card1Controller.eventsController = this;
+
+                //nabaath f data mn card l eventdetail
+                card1Controller.evenement=this.evenements.get(i);
+
+
+                card1Controller.setData(this.evenements.get(i));
+                this.cardLayout.getChildren().add(cardBox);
+            }
+        } catch (Exception var9) {
+            var9.printStackTrace();
+        }
+
+
+
+
+        int column = 0;
+        int row = 1;
+        try{
+            List<Evenement> evenements1 = new ArrayList<>(this.afficher());
+            System.out.println(evenements1);
+            for(Evenement event : evenements1){
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("CardEventGrid.fxml"));
+                VBox vbox = fxmlLoader.load();
+                CardEventGridController cardEventGridController = fxmlLoader.getController();
+                cardEventGridController.eventsController = this;
+                cardEventGridController.evenement = event;
+                cardEventGridController.setData(event);
+                if(column==4){
+                    column=0;
+                    ++row;
+                }
+                eventContainer.add(vbox,column++,row);
+                GridPane.setMargin(vbox, new Insets(15));
             }
 
-        }catch (IOException e) {
+        }catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
+
+
+
+
+    }
+    @FXML
+    void goToListReserver(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MyListReservation.fxml"));
+        Parent eventDetailRoot = (Parent)fxmlLoader.load();
+        MyListReservationController myListReservationController = fxmlLoader.getController();
+        myListReservationController.eventsController=this;
+
+        this.sidebarController.borderPane.setCenter(eventDetailRoot);
     }
 
-    public HBox getCardLayout() {
-        return CardLayout;
+
+
+
+
+    private List<Evenement> afficher() throws SQLException {
+        EvenementServiceImpl evenementService = new EvenementServiceImpl();
+        return evenementService.getAll();
+    }
+  private List<Evenement> afficherHighlights() throws SQLException {
+        EvenementServiceImpl evenementService = new EvenementServiceImpl();
+        return evenementService.getListHighlight();
     }
 
-    private List<Evenement> getEvents(){
-        List<Evenement> events= new ArrayList<Evenement>();
-        Evenement event1 = new Evenement();
-        event1.setLibelle("alaabook");
-        event1.setLieu("menzeh");
-        event1.setDate_event(LocalDate.of(1967, 06, 22));
-        events.add(event1);
-        Evenement event2 = new Evenement();
-        event2.setLibelle("alaabook");
-        event2.setLieu("menzeh");
-        event2.setDate_event(LocalDate.of(1967, 06, 22));
-        events.add(event2);
-        Evenement event3 = new Evenement();
-        event3.setLibelle("alaabook");
-        event3.setLieu("menzeh");
-        event3.setDate_event(LocalDate.of(1967, 06, 22));
-        events.add(event3);
-        Evenement event4 = new Evenement();
-        event4.setLibelle("alaabook");
-        event4.setLieu("menzeh");
-        event4.setDate_event(LocalDate.of(1967, 06, 22));
-        events.add(event4);
-        return events ;
+
+
+
+
+
+
+
+    private List<Evenement> evenements() {
+        List<Evenement> evenements = new ArrayList();
+        Evenement evenement = new Evenement();
+        evenement.setLibelle("Ons JABEUR & Coco GAUFF");
+        evenement.setPhoto("/image/oj.jpg");
+        evenement.setPrix(400.0F);
+        evenements.add(evenement);
+        evenement = new Evenement();
+        evenement.setLibelle("Ons JABEUR & Coco GAUFF");
+        evenement.setPhoto("/image/psg.jpg");
+        evenement.setPrix(400.0F);
+        evenements.add(evenement);
+        evenement = new Evenement();
+        evenement.setLibelle("Ons JABEUR & Coco GAUFF");
+        evenement.setPhoto("/image/oj.jpg");
+        evenement.setPrix(400.0F);
+        evenements.add(evenement);
+        return evenements;
     }
 }
