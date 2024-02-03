@@ -115,7 +115,31 @@ public class SidebarController  {
     }
 
     @FXML
-    void goEvenement(MouseEvent event) {
+    void goEvenement(MouseEvent event) throws IOException {
+        if (User.Role_User_Connecte==1)
+        {
+            FXMLLoader root = new FXMLLoader(this.getClass().getResource("ListEventsEquipes.fxml"));
+            Parent parent = (Parent) root.load();
+            Object listEventsEquipes = root.getController();
+            if (root.getController() instanceof ListEventsEquipesController) {
+                ((ListEventsEquipesController) listEventsEquipes).sidebarController = this;
+                this.borderPane.setCenter(parent);
+            }
+
+        }
+        else
+        {
+            FXMLLoader root = new FXMLLoader(this.getClass().getResource("Events.fxml"));
+            Parent parent = (Parent) root.load();
+            Object eventsController = root.getController();
+            if (root.getController() instanceof EventsController) {
+                ((EventsController) eventsController).sidebarController = this;
+                this.borderPane.setCenter(parent);
+            }
+        }
+
+
+
 
     }
 

@@ -204,7 +204,7 @@ public class AjouterEquipeController {
             al.setTitle("Alert");
             al.setContentText("Votre compte est bien enregistré");
             al.show();
-            this.retourner();
+
         }
 
 

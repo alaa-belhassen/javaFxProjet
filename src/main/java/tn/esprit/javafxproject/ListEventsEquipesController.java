@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import tn.esprit.javafxproject.models.Evenement;
 import tn.esprit.javafxproject.models.Reserver;
+import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.EvenementServiceImpl;
 import tn.esprit.javafxproject.services.ReservationServiceImpl;
 
@@ -52,7 +53,7 @@ public class ListEventsEquipesController implements Initializable {
 
     private ObservableList<Evenement> getAllList() throws SQLException {
         EvenementServiceImpl evenementService=new EvenementServiceImpl();
-        ObservableList    <Evenement> oblist= FXCollections.observableArrayList(evenementService.getMyList(2));
+        ObservableList    <Evenement> oblist= FXCollections.observableArrayList(evenementService.getMyList(User.UserConnecte));
         System.out.println(oblist);
         return oblist;
     }

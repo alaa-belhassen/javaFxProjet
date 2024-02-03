@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 public class AdminEventsController implements Initializable {
 
 
-    public SidebarController sidebarController;
+    public AdminSidebarController sidebarController;
 
     @FXML
     private TableColumn<Evenement, Void> acceptdeclineEvent;

@@ -131,7 +131,7 @@ public class EventDetailController  {
         reserver.setDate(LocalDate.now());
        //partie useeer
         User user=new User();
-        user.setIdUser(2);
+        user.setIdUser(User.UserConnecte);
         reserver.setIdUser(user);
         reserver.setStatus(Status.VALID.toString());
         reserver.setCodeQR("");

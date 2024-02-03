@@ -82,7 +82,7 @@ public class MyListReservationController implements Initializable {
 
     private ObservableList<Reserver> getAllList() throws SQLException {
         ReservationServiceImpl reservationService=new ReservationServiceImpl();
-        ObservableList    <Reserver> oblist=FXCollections.observableArrayList(reservationService.getMyList(2));
+        ObservableList    <Reserver> oblist=FXCollections.observableArrayList(reservationService.getMyList(User.UserConnecte));
         System.out.println(oblist);
     return oblist;
 }

@@ -115,7 +115,14 @@ public class AdminSidebarController  implements Initializable {
     }
 
     @FXML
-    void goEvenement(MouseEvent event) {
+    void goEvenement(MouseEvent event) throws IOException {
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource("AdminEvents.fxml"));
+        Parent parent = (Parent) root.load();
+        Object adminEvents = root.getController();
+        if (root.getController() instanceof AdminEventsController) {
+            ((AdminEventsController) adminEvents).sidebarController = this;
+            this.borderPane.setCenter(parent);
+        }
 
     }
 

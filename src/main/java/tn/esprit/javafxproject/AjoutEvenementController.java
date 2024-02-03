@@ -11,6 +11,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import tn.esprit.javafxproject.models.Categorie;
 import tn.esprit.javafxproject.models.Evenement;
+import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.CategorieServiceImpl;
 import tn.esprit.javafxproject.services.EvenementServiceImpl;
 import tn.esprit.javafxproject.utils.Status;
@@ -232,7 +233,7 @@ if(v1){
 
             evenement.setId_categorie(categorieDB);
 
-            evenement.setIdUser(2);
+            evenement.setIdUser(User.UserConnecte);
 
             evenement.setTime_event(LocalTime.parse(hh.getText()+":"+mm.getText()+":"+ss.getText()));
 
