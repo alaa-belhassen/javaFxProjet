@@ -21,7 +21,7 @@ import java.io.IOException;
 public class AjouterEquipeController {
 
     public UsersController usersController;
-    public tn.esprit.javafxproject.RolesController RolesController;
+
     UserServiceImpl UserService = new UserServiceImpl();
     DbConnection db = DbConnection.getInstance();
     @FXML

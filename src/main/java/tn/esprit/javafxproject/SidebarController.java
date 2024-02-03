@@ -95,6 +95,7 @@ public class SidebarController  {
         stage.setScene(scene);
         stage.show();
         User.UserConnecte=-1;
+        User.Role_User_Connecte=-1;
 
     }
 
