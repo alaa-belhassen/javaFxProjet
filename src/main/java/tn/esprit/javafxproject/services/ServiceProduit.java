@@ -4,10 +4,12 @@ import tn.esprit.javafxproject.models.Achat;
 import tn.esprit.javafxproject.models.Produit;
 import tn.esprit.javafxproject.services.ICrud;
 import tn.esprit.javafxproject.utils.DbConnection;
+import tn.esprit.javafxproject.utils.Status;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceProduit implements ICrud<Produit> {
 
@@ -32,6 +34,8 @@ public class ServiceProduit implements ICrud<Produit> {
                 p.setProductDescription(res.getString(3));
                 p.setPrice(res.getDouble(4));
                 p.setQuantityInStock(res.getInt(5));
+                p.setStatus(res.getString(6));
+                p.setImage(res.getString(7));
                 Produits.add(p);
             }
         } catch (SQLException e) {
@@ -42,7 +46,7 @@ public class ServiceProduit implements ICrud<Produit> {
 
     @Override
     public boolean add(Produit produit) {
-        String requete = "INSERT INTO produit ( productName, productDescription, price, quantityInStock) VALUES (?,?,?,?)";
+        String requete = "INSERT INTO produit ( productName, productDescription, price, quantityInStock, status , image) VALUES (?,?,?,?,?,?)";
         int er = 0;
 
         try (PreparedStatement preparedStatement = cnx.prepareStatement(requete)) {
@@ -51,6 +55,8 @@ public class ServiceProduit implements ICrud<Produit> {
             preparedStatement.setString(2, produit.getProductDescription());
             preparedStatement.setDouble(3, produit.getPrice());
             preparedStatement.setInt(4, produit.getQuantityInStock());
+            preparedStatement.setString(5, Status.VALID.toString());
+            preparedStatement.setString(6, produit.getImage());
 
             er = preparedStatement.executeUpdate();
             System.out.println("Ajout réussi");
@@ -65,7 +71,7 @@ public class ServiceProduit implements ICrud<Produit> {
     public boolean delete(Produit p) {
         String req = "UPDATE produit  "
 
-                + " SET status='supprimé' "
+                + " SET status='SUPPRIMER' "
                 + "WHERE productID='" + p.getProductID() + "';";
         Statement st;
         int er = 0;
@@ -82,10 +88,37 @@ public class ServiceProduit implements ICrud<Produit> {
         return er == -1;
     }
 
+    public List<Produit> searchProduit(String searchTerm) {
+        List<Produit> produits = new ArrayList<>();
+        String req = "SELECT * FROM produit WHERE productName LIKE ? OR productDescription LIKE ?";
+
+        try (PreparedStatement pst = cnx.prepareStatement(req)) {
+            pst.setString(1, "%" + searchTerm + "%");
+            pst.setString(2, "%" + searchTerm + "%");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Produit produit = new Produit();
+                produit.setProductID(rs.getInt("productID"));
+                produit.setProductName(rs.getString("productName"));
+                produit.setProductDescription(rs.getString("productDescription"));
+                produit.setPrice(rs.getDouble("price"));
+                produit.setQuantityInStock(rs.getInt("quantityInStock"));
+                produit.setStatus(rs.getString("status"));
+
+                produits.add(produit);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return produits;
+    }
+
+
     @Override
     public boolean delete(int id) {
         String req = "UPDATE produit	SET "
-                + "status='supprimé' "
+                + "status='SUPPRIMER' "
                 + "WHERE idproduit ='" + id + "';";
         Statement st;
         int er = 0;

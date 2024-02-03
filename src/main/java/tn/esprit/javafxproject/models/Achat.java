@@ -10,15 +10,19 @@ public class Achat {
     private double totalAmount;
     private String paymentStatus;
 
+    private  String status;
+
+
     public Achat() {
     }
 
-    public Achat(int purchaseID, LocalDate purchaseDate, int idUser, double totalAmount, String paymentStatus) {
+    public Achat(int purchaseID, LocalDate purchaseDate, int idUser, double totalAmount, String paymentStatus, String status) {
         this.purchaseID = purchaseID;
         this.purchaseDate = purchaseDate;
         this.idUser = idUser;
         this.totalAmount = totalAmount;
         this.paymentStatus = paymentStatus;
+        this.status = status;
     }
 
     public int getPurchaseID() {
@@ -53,6 +57,15 @@ public class Achat {
         this.totalAmount = totalAmount;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
     public String getPaymentStatus() {
         return paymentStatus;
     }
@@ -69,6 +82,7 @@ public class Achat {
                 ", idUser=" + idUser +
                 ", totalAmount=" + totalAmount +
                 ", paymentStatus='" + paymentStatus + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

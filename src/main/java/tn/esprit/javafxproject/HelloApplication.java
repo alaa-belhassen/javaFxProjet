@@ -19,7 +19,8 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        DbConnection.getInstance();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Sidebar.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1315, 890);
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -27,42 +28,9 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-
-
-
-
-        DbConnection db = DbConnection.getInstance();
-        ServiceAchat SA = new ServiceAchat();
-        ServiceProduit SP = new ServiceProduit();
-        Produit p = new Produit ();
-        p.setProductDescription("T-shirt05");
-        SP.add(p);
-
-        //Achat a = new Achat ();
-        //a.setIdAchat(4);
-        //LocalDate dateAchat = LocalDate.now();
-        //a.setDateAchat(dateAchat);
-        //a.setIdClient(2);
-        //SA.update(a);
-        //SA.add(a);
-        //SA.delete(4);
-        ArrayList<Achat> LesAchats = new ArrayList<>();
-        LesAchats = SA.getAll();
-        for (Achat ac : LesAchats) {
-            System.out.println(ac.toString());
-
-        }
-
-        ArrayList<Produit> Lesproduits = new ArrayList<>();
-        Lesproduits = SP.getAll();
-        for (Produit pc : Lesproduits) {
-            System.out.println(pc.toString());
-
-        }
-
-
-    }}
-
+        launch();
+    }
+}
 
 
 

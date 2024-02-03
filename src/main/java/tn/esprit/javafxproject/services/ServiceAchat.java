@@ -3,6 +3,7 @@ package tn.esprit.javafxproject.services;
 import tn.esprit.javafxproject.models.Achat;
 import tn.esprit.javafxproject.services.ICrud;
 import tn.esprit.javafxproject.utils.DbConnection;
+import tn.esprit.javafxproject.utils.Status;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -37,18 +38,33 @@ public class ServiceAchat implements ICrud<Achat> {
         }
         return Achats;
     }
+    public int getLastId() {
+        String req = "SELECT Max(purchaseid) from achat";
+        int result=0;
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet res = st.executeQuery(req);
+            if (res.next()) {
 
+                result = res.getInt(1);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
     @Override
     public boolean add(Achat a) {
-        String requete = "INSERT INTO achat (idachat, dateachat, idclient , status) VALUES (?, ?, ?,?)";
+        String requete = "INSERT INTO achat( purchasedate, iduser, totalamount, paymentstatus, status) VALUES ( ?, ?, ?, ?, ?) ";
         int er = 0;
 
         try (PreparedStatement preparedStatement = cnx.prepareStatement(requete)) {
-            preparedStatement.setInt(1, a.getPurchaseID());
-            preparedStatement.setDate(2, Date.valueOf(a.getPurchaseDate()));
-            preparedStatement.setInt(3, a.getIdUser());
-            preparedStatement.setDouble(4, a.getTotalAmount());
-            preparedStatement.setString(5, a.getPaymentStatus());
+            preparedStatement.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+            preparedStatement.setInt(2, a.getIdUser());
+            preparedStatement.setDouble(3, a.getTotalAmount());
+            preparedStatement.setString(4, a.getPaymentStatus());
+            preparedStatement.setString(5, String.valueOf(Status.VALID));
 
             er = preparedStatement.executeUpdate();
             System.out.println("Ajout réussi");
@@ -56,14 +72,14 @@ public class ServiceAchat implements ICrud<Achat> {
             e.printStackTrace();
         }
 
-        return er > 0; // Vérifiez si des lignes ont été affectées (er > 0) pour déterminer le succès.
+        return er>0;  // Vérifiez si des lignes ont été affectées (er > 0) pour déterminer le succès.
     }
 
     @Override
     public boolean delete(Achat a) {
         String req = "UPDATE achat "
 
-                + " SET status='supprimé' "
+                + " SET status='SUPPRIMER' "
                 + "WHERE idachat='" + a.getPurchaseID() + "';";
         Statement st;
         int er = 0;
@@ -83,7 +99,7 @@ public class ServiceAchat implements ICrud<Achat> {
     @Override
     public boolean delete(int id) {
         String req = "UPDATE achat	SET "
-                + "status='supprimé' "
+                + "status='SUPPRIMER' "
                 + "WHERE idachat ='" + id + "';";
         Statement st;
         int er = 0;

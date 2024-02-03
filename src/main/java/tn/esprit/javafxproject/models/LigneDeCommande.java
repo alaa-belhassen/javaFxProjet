@@ -2,13 +2,30 @@ package tn.esprit.javafxproject.models;
 
 public class LigneDeCommande {
 
+    private int purchaseID;
     private int productID;
-    private String productName;
-    private String productDescription;
     private double price;
-    private int quantityInStock;
-
+    private String status;
+    private int quantityOrdred;
+    private Produit produit;
+    private Achat achat;
     public LigneDeCommande() {
+    }
+
+    public LigneDeCommande(int purchaseID, int productID, double price, String status, int quantityOrdred) {
+        this.purchaseID = purchaseID;
+        this.productID = productID;
+        this.price = price;
+        this.status = status;
+        this.quantityOrdred = quantityOrdred;
+    }
+
+    public int getPurchaseID() {
+        return purchaseID;
+    }
+
+    public void setPurchaseID(int purchaseID) {
+        this.purchaseID = purchaseID;
     }
 
     public int getProductID() {
@@ -19,22 +36,6 @@ public class LigneDeCommande {
         this.productID = productID;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -43,22 +44,49 @@ public class LigneDeCommande {
         this.price = price;
     }
 
-    public int getQuantityInStock() {
-        return quantityInStock;
+    public String getStatus() {
+        return status;
     }
 
-    public void setQuantityInStock(int quantityInStock) {
-        this.quantityInStock = quantityInStock;
+    public void setStatus(String status) {
+        this.status = status;
     }
+
+    public int getQuantityOrdred() {
+        return quantityOrdred;
+    }
+
+    public void setQuantityOrdred(int quantityOrdred) {
+        this.quantityOrdred = quantityOrdred;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
+    }
+
+    public Achat getAchat() {
+        return achat;
+    }
+
+    public void setAchat(Achat achat) {
+        this.achat = achat;
+    }
+
 
     @Override
     public String toString() {
         return "LigneDeCommande{" +
-                "productID=" + productID +
-                ", productName='" + productName + '\'' +
-                ", productDescription='" + productDescription + '\'' +
+                "purchaseID=" + purchaseID +
+                ", productID=" + productID +
                 ", price=" + price +
-                ", quantityInStock=" + quantityInStock +
+                ", status='" + status + '\'' +
+                ", quantityOrdred=" + quantityOrdred +
+                ", produit=" + produit +
+                ", achat=" + achat +
                 '}';
     }
 }

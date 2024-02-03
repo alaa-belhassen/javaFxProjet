@@ -9,107 +9,82 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="226.0" prefWidth="400.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="240.0" styleClass="white-background-card" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.javafxproject.CardController">
    <children>
-      <ImageView fx:id="image" fitHeight="227.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../../Downloads/403402024_698182638943794_126113578623827407_n.jpg" />
-         </image>
-      </ImageView>
-      <VBox prefHeight="226.0" prefWidth="288.0">
+      <HBox alignment="CENTER" prefHeight="195.0" prefWidth="240.0">
          <children>
-            <Label fx:id="title" prefHeight="34.0" prefWidth="179.0" text="Event name">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="8.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="44.0" prefWidth="229.0">
-               <children>
-                  <Label prefHeight="44.0" prefWidth="109.0" text="Location :">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="8.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="lieu" prefHeight="44.0" prefWidth="109.0" text="menzeh">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="44.0" prefWidth="229.0">
-               <children>
-                  <Label prefHeight="44.0" prefWidth="109.0" text="max_places :">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="8.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="max_places" prefHeight="44.0" prefWidth="109.0" text="8">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="44.0" prefWidth="229.0">
-               <children>
-                  <Label prefHeight="44.0" prefWidth="109.0" text="date_event">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="8.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="date_event" prefHeight="44.0" prefWidth="109.0" text="8 mars">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="221.0">
-               <children>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@image/ticket.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="20 dt">
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Button fx:id="btnBuy" mnemonicParsing="false" style="-fx-background-color: #00b300;" text="Buy" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets left="8.0" />
-               </VBox.margin>
-            </HBox>
+            <ImageView fx:id="image" fitHeight="178.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/1696348579560.jpeg" />
+               </image>
+            </ImageView>
          </children>
-      </VBox>
+      </HBox>
+      <HBox prefHeight="36.0" prefWidth="240.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="Nom:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Label>
+            <Label fx:id="nom" prefHeight="30.0" prefWidth="50.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="205.0" prefHeight="36.0" prefWidth="240.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="Prix:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Label>
+            <Label fx:id="prix">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="292.0" prefHeight="36.0" prefWidth="240.0">
+         <children>
+            <Button id="leftButton" fx:id="plusBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#plus" prefHeight="30.0" prefWidth="29.0" text="+">
+               <HBox.margin>
+                  <Insets left="75.0" />
+               </HBox.margin>
+            </Button>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="27.0">
+               <children>
+                  <Label fx:id="qtLb" text="1" />
+               </children>
+            </HBox>
+            <Button id="leftButton" fx:id="moinBtn" alignment="CENTER" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="30.0" prefWidth="29.0" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="241.0" prefHeight="36.0" prefWidth="240.0">
+         <children>
+            <Button id="leftButton" fx:id="btnProduit" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#addToLigneDeCommande" prefHeight="30.0" prefWidth="162.0" text="ajouter produit">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
    </children>
-</HBox>
+</VBox>

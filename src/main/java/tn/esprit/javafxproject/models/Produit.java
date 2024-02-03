@@ -8,6 +8,27 @@ public class Produit {
     private String productDescription;
     private double price;
     private int quantityInStock;
+    private String status;
+    private String image;
+
+
+    public Produit(int productID, String productName, String productDescription, double price, int quantityInStock, String status, String image) {
+        this.productID = productID;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.price = price;
+        this.quantityInStock = quantityInStock;
+        this.status = status;
+        this.image = image;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Produit() {
     }
@@ -60,6 +81,14 @@ public class Produit {
         this.quantityInStock = quantityInStock;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Produit{" +
@@ -68,6 +97,8 @@ public class Produit {
                 ", productDescription='" + productDescription + '\'' +
                 ", price=" + price +
                 ", quantityInStock=" + quantityInStock +
+                ", status='" + status + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

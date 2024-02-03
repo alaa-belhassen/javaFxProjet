@@ -35,7 +35,11 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.23</version> <!-- Use the version you downloaded -->
+        </dependency>
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
             <artifactId>formsfx-core</artifactId>
