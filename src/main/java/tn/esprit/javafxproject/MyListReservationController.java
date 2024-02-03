@@ -121,6 +121,7 @@ public class MyListReservationController implements Initializable {
                         try {
                             ReservationServiceImpl reservationService=new ReservationServiceImpl();
                             reservationService.delete(reserver);
+                            reservationService.updateEventPlus(reserver.getEvenement().getIdEvenement(), (int) (reserver.getPrix_total()/reserver.getEvenement().getPrix()));
                             observableList.remove(reserver);
 
                         } catch (SQLException e) {
