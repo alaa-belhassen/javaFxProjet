@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import tn.esprit.javafxproject.models.Reclamation;
 import tn.esprit.javafxproject.models.Response;
+import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.ReclamationService;
 import tn.esprit.javafxproject.services.ReponseService;
 
@@ -73,7 +74,7 @@ public class ReclamationuserController {
         Reclamation nouvelleReclamation = new Reclamation();
         nouvelleReclamation.setDescription_reclamation(contenuReclamation);
         nouvelleReclamation.setStatus_reclamation("En attente");
-        nouvelleReclamation.setId_user(1);
+        nouvelleReclamation.setId_user(User.UserConnecte);
 
         try {
             boolean ajoutReussi = reclamationService.add(nouvelleReclamation);
@@ -102,7 +103,14 @@ public class ReclamationuserController {
 
     private void refreshTableView() {
         try {
-            List<Response> responsesList = reponseService.getResponsesForUser(1);
+            List<Response> responsesList = reponseService.getResponsesForUser(User.UserConnecte);
+
+            // Print the contents of responsesList
+            System.out.println("Responses List:");
+            for (Response response : responsesList) {
+                System.out.println(response); // Assuming Response class has a proper toString() method
+            }
+
             ObservableList<Response> observableList = FXCollections.observableArrayList(responsesList);
             tabrep.setItems(observableList);
         } catch (SQLException e) {

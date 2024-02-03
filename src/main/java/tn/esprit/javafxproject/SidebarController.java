@@ -97,6 +97,7 @@ public class SidebarController  {
         stage.setScene(scene);
         stage.show();
         User.UserConnecte=-1;
+        User.Role_User_Connecte=-1;
 
     }
 
@@ -144,10 +145,17 @@ public class SidebarController  {
     }
 
     @FXML
-    void goReclamation(MouseEvent event) {
+    void goReclamation(MouseEvent event) throws IOException {
+
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource( "ReclamationUser.fxml"));
+        Parent parent = (Parent)root.load();
+        Object usersController = root.getController();
+        if (root.getController() instanceof ReclamationuserController) {
+            ((ReclamationuserController)usersController).sidebarController = this;
+            this.borderPane.setCenter(parent);
+        }
 
     }
-
     @FXML
     void goShop(MouseEvent event) {
 

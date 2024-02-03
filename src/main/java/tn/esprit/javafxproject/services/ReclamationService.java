@@ -45,10 +45,7 @@ public class ReclamationService implements ICrud<Reclamation>{
         return reclamations;
     }
 
-    @Override
-    public boolean insert(Response rep) throws SQLException {
-        return false;
-    }
+
 
 
     @Override

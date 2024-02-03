@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import tn.esprit.javafxproject.models.Reclamation;
 import tn.esprit.javafxproject.models.Response;
+import tn.esprit.javafxproject.models.User;
 import tn.esprit.javafxproject.services.ReclamationService;
 import tn.esprit.javafxproject.services.ReponseService;
 
@@ -44,6 +45,7 @@ public class ReclamationAdminController {
     @FXML
     private TextArea tfRep;
 
+    public AdminSidebarController adminSideBar;
     private ReclamationService reclamationService = new ReclamationService();
     private ReponseService reponseService=new ReponseService();
 
@@ -60,7 +62,7 @@ public class ReclamationAdminController {
         if (selectedReclamation != null) {
             // Assuming you have the Response object (rep) to be inserted
             Response rep = new Response();
-            rep.setId_user(1);
+            rep.setId_user(selectedReclamation.getId_user());
             rep.setDescription_reponse(tfRep.getText());
 
             try {

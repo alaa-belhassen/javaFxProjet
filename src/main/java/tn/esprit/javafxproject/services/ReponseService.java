@@ -14,7 +14,7 @@ public class ReponseService implements ICrud<Response> {
         cnx = DbConnection.getInstance().getCnx();
     }
 
-    @Override
+
     public boolean insert(Response rep) throws SQLException {
         String req = "INSERT INTO reponse (id_reclamation, description_reponse, status_reponse,iduser) " +
                 "VALUES ('" + rep.getId_reclamation()+ "','" + rep.getDescription_reponse() + "','" + "Active"+"','"+ rep.getId_user() + "')";
@@ -133,7 +133,7 @@ public class ReponseService implements ICrud<Response> {
         ArrayList<Response> userResponses = new ArrayList<>();
 
         String query = "SELECT * FROM reponse WHERE iduser = " + userId;
-
+        System.out.println(userId);
         try (Statement statement = cnx.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
 

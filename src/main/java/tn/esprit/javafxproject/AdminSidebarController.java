@@ -100,6 +100,7 @@ public class AdminSidebarController  implements Initializable {
         stage.setScene(scene);
         stage.show();
         User.UserConnecte=-1;
+        User.Role_User_Connecte=-1;
     }
 
     @FXML
@@ -127,7 +128,14 @@ public class AdminSidebarController  implements Initializable {
     }
 
     @FXML
-    void goReclamation(MouseEvent event) {
+    void goReclamation(MouseEvent event) throws IOException {
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource("ReclamationAdmin.fxml"));
+        Parent parent = (Parent) root.load();
+        Object reclamationAdmin = root.getController();
+        if (root.getController() instanceof ReclamationAdminController) {
+            ((ReclamationAdminController) reclamationAdmin).adminSideBar = this;
+            this.borderPane.setCenter(parent);
+        }
 
     }
 
