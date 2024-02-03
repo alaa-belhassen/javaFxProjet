@@ -140,7 +140,14 @@ public class AdminSidebarController  implements Initializable {
     }
 
     @FXML
-    void goShop(MouseEvent event) {
+    void goShop(MouseEvent event) throws IOException {
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource( "ProduitsList.fxml"));
+        Parent parent = (Parent)root.load();
+        Object produitList = root.getController();
+        if (root.getController() instanceof ProduitsListController) {
+            ((ProduitsListController)produitList).AdminsidebarController = this;
+            this.borderPane.setCenter(parent);
+        }
 
     }
 

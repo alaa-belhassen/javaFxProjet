@@ -13,7 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import tn.esprit.javafxproject.models.Achat;
 import tn.esprit.javafxproject.models.User;
+import tn.esprit.javafxproject.services.ServiceAchat;
 import tn.esprit.javafxproject.services.UserServiceImpl;
 
 import java.io.FileInputStream;
@@ -157,7 +159,20 @@ public class SidebarController  {
 
     }
     @FXML
-    void goShop(MouseEvent event) {
+    void goShop(MouseEvent event) throws IOException {
+            ServiceAchat serviceAchat = new ServiceAchat();
+            Achat achat = new Achat();
+            achat.setIdUser(User.UserConnecte);
+            achat.setPaymentStatus("non");
+            serviceAchat.add(achat);
+
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource("Shop.fxml"));
+        Parent parent = (Parent) root.load();
+        Object shopController = root.getController();
+        if (root.getController() instanceof ShopController) {
+            ((ShopController) shopController).sideBarController = this;
+            this.borderPane.setCenter(parent);
+        }
 
     }
 
