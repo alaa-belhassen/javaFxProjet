@@ -52,6 +52,8 @@ public class EventDetailController  {
     int nb_places;
     @FXML
     private Label titre;
+    @FXML
+    private Label alreadymade;
 
     public EventDetailController() {
 
@@ -129,7 +131,7 @@ public class EventDetailController  {
         ReservationServiceImpl reservationService=new ReservationServiceImpl();
         Reserver reserver=new Reserver();
         reserver.setDate(LocalDate.now());
-       //partie useeer
+
         User user=new User();
         user.setIdUser(User.UserConnecte);
         reserver.setIdUser(user);
@@ -142,20 +144,32 @@ public class EventDetailController  {
         pdfLoader.generatePdf(reserver);
        reservationService.add(reserver);
 
+        if(!reservationService.add(reserver)){
+            alreadymade.setVisible(true);
+            alreadymade.setText("reservation already made !");
+            alreadymade.setTextFill(Color.RED);
+        }else {
 
-        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("Events.fxml"));
-        //nekhou akber parent ml page events
-        VBox vBox=  fxmlLoader.load();
-        EventsController eventsController=fxmlLoader.getController();
-        if(card1Controller != null ){
-            eventsController.sidebarController= card1Controller.eventsController.sidebarController;
-            card1Controller.eventsController.sidebarController.borderPane.setCenter(vBox);
 
-        }else{
-            eventsController.sidebarController= cardEventGridController.eventsController.sidebarController;
-            cardEventGridController.eventsController.sidebarController.borderPane.setCenter(vBox);
 
+            FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("Events.fxml"));
+            //nekhou akber parent ml page events
+            VBox vBox=  fxmlLoader.load();
+            EventsController eventsController=fxmlLoader.getController();
+            if(card1Controller != null ){
+                eventsController.sidebarController= card1Controller.eventsController.sidebarController;
+                card1Controller.eventsController.sidebarController.borderPane.setCenter(vBox);
+
+            }else{
+
+                eventsController.sidebarController= cardEventGridController.eventsController.sidebarController;
+                cardEventGridController.eventsController.sidebarController.borderPane.setCenter(vBox);
+
+            }
         }
+
+
+
 
 
     }
