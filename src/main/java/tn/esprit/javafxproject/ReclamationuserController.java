@@ -67,7 +67,16 @@ public class ReclamationuserController {
     void Validerrec(ActionEvent event) {
         System.out.println("debuT");
         System.out.println("TextArea Content: " + tfrec.getText());
-
+        // Check if the content is not empty
+        if (tfrec.getText().isEmpty()) {
+            // Show an alert indicating that the content is empty
+            Alert emptyAlert = new Alert(Alert.AlertType.ERROR);
+            emptyAlert.setTitle("Erreur");
+            emptyAlert.setHeaderText(null);
+            emptyAlert.setContentText("Veuillez saisir le contenu de la réclamation.");
+            emptyAlert.showAndWait();
+            return;  // Exit the method if content is empty
+        }
         String contenuReclamation = tfrec.getText();
         System.out.println(contenuReclamation);
 
