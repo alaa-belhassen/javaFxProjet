@@ -40,6 +40,11 @@ public class EvenementServiceImpl implements ICrud<Evenement> {
     }
 
     @Override
+    public boolean insert(Response rep) throws SQLException {
+        return false;
+    }
+
+    @Override
     public boolean add(Evenement evenement) throws SQLException {
         String selectQuery = "SELECT * FROM evenement WHERE libelle = ?";
         try (PreparedStatement selectStatement = DbConnection.getCnx().prepareStatement(selectQuery)) {

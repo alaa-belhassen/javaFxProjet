@@ -2,6 +2,7 @@ package tn.esprit.javafxproject.services;
 
 
 import tn.esprit.javafxproject.models.Categorie;
+import tn.esprit.javafxproject.models.Response;
 import tn.esprit.javafxproject.utils.DbConnection;
 import tn.esprit.javafxproject.utils.Status;
 
@@ -32,6 +33,11 @@ public class CategorieServiceImpl implements ICrud<Categorie> {
 
 
         return null ;
+    }
+
+    @Override
+    public boolean insert(Response rep) throws SQLException {
+        return false;
     }
 
     @Override

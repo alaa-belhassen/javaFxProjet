@@ -3,6 +3,7 @@ package tn.esprit.javafxproject.services;
 
 
 import tn.esprit.javafxproject.models.Emoji;
+import tn.esprit.javafxproject.models.Response;
 import tn.esprit.javafxproject.utils.DbConnection;
 import tn.esprit.javafxproject.utils.Status;
 
@@ -31,6 +32,11 @@ public class EmojiServiceImpl implements ICrud<Emoji>{
             }
             return emojis ;
         }
+
+    @Override
+    public boolean insert(Response rep) throws SQLException {
+        return false;
+    }
 
 
     @Override
