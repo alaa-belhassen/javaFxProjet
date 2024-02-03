@@ -142,9 +142,9 @@ public class EventDetailController  {
         reserver.setEvenement(evenement);
         PdfLoaderReservation pdfLoader=new PdfLoaderReservation();
         pdfLoader.generatePdf(reserver);
-       reservationService.add(reserver);
+       boolean x = reservationService.add(reserver);
 
-        if(!reservationService.add(reserver)){
+        if(!x){
             alreadymade.setVisible(true);
             alreadymade.setText("reservation already made !");
             alreadymade.setTextFill(Color.RED);

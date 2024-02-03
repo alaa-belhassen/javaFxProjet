@@ -3,10 +3,8 @@ package tn.esprit.javafxproject.services;
 
 import tn.esprit.javafxproject.models.Role;
 import tn.esprit.javafxproject.models.User;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 import tn.esprit.javafxproject.utils.DbConnection;
@@ -49,22 +47,28 @@ public class RoleServiceImpl implements ICrud <Role>  {
 
     @Override
     public boolean add(Role r) {
-        
-        String req = "INSERT INTO role "
-                + "	(idrole, name, status)\r\n"
-                + "	VALUES ('"+ r.getIdRole()+"','"+r.getName()+"','"+ Status.VALID.toString()+"'  );";
-        Statement st;
-        int er=0;
-        try {
-            st = cnx.createStatement();
-            er= st.executeUpdate(req);
-            System.out.println(" Ajout reussi ");
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
-        return er == -1;
+        String req = "INSERT INTO role (name, status) VALUES (?, ?)";
+        try (PreparedStatement preparedStatement = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, r.getName());
+            preparedStatement.setString(2, Status.VALID.toString());
+
+            int er = preparedStatement.executeUpdate();
+
+            // Retrieve the generated ID (if needed)
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    r.setIdRole(generatedKeys.getInt(1));
+                }
+            }
+
+            System.out.println("Ajout réussi");
+
+            return er == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

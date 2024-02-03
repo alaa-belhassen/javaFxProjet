@@ -56,15 +56,15 @@ public class ChangePasswordController {
 
     public void retour(ActionEvent event) throws IOException {
 
-        FXMLLoader root = new FXMLLoader(this.getClass().getResource( "Profil.fxml"));
-        Parent parent = (Parent)root.load();
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource("Profil.fxml"));
+        Parent parent = (Parent) root.load();
         Object ProfilController = root.getController();
         if (root.getController() instanceof ProfilController) {
-            ((ProfilController)ProfilController).adminsidebarController = this.profilController.adminsidebarController;
-            if(User.Role_User_Connecte==0)
-            { this.profilController.adminsidebarController.borderPane.setCenter(parent);}
-            else
-            {
+            if (User.Role_User_Connecte == 0) {
+                ((ProfilController)ProfilController).adminsidebarController = this.profilController.adminsidebarController;
+                this.profilController.adminsidebarController.borderPane.setCenter(parent);
+            } else {
+                ((ProfilController)ProfilController).sidebarController = this.profilController.sidebarController;
                 this.profilController.sidebarController.borderPane.setCenter(parent);
             }
         }
