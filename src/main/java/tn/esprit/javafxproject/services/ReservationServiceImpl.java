@@ -327,6 +327,24 @@ public class ReservationServiceImpl implements ICrud<Reserver> {
 
         }
     }
+    public boolean updateEventPlus(int idevenement, int qte) throws SQLException {
+        try (PreparedStatement statement = DbConnection.getCnx().prepareStatement(
+                "UPDATE evenement SET max_places=max_places+? WHERE idevenement=?")) {
+
+            statement.setInt(1, qte);
+            statement.setInt(2, idevenement);
+
+
+            int rowsUpdated = statement.executeUpdate();
+            if(rowsUpdated > 0) {
+
+                System.out.println("updated successfully");
+                return true;
+            }else {
+                return false;
+            }
+
+        }}
 
 
 
@@ -349,6 +367,7 @@ public class ReservationServiceImpl implements ICrud<Reserver> {
 
         }
     }
+
 
     //                    "UPDATE evenement SET max_places=? WHERE idevenement=?")) {
 
